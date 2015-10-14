@@ -1,0 +1,119 @@
+table users
+	id: integer
+	email: text
+	password: text
+	username: text
+	profile: text
+	regist_date: date
+
+users
+	has_many tweets
+	has_many messages
+	has_many users through messages
+	has_many follows
+	has_many users through follows
+	has_many favorites
+	has_many tweets through favorites
+	has_many c_mentions
+	has_many comments through c_mentions
+	has_many t_mentions
+	has_many tweets through t_mentions
+
+table tweets
+	id: integer
+	user_id: integer
+	content: text
+	retweet_id: integer
+	pub_time: time
+	media(url): string
+
+tweets
+	has_many comments
+	has_many t_mentions
+	has_many users through t_mentions
+	has_many favorites
+	has_many users through favorites
+	has_many tags
+	has_many hash_tags through tags
+	belongs_to user
+
+table follows
+	id: integer
+	followee_id: integer
+	follower_id: integer
+	fo_time: time
+
+follows
+	belongs_to users
+
+table t_mentions
+	id: integer
+	tweet_id: integer
+	user_id:integer
+
+t_mentions
+	belongs_to user
+	belongs_to tweet
+
+table comments
+	id: integer
+	tweet_id: integer
+	commenter_id: integer
+	content: text
+	c_time: time
+
+comments
+	has_many c_mentions
+	has_many users through c_mentions
+	belongs_to tweet
+
+table c_mentions
+	id: integer
+	tweet_id: integer
+	user_id: integer
+
+c_mention
+	belongs_to comment
+	be;ongs_to user
+
+table hash_tags
+	id: integer
+	name: text
+
+hash_tags
+	has_many tags
+	has_many tweets through tags
+
+table tags
+	id: integer
+	hash_id: integer
+	tweet_id: integer
+
+tags
+	belongs_to hash_tag
+	belongs_to tweet
+
+table messages
+	id: integer
+	content: text
+	sender_id: integer
+	receiver_id: integer
+	pub_time: time
+
+messages
+	belongs_to user
+
+table favorites
+	id: integer
+	tweet_id: integer
+	user_id: integer
+	fa_time: time
+
+favorites
+	belongs_to user
+	belongs_to tweet
+
+
+	
+
+
