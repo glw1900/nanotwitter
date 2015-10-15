@@ -1,1 +1,10 @@
 <h3>show follow relationship</h3>
+<ul>
+<% @follow_users.each do |follow_user| %>
+	<li>
+		<%= follow_user.id %>
+		<%= follow_user.username %>
+	</li>
+<% end %>
+</ul>
+<a href="/">Back to Home</a>

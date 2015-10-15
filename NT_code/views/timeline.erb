@@ -1,1 +1,12 @@
 <h3>timeline of follow posts</h3>
+<ul>
+<% @tweets.each do |tweet| %>
+	<li>
+		<%= tweet.user_id %>
+		<%= tweet.content %>
+		<%= tweet.time %>	
+		<%= tweet.media %>			
+	</li>
+<% end %>
+</ul>
+<a href="/">Back to Home</a>
