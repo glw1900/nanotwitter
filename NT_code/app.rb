@@ -11,6 +11,7 @@ require './models/t_mention'
 require './models/tag'
 require './models/user'
 require './models/tweet'
+require 'pry-byebug'
 
 
 get '/' do
@@ -23,11 +24,17 @@ end
 
 post '/user/submit' do
   @user = User.new(params[:user])
+  username = @user.username
+  # username = params[:user][:username]
   if @user.save
-    redirect '/user/#{@user.username}'
+    redirect_string = '/user/' + username
+    redirect redirect_string
+  end
 end
 
 get '/user/:username' do
-  "#{params['username']}"
-end
+  @users = User.all
 
+   #{}"#{params['username']}
+  erb :display
+end
