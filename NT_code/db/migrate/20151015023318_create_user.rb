@@ -5,7 +5,7 @@ class CreateUser < ActiveRecord::Migration
       t.string :username
   		t.string :password
   		t.string :profile
-  		t.datetime :regist_date
+  		t.date :regist_date
     end
   end
 

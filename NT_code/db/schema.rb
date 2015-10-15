@@ -14,10 +14,11 @@
 ActiveRecord::Schema.define(version: 20151015023318) do
 
   create_table "users", force: :cascade do |t|
-    t.string   "email"
-    t.string   "password"
-    t.string   "profile"
-    t.datetime "regist_date"
+    t.string "email"
+    t.string "username"
+    t.string "password"
+    t.string "profile"
+    t.date   "regist_date"
   end
 
 end
