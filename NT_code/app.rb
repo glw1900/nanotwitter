@@ -14,5 +14,4 @@ get '/signup' do
 end
 
 post '/user/submit' do
-  @user = 
 end

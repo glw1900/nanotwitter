@@ -5,3 +5,4 @@ gem "activerecord"
 gem "activesupport"
 gem "sinatra-activerecord"
 gem "pg"
+gem “rack”
