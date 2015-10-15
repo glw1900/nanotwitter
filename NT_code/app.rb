@@ -21,7 +21,13 @@ get '/signup' do
   erb :sign_up
 end
 
-"""post '/user/submit' do
-  @user =
+post '/user/submit' do
+  @user = User.new(params[:user])
+  if @user.save
+    redirect '/user/#{@user.username}'
 end
-"""
+
+get '/user/:username' do
+  "#{params['username']}"
+end
+
