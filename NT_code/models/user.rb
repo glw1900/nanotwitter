@@ -9,5 +9,5 @@ class User < ActiveRecord::Base
   has_many :c_mentions
   has_many :comments, :through => :c_mentions
   has_many :t_mentions
-  has_many :tweets, :throuh => :t_mentons
+  has_many :tweets, :through => :t_mentons
 end
