@@ -35,6 +35,6 @@ end
 get '/user/:username' do
   @users = User.all
 
-   #{}"#{params['username']}
+   #"#{params['username']}"
   erb :display
 end
