@@ -77,10 +77,11 @@ get '/follow' do
 end
 
 post '/user/follow' do
-  @follow = Follow.new
-  @follow.follower_id = User.find_by(username: params[:follow][:follower]).id
-  @follow.followee_id = User.find_by(username: params[:follow][:followee]).id
-  if follow.save
+  par = {}
+  par[:follower_id] = User.find_by(username: params[:follow][:follower]).id
+  par[:followee_id] = User.find_by(username: params[:follow][:followee]).id
+  @follow = Follow.new(par)
+  if @follow.save
     username = params[:follow][:follower]
     redirect '/follow/' + username
   else
@@ -92,5 +93,10 @@ get '/follow/:username' do
   username = params[:username]
   user_id = User.find_by(username: username).id
   @follow_users = Follow.find_by(follower_id: user_id)
+  
+
+  if !@follow_users.is_a? Array
+    @follow_users = [@follow_users]
+  end
   erb :follow
 end
