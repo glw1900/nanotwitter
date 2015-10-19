@@ -50,25 +50,24 @@ post "/user/submit_twitter" do
   tweet[:content] = params[:tweet]
   tweet[:media_url] = nil
   tweet[:retweet_id] = nil
-  tweet[:user_id] = User.find_by(username: session["username"])
+  tweet[:user_id] = User.find_by(username: session["username"]).id
   tweet[:pub_time] = nil
 
   @new_tweet = Tweet.new(tweet)
   if @new_tweet.save
     redirect '/user/timeline'
   end
-
 end
 
 get '/user/timeline' do
-  username = params[:username]
+  username = session[:username]
+  user_id = User.find_by(username: username).id
   if !session["username"].nil?
     # username = session["username"]
-    @tweet_list = Tweet.where(username: username)
-    if @tweet_list.nil?
-      @tweet_list = ["this is a tweet"]
-    end
-    binding.pry
+    @tweet_list = Tweet.where(user_id: user_id)
+    # if @tweet_list.nil?
+    #   @tweet_list = ["this is a tweet"]
+    # end
     erb :timeline
   end
 end
