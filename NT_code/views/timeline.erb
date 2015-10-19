@@ -1,0 +1,18 @@
+<h3>post a twitter</h3>
+<form action="/user/submit_twitter" method="POST">
+	<input type="text" name="tweet" value="Feeling happy?" /><BR>
+	<input type="submit" value="Tweet" />
+</form>
+
+<h3>recent twittwers from who you have followed</h3>
+<ol>
+<% @twitters.each do |twitter| %>
+	<li>
+		<%= twitter.content %>
+    <%= twitter.user_id %>
+    <%= twitter.created_at %>
+	</li>
+<% end %>
+</ol>
+
+
