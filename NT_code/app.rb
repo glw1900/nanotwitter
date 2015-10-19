@@ -58,14 +58,17 @@ post "/user/submit_twitter" do
     redirect '/user/timeline'
   end
 
-
-
 end
 
 get '/user/timeline' do
-  # username = params[:email]
+  username = params[:username]
   if !session["username"].nil?
     # username = session["username"]
+    @tweet_list = Tweet.where(username: username)
+    if @tweet_list.nil?
+      @tweet_list = ["this is a tweet"]
+    end
+    binding.pry
     erb :timeline
   end
 end
