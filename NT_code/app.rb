@@ -11,6 +11,7 @@ require './models/t_mention'
 require './models/tag'
 require './models/user'
 require './models/tweet'
+require './process'
 enable :sessions
 require 'pry-byebug'
 
@@ -19,15 +20,13 @@ get '/' do
   erb :homepage
 end
 
-get '/signup' do
-  
+get '/signup' do  
   erb :sign_up
 end
 
 post '/user/submit_regis' do
   @user = User.new(params[:user])
   username = @user.username
-  # username = params[:user][:username]
   if @user.save
     # redirect_string = '/user/' + username
     # redirect redirect_string
@@ -39,34 +38,27 @@ post "/user/submit" do
   @tring_logging_in = params[:user]
   if auth(@tring_logging_in)
     email = @tring_logging_in["email"]
-    session[email] = true
+    session["email"] = email
     redirect '/user/' + email
   else
     "Wrong Password"
   end
 end
 
+post "/user/submit_twitter" do
+  @tweet = 
+end
+
 get '/user/:email' do
-  username = params[:email]
-  if session[email]
-    "You have logged in"
+  # username = params[:email]
+  if !session["email"].nil?
+    email = session["email"]
+    "#{email}"
+    # erb :timeline
   end
-  # erb :display
 end
 
 
-def auth(user)
-  email = user["email"]
-  password = user["password"]
-  u = User.find_by(email: email)
-  # binding.pry
-  if u.nil?
-    return false
-  end
-  if u.password == password
-    return true
-  end
-  return false
-end
+
 
 
