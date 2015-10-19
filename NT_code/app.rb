@@ -37,24 +37,36 @@ end
 post "/user/submit" do
   @tring_logging_in = params[:user]
   if auth(@tring_logging_in)
-    email = @tring_logging_in["email"]
-    session["email"] = email
-    redirect '/user/' + email
+    username = @tring_logging_in["username"]
+    session["username"] = username
+    redirect '/user/timeline'
   else
     "Wrong Password"
   end
 end
 
-# post "/user/submit_twitter" do
-#   @tweet = 
-# end
+post "/user/submit_twitter" do
+  tweet = {}
+  tweet[:content] = params[:tweet]
+  tweet[:media_url] = nil
+  tweet[:retweet_id] = nil
+  tweet[:user_id] = User.find_by(username: session["username"])
+  tweet[:pub_time] = nil
 
-get '/user/:email' do
+  @new_tweet = Tweet.new(tweet)
+  if @new_tweet.save
+    redirect '/user/timeline'
+  end
+
+
+
+end
+
+get '/user/timeline' do
   # username = params[:email]
-  if !session["email"].nil?
-    email = session["email"]
-    "#{email}"
-    # erb :timeline
+  if !session["username"].nil?
+    # username = session["username"]
+    erb :timeline
   end
 end
 
