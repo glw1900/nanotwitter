@@ -14,43 +14,55 @@
 ActiveRecord::Schema.define(version: 20151015023318) do
 
   create_table "c_mentions", force: :cascade do |t|
-    t.integer "tweet_id"
-    t.integer "user_id"
+    t.integer  "tweet_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "comments", force: :cascade do |t|
-    t.integer "tweet_id"
-    t.integer "commenter_id"
-    t.string  "content"
-    t.date    "c_time"
+    t.integer  "tweet_id"
+    t.integer  "commenter_id"
+    t.string   "content"
+    t.date     "c_time"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "favorites", force: :cascade do |t|
-    t.integer "tweet_id"
-    t.integer "user_id"
-    t.date    "fa_time"
+    t.integer  "tweet_id"
+    t.integer  "user_id"
+    t.date     "fa_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "follows", force: :cascade do |t|
-    t.integer "followee_id"
-    t.integer "follower_id"
-    t.date    "fo_time"
+    t.integer  "followee_id"
+    t.integer  "follower_id"
+    t.date     "fo_time"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "hash_tags", force: :cascade do |t|
     t.string "name"
   end
 
-  create_table "message", force: :cascade do |t|
-    t.integer "sender_id"
-    t.integer "receiver_id"
-    t.string  "content"
-    t.date    "pub_time"
+  create_table "messages", force: :cascade do |t|
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
+    t.string   "content"
+    t.date     "pub_time"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "t_mentions", force: :cascade do |t|
-    t.integer "tweet_id"
-    t.integer "user_id"
+    t.integer  "tweet_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tags", force: :cascade do |t|
@@ -59,19 +71,23 @@ ActiveRecord::Schema.define(version: 20151015023318) do
   end
 
   create_table "tweets", force: :cascade do |t|
-    t.integer "user_id"
-    t.string  "content"
-    t.integer "retweet_id"
-    t.date    "pub_time"
-    t.string  "media_url"
+    t.integer  "user_id"
+    t.string   "content"
+    t.integer  "retweet_id"
+    t.date     "pub_time"
+    t.string   "media_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email"
-    t.string "username"
-    t.string "password"
-    t.string "profile"
-    t.date   "regist_date"
+    t.string   "email"
+    t.string   "username"
+    t.string   "password"
+    t.string   "profile"
+    t.date     "regist_date"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
 end

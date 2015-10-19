@@ -6,6 +6,7 @@ class CreateUser < ActiveRecord::Migration
   		t.string :password
   		t.string :profile
   		t.date :regist_date
+      t.timestamps null: false
     end
     create_table :tweets do |t|
       t.integer :user_id
@@ -13,25 +14,30 @@ class CreateUser < ActiveRecord::Migration
   		t.integer :retweet_id
   		t.date :pub_time
       t.string :media_url
+      t.timestamps null: false
     end
     create_table :follows do |t|
       t.integer :followee_id
   		t.integer :follower_id
       t.date :fo_time
+      t.timestamps null: false
     end
     create_table :t_mentions do |t|
       t.integer :tweet_id
       t.integer :user_id
+      t.timestamps null: false
     end
     create_table :comments do |t|
       t.integer :tweet_id
       t.integer :commenter_id
       t.string :content
       t.date :c_time
+      t.timestamps null: false
     end
     create_table :c_mentions do |t|
       t.integer :tweet_id
       t.integer :user_id
+      t.timestamps null: false
     end
     create_table :hash_tags do |t|
       t.string :name
@@ -40,16 +46,18 @@ class CreateUser < ActiveRecord::Migration
       t.integer :hash_id
       t.integer :tweet_id
     end
-    create_table :message do |t|
+    create_table :messages do |t|
       t.integer :sender_id
       t.integer :receiver_id
       t.string :content
       t.date :pub_time
+      t.timestamps null: false
     end
     create_table :favorites do |t|
       t.integer :tweet_id
       t.integer :user_id
       t.date :fa_time
+      t.timestamps null: false
     end
   end
 
