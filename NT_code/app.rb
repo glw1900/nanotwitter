@@ -45,9 +45,9 @@ post "/user/submit" do
   end
 end
 
-post "/user/submit_twitter" do
-  @tweet = 
-end
+# post "/user/submit_twitter" do
+#   @tweet = 
+# end
 
 get '/user/:email' do
   # username = params[:email]
