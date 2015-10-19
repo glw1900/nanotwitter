@@ -20,7 +20,7 @@ get '/' do
   erb :homepage
 end
 
-get '/signup' do  
+get '/signup' do
   erb :sign_up
 end
 
@@ -72,7 +72,25 @@ get '/user/timeline' do
   end
 end
 
+get '/follow' do
+  erb :personpage
+end
 
+post '/user/follow' do
+  @follow = Follow.new
+  @follow.follower_id = User.find_by(username: params[:follow][:follower]).id
+  @follow.followee_id = User.find_by(username: params[:follow][:followee]).id
+  if follow.save
+    username = params[:follow][:follower]
+    redirect '/follow/' + username
+  else
+    "wrong when creating follow"
+  end
+end
 
-
-
+get '/follow/:username' do
+  username = params[:username]
+  user_id = User.find_by(username: username).id
+  @follow_users = Follow.find_by(follower_id: user_id)
+  erb :follow
+end
