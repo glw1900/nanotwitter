@@ -13,7 +13,7 @@ require './models/user'
 require './models/tweet'
 require './process'
 enable :sessions
-require 'pry-byebug'
+# require 'pry-byebug'
 
 
 get '/' do
