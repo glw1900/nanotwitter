@@ -4,6 +4,10 @@
 # This is automatically configured on Heroku, you only need to worry if you also
 # want to run your app locally
 
+# require 'sinatra'
+# require 'sinatra/activerecord'
+# enable :sessions
+
 configure :production do
   puts "[production environment]"
   db = URI.parse(ENV['DATABASE_URL'] || 'postgres://localhost/mydb')
@@ -20,4 +24,5 @@ end
 
 configure :development, :test do
   puts "[develoment or test Environment]"
+  # session.clear
 end

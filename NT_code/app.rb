@@ -15,7 +15,6 @@ require './process'
 enable :sessions
 require 'pry-byebug'
 
-
 get '/' do
   @logged_in = false #0 when no user log in
   if session["username"] != nil
@@ -33,8 +32,6 @@ post '/users/submit_regis' do
   @user = User.new(params[:user])
   username = @user.username
   if @user.save
-    # redirect_string = '/user/' + username
-    # redirect redirect_string
     redirect '/'
   end
 end
@@ -69,18 +66,10 @@ get '/users/timeline' do
   @uname = username
   user_id = User.find_by(username: username).id
   if !session["username"].nil?
-    # username = session["username"]
     @tweet_list = Tweet.where(user_id: user_id)
-    # if @tweet_list.nil?
-    #   @tweet_list = ["this is a tweet"]
-    # end
     erb :timeline
   end
 end
-
-# get '/follow' do
-#   erb :personpage
-# end
 
 post '/users/follow' do
   @follow = Follow.new()
@@ -145,7 +134,7 @@ end
 
 get '/follow/:username' do
   @username = params[:username]
-  #get the id of the current page
+  #get the id of the current pageuser
   user_id = User.find_by(username: @username).id
   follow_ids = Follow.where(follower_id: user_id)
   # binding.pry

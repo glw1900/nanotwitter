@@ -2,7 +2,6 @@
 <%#no user %>
 "no such user"
 <% else %>
-
 	<h3><%= @pageuser%> 's homepage</h3>
 	<% if @mode == 2 #if did not follow%>
 		<form action="/followings/create" method="POST">
