@@ -1,0 +1,13 @@
+<%= @username %>'s follow list
+<ul>
+<% if !@follow_users.nil? %>
+
+<% @follow_users.each do |follow_user| %>
+	<li>
+		<%= follow_user.username%>
+		<%= follow_user.created_at%>	
+	</li>
+<% end %>
+<% end %>
+</ul>
+<a href="/users/<%=@username%>">Back to Home</a>

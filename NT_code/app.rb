@@ -13,10 +13,15 @@ require './models/user'
 require './models/tweet'
 require './process'
 enable :sessions
-# require 'pry-byebug'
+require 'pry-byebug'
 
 
 get '/' do
+  @logged_in = false #0 when no user log in
+  if session["username"] != nil
+    @logged_in = true
+    @username = session["username"]
+  end
   erb :homepage
 end
 
@@ -24,7 +29,7 @@ get '/signup' do
   erb :sign_up
 end
 
-post '/user/submit_regis' do
+post '/users/submit_regis' do
   @user = User.new(params[:user])
   username = @user.username
   if @user.save
@@ -34,18 +39,18 @@ post '/user/submit_regis' do
   end
 end
 
-post "/user/submit" do
+post "/users/submit" do
   @tring_logging_in = params[:user]
   if auth(@tring_logging_in)
     username = @tring_logging_in["username"]
     session["username"] = username
-    redirect '/user/timeline'
+    redirect '/users/timeline'
   else
     "Wrong Password"
   end
 end
 
-post "/user/submit_twitter" do
+post "/users/submit_twitter" do
   tweet = {}
   tweet[:content] = params[:tweet]
   tweet[:media_url] = nil
@@ -55,12 +60,13 @@ post "/user/submit_twitter" do
 
   @new_tweet = Tweet.new(tweet)
   if @new_tweet.save
-    redirect '/user/timeline'
+    redirect '/users/timeline'
   end
 end
 
-get '/user/timeline' do
+get '/users/timeline' do
   username = session[:username]
+  @uname = username
   user_id = User.find_by(username: username).id
   if !session["username"].nil?
     # username = session["username"]
@@ -72,15 +78,15 @@ get '/user/timeline' do
   end
 end
 
-get '/follow' do
-  erb :personpage
-end
+# get '/follow' do
+#   erb :personpage
+# end
 
-post '/user/follow' do
-  @follow = Follow.new
+post '/users/follow' do
+  @follow = Follow.new()
   @follow.follower_id = User.find_by(username: params[:follow][:follower]).id
   @follow.followee_id = User.find_by(username: params[:follow][:followee]).id
-  if follow.save
+  if @follow.save
     username = params[:follow][:follower]
     redirect '/follow/' + username
   else
@@ -88,9 +94,69 @@ post '/user/follow' do
   end
 end
 
-get '/follow/:username' do
-  username = params[:username]
-  user_id = User.find_by(username: username).id
-  @follow_users = Follow.find_by(follower_id: user_id)
-  erb :follow
+post '/followings/create' do
+  @follow = Follow.new()
+  @follow.follower_id = params[:follow_from_id]
+  @follow.followee_id = params[:follow_to_id]
+  # binding.pry
+  if @follow.save
+    username = User.find_by(id: params[:follow_from_id]).username
+    redirect '/follow/' + username
+  else
+    "error when creating follow"
+  end
 end
+
+post '/followings/create' do
+  @follow = Follow.new()
+  @follow.follower_id = params[:follow_from_id]
+  @follow.followee_id = params[:follow_to_id]
+  # binding.pry
+  if @follow.save
+    username = User.find_by(id: params[:follow_from_id]).username
+    redirect '/follow/' + username
+  else
+    "error when creating follow"
+  end
+end
+
+#go to the person page of some one
+get '/users/:username' do
+  if User.find_by(username: params[:username]).nil?
+    @mode = -1
+  else
+    @follow_from_id = User.find_by(username: session[:username]).id
+    @follow_to_id = User.find_by(username: params[:username]).id
+    @pageuser = params[:username]
+    if @follow_from_id == @follow_to_id
+      #user is checiing his or her own page
+      @mode = 0
+    elsif Follow.where(follower_id: @follow_from_id, followee_id: @follow_to_id).size > 0
+      #alreadt followed, show a button to unfollow
+      @mode = 1
+    else
+      #show a follow button
+      @mode = 2
+    end
+  end
+  erb :personpage
+end
+
+
+get '/follow/:username' do
+  @username = params[:username]
+  #get the id of the current page
+  user_id = User.find_by(username: @username).id
+  follow_ids = Follow.where(follower_id: user_id)
+  # binding.pry
+  @follow_users = []
+  follow_ids.each do |follow|
+    fname = User.find_by(id: follow.followee_id)
+    @follow_users << fname
+  end
+  erb :followlist
+end
+
+
+
+

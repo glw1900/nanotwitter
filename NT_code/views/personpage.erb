@@ -1,11 +1,28 @@
-<h3>homepage with 50 posts of any user</h3>
-<form action="/user/follow" method="POST">
-	<input type="text" name="follow[follower]" value="Enter your username" /><BR>
-	<input type="text" name="follow[followee]" value="Enter folwee username" /><BR>
-	<input type="submit" value="Follow" />
-</form>
-<BR>
-<a href="/">homepage</a><BR>
+<% if @mode == -1%>
+<%#no user %>
+"no such user"
+<% else %>
+
+	<h3><%= @pageuser%> 's homepage</h3>
+	<% if @mode == 2 #if did not follow%>
+		<form action="/followings/create" method="POST">
+			<input type="hidden" name="follow_to_id" value=<%= @follow_to_id%>>
+		 	<input type="hidden" name="follow_from_id" value=<%= @follow_from_id%>>
+			<input type="submit" value="Follow" />
+		</form>
+	<% elsif @mode == 1 #if already followed%>
+		<form action="/followings/destroy" method="POST">
+			<input type="hidden" name="follow_to_id" value=<%= @follow_to_id%>>
+		 	<input type="hidden" name="follow_from_id" value=<%= @follow_from_id%>>
+			<input type="submit" value="Unfollow" />
+		</form>
+	<% end %>
+
+	<form action="/follow/<%= @pageuser%>" method="GET">
+		<input type="submit" value="who I follow" />
+	</form>
+	<BR>
+<% end %>
 
 
 

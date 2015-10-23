@@ -1,8 +1,15 @@
-<h3>homepage with 50 posts of any user</h3>
-<form action="/user/submit" method="POST">
+<h3>homepage</h3>
+<% if @logged_in == true %>
+	hello, <%= @username %>
+<% end %>
+<%= @logged_in %>
+
+<form action="/users/submit" method="POST">
 	<input type="text" name="user[username]" value="Enter your username" /><BR>
 	<input type="text" name="user[password]" value="Enter password" /><BR>
 	<input type="submit" value="Submit" />
 </form>
-<BR>
-<a href="/signup">sign up</a><BR>
+<input type="hidden" name="follower" value=<%= @username%>>
+
+
+<h3>50 posts of any user</h3>
