@@ -1,15 +1,13 @@
-<h3>homepage</h3>
-<% if @logged_in == true %>
-	hello, <%= @username %>
-<% end %>
-<%= @logged_in %>
-
+<h3>Welcome to nano twitter</h3>
 <form action="/users/submit" method="POST">
 	<input type="text" name="user[username]" value="Enter your username" /><BR>
 	<input type="text" name="user[password]" value="Enter password" /><BR>
 	<input type="submit" value="Submit" />
 </form>
-<input type="hidden" name="follower" value=<%= @username%>>
+<form action="/signup" method="GET">
+	<input type="submit" value="Sign up" />
+</form>
 
+<BR>
 
 <h3>50 posts of any user</h3>
