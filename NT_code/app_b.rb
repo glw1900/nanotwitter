@@ -26,7 +26,7 @@ get '/' do
 end
 
 get '/signup' do
-  erb :sign_up
+  erb :regist
 end
 
 post '/users/submit_regis' do
