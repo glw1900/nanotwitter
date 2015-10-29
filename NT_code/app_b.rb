@@ -29,12 +29,19 @@ get '/signup' do
   erb :regist
 end
 
+get '/signin' do
+  erb :sign_in
+end
+
 post '/users/submit_regis' do
-  @user = User.new(params[:user])
-  username = @user.username
-  if @user.save
-    redirect '/'
+  u = check(params[:user])
+  if u
+    @user = User.new(u)
+    if @user.save
+      redirect '/signin'
+    end
   end
+  "Password not match"
 end
 
 post "/users/submit" do
@@ -101,7 +108,6 @@ post '/followings/create' do
   @follow = Follow.new()
   @follow.follower_id = params[:follow_from_id]
   @follow.followee_id = params[:follow_to_id]
-  # binding.pry
   if @follow.save
     username = User.find_by(id: params[:follow_from_id]).username
     redirect '/follow/' + username
@@ -132,7 +138,6 @@ get '/users/:username' do
   erb :personpage
 end
 
-
 get '/follow/:username' do
   @username = params[:username]
   #get the id of the current pageuser
@@ -145,8 +150,4 @@ get '/follow/:username' do
     @follow_users << fname
   end
   erb :followlist
-end
-
-get '/signin' do
-  erb :sign_in
 end
