@@ -19,13 +19,24 @@ get '/' do
   @logged_in = false #0 when no user log in
   if session["username"] != nil
     @logged_in = true
-    @username = session["username"]
+    redirect '/timeline'
   end
   erb :homepage
 end
 
 get '/signup' do
   erb :sign_up
+end
+
+post '/signout' do
+  if session["username"] == nil
+    'already sign out'
+  else
+    @username = session["username"]
+    session["username"] = nil
+  end
+  redirect "/"
+  erb :sign_out
 end
 
 post '/users/submit_regis' do
@@ -41,7 +52,7 @@ post "/users/submit" do
   if auth(@tring_logging_in)
     username = @tring_logging_in["username"]
     session["username"] = username
-    redirect '/users/timeline'
+    redirect '/timeline'
   else
     "Wrong Password"
   end
@@ -57,11 +68,11 @@ post "/users/submit_twitter" do
 
   @new_tweet = Tweet.new(tweet)
   if @new_tweet.save
-    redirect '/users/timeline'
+    redirect '/timeline'
   end
 end
 
-get '/users/timeline' do
+get '/timeline' do
   username = session[:username]
   @uname = username
   user_id = User.find_by(username: username).id
@@ -128,6 +139,9 @@ get '/users/:username' do
       @mode = 2
     end
   end
+  @uname = params[:username]
+  user_id = User.find_by(username: @uname).id
+  @tweet_list = Tweet.where(user_id: user_id)
   erb :personpage
 end
 

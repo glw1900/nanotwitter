@@ -4,8 +4,8 @@
 
 <% @follow_users.each do |follow_user| %>
 	<li>
-		<%= follow_user.username%>
-		<%= follow_user.created_at%>
+		<a href="/users/<%= follow_user.username%>"><%= follow_user.username%></a>
+		<%= follow_user.created_at%>	
 	</li>
 <% end %>
 <% end %>
