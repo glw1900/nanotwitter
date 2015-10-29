@@ -1,22 +1,34 @@
-<h3>post a twitter</h3>
-<form action="/users/submit_twitter" method="POST">
-	<input type="text" name="tweet" value="Feeling happy?" /><BR>
-	<input type="submit" value="Tweet" />
-</form>
-
-<h3>recent twittwers from who you have followed</h3>
-<ol>
-<% if !@tweet_list.nil? %>
-	<% @tweet_list.each do |twitter| %>
-		<li>
-			<%= twitter.content %>
-    		<%= twitter.user_id %>
-    		<%= twitter.created_at %>
-		</li>
-	<% end %>
-<% end %>
-</ol>
-<BR>
-<a href="/users/<%= @uname %>">My homepage</a>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>SignUp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
 
 
+<body>
+<div class="bs-example">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>user_id</th>
+                <th>content</th>
+                <th>created_at</th>
+            </tr>
+        </thead>
+        <tbody>
+          <% if !@tweet_list.nil? %>
+            <% @tweet_list.each do |twitter| %>
+              <tr>
+                  <td><%= twitter.content %></td>
+              </tr>
+
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
