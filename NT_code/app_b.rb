@@ -75,7 +75,7 @@ get '/users/timeline' do
   user_id = User.find_by(username: username).id
   if !session["username"].nil?
     @tweet_list = Tweet.where(user_id: user_id)
-    erb :timeline
+    erb :timeline2
   end
 end
 
