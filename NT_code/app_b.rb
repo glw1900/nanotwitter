@@ -25,6 +25,16 @@ get '/' do
   erb :home
 end
 
+get '/timeline' do
+  username = session[:username]
+  @uname = username
+  user_id = User.find_by(username: username).id
+  if !session["username"].nil?
+    @tweet_list = Tweet.where(user_id: user_id)
+    erb :timeline
+  end
+end
+
 get '/signup' do
   erb :regist
 end
@@ -49,7 +59,7 @@ post "/users/submit" do
   if auth(@tring_logging_in)
     username = @tring_logging_in["username"]
     session["username"] = username
-    redirect '/users/timeline'
+    redirect '/timeline'
   else
     "Wrong Password"
   end
@@ -66,16 +76,6 @@ post "/users/submit_twitter" do
   @new_tweet = Tweet.new(tweet)
   if @new_tweet.save
     redirect '/users/timeline'
-  end
-end
-
-get '/users/timeline' do
-  username = session[:username]
-  @uname = username
-  user_id = User.find_by(username: username).id
-  if !session["username"].nil?
-    @tweet_list = Tweet.where(user_id: user_id)
-    erb :timeline2
   end
 end
 
