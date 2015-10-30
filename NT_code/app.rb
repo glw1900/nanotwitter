@@ -159,7 +159,3 @@ get '/follow/:username' do
   end
   erb :followlist
 end
-
-
-
-
