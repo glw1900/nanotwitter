@@ -7,7 +7,6 @@ get '/users/:username' do
   look_at_user_id = User.find_by(username: look_at_username).id
   
   @parameters = user_a_look_at_user_b_homepage(logged_id, look_at_user_id)
-  # TODO: erb here
   erb :personpage2
 end
 
@@ -15,8 +14,8 @@ post '/create/user' do
   
   @user = User.new(params)
   if @user.save
-    redirect '/signin'
     response["successfully_sign_up"] = true
+    redirect '/signin'
   end
   
 end
