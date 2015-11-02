@@ -118,7 +118,7 @@ end
 
 post "/users/submit_twitter" do
   tweet = {}
-  tweet[:content] = params[:tweet]
+  tweet[:content] = params[:tweet][:content]
   tweet[:media_url] = nil
   tweet[:retweet_id] = nil
   tweet[:user_id] = User.find_by(username: session["username"]).id
