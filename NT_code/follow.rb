@@ -36,11 +36,10 @@ end
 
 post '/create/follow' do
   @follow = Follow.new()
-  @follow.follower_id = params[:follow_from_id]
-  @follow.followee_id = params[:follow_to_id]
-  # binding.pry
+  @follow.follower_id = params[:follower_id]
+  @follow.followee_id = params[:followee_id]
   if @follow.save
-    username = User.find_by(id: params[:follow_from_id]).username
+    username = User.find_by(id: params[:follower_id]).username
     redirect '/follow/' + username
   else
     "error when creating follow"
@@ -48,8 +47,8 @@ post '/create/follow' do
 end
 
 post '/delete/follow' do
-  follow = Follow.find_by(followee_id: params[:follow_to_id], follower_id: params[:follow_from_id])
-  follow_to_name = User.find_by(id: params[:follow_to_id]).username
+  follow = Follow.find_by(followee_id: params[:followee_id], follower_id: params[:follower_id])
+  follow_to_name = User.find_by(id: params[:followee_id]).username
   if follow != nil
     follow.destroy
     'unfollow success' + follow_to_name

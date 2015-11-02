@@ -41,7 +41,6 @@ def tweet_array_to_hash(records_array, logged)
   records_array.each do |tw|
     t = Hash.new()
     t["text"] = tw["content"]
-    puts "tw[:content]", tw["content"]
     t["time"] = tw["created_at"]
     t["by_user"] = tw["username"]
     # below is made up
