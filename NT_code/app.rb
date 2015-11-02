@@ -41,7 +41,6 @@ get '/timeline' do
   @parameters["username"] = session[:username]
   @paramaters["ttimeline_twitter_list"] = tweet_list
   erb :timeline
-  
 end
 
 get '/signup' do
@@ -77,7 +76,7 @@ get '/users/:username' do
   erb :personpage2
 end
 
-get '/follow/:username' do
+get '/user/:username.following' do
   @username = params[:username]
   #get the id of the current pageuser
   user_id = User.find_by(username: @username).id
@@ -113,7 +112,7 @@ post "/signin" do
   end
 end
 
-post "/users/submit_twitter" do
+post "/create/twitter" do
   tweet = {}
   tweet[:content] = params[:tweet]
   tweet[:media_url] = nil
