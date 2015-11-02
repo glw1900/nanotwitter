@@ -28,7 +28,7 @@ require 'pry-byebug'
 # end
 
 get '/' do
-  @parameters = Hash.new
+  @parameters = {}
   @parameters["unlogged_twitter_list"] = first_50_tweets_lst
   erb :home
 end
