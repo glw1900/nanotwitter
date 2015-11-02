@@ -56,14 +56,15 @@
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
-  <br>
 
-  <div class="span6">
-        <textarea  cols="100" id="textarea" rows="6" placeholder="Enter a short synopsis"></textarea>
-        <br>
-        <button class="btn">Tweet</button>
+  <div class="modal-body">
+      <form class="form col-md-12 center-block" action="/users/submit_twitter" method="POST">
+          <textarea  cols="100" id="textarea" name="tweet[content]" rows="6" placeholder="New Tweet"></textarea>
+          <br>
+          <button class="btn btn-primary">Tweet</button>
+      </form>
   </div>
-
+  <br>
 
 <div class="bs-example">
     <table class="table table-striped">

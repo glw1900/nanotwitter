@@ -16,17 +16,6 @@ enable :sessions
 set :public_folder, File.dirname(__FILE__)+'/bootstrap-3.3.5-dist'
 require 'pry-byebug'
 
-# get '/' do
-#   @logged_in = false #0 when no user log in
-#   if session["username"] != nil
-#     @logged_in = true
-#     @username = session["username"]
-#   end
-#   @parameters = Hash.new
-#   @parameters["unlogged_twitter_list"] = first_50_tweets_list
-#   erb :home
-# end
-
 get '/' do
   @parameters = {}
   @parameters["unlogged_twitter_list"] = first_50_tweets_lst
@@ -34,13 +23,20 @@ get '/' do
 end
 
 get '/timeline' do
-  username = session[:username]
-  @uname = username
-  user_id = User.find_by(username: username).id
-  if !session["username"].nil?
-    @tweet_list = Tweet.where(user_id: user_id)
-    erb :timeline
-  end
+  # user_id = User.find_by(username: username).id
+  # tweet_list = []
+  # if !session["username"].nil?
+  #   tweet_list = Tweet.where(user_id: user_id)
+  #   tweet_list.each do |tweet|
+  #     tweet_hash = {}
+  #     tweet_hash[]
+
+  # end
+  # @parameters = {}
+  # @parameters["username"] = session[:username]
+  # @paramaters["ttimeline_twitter_list"] = tweet_list
+  # erb :timeline
+  #=================waiting for Chen's sql join and hash result
 end
 
 get '/signup' do
@@ -49,10 +45,6 @@ end
 
 get '/signin' do
   erb :sign_in
-end
-
-get '/logout' do
-  erb :home
 end
 
 #go to the person page of some one
@@ -94,7 +86,7 @@ get '/follow/:username' do
   erb :followlist
 end
 
-post '/users/submit_regis' do
+post '/create/user' do
   u = check(params[:user])
   if u
     @user = User.new(u)
@@ -105,7 +97,7 @@ post '/users/submit_regis' do
   "Password not match"
 end
 
-post "/users/submit" do
+post "/signin" do
   @tring_logging_in = params[:user]
   if auth(@tring_logging_in)
     username = @tring_logging_in["username"]
@@ -130,7 +122,7 @@ post "/users/submit_twitter" do
   end
 end
 
-post '/followings/create' do
+post '/create/follow' do
   @follow = Follow.new()
   @follow.follower_id = params[:follow_from_id]
   @follow.followee_id = params[:follow_to_id]
@@ -143,7 +135,7 @@ post '/followings/create' do
   end
 end
 
-post '/followings/destroy' do
+post '/delete/follow' do
   follow = Follow.find_by(followee_id: params[:follow_to_id], follower_id: params[:follow_from_id])
   follow_to_name = User.find_by(id: params[:follow_to_id]).username
   if follow != nil
