@@ -16,31 +16,31 @@ enable :sessions
 set :public_folder, File.dirname(__FILE__)+'/bootstrap-3.3.5-dist'
 require 'pry-byebug'
 
+# get '/' do
+#   @logged_in = false #0 when no user log in
+#   if session["username"] != nil
+#     @logged_in = true
+#     @username = session["username"]
+#   end
+#   @parameters = Hash.new
+#   @parameters["unlogged_twitter_list"] = first_50_tweets_list
+#   erb :home
+# end
+
 get '/' do
-  @parameters = {}
+  @parameters = Hash.new
   @parameters["unlogged_twitter_list"] = first_50_tweets_lst
   erb :home
 end
 
 get '/timeline' do
-  #=================this is only a temp version
-  # =================waiting for Chen's sql join and hash result
+  username = session[:username]
   user_id = User.find_by(username: username).id
-  tweet_list = []
-  if !session["username"].nil?
-    tweet_list = Tweet.where(user_id: user_id)
-    tweet_list.each do |tweet|
-      tweet_hash = {}
-      tweet_hash["text"] = tweet.content
-      tweet_hash["time"] = tweet.created_at
-      tweet_hash["by_user"] = User.find_by(id: tweet.user_id).username
-      tweet_list.push(tweet_hash)
-    end
-  end
   @parameters = {}
-  @parameters["username"] = session[:username]
-  @paramaters["ttimeline_twitter_list"] = tweet_list
-  erb :timeline
+  if !session["username"].nil?
+    @parameters = get_time_line(user_id)
+    erb :timeline
+  end
 end
 
 get '/signup' do
@@ -49,6 +49,10 @@ end
 
 get '/signin' do
   erb :sign_in
+end
+
+get '/logout' do
+  erb :home
 end
 
 #go to the person page of some one
@@ -76,7 +80,7 @@ get '/users/:username' do
   erb :personpage2
 end
 
-get '/user/:username.following' do
+get '/follow/:username' do
   @username = params[:username]
   #get the id of the current pageuser
   user_id = User.find_by(username: @username).id
@@ -90,7 +94,7 @@ get '/user/:username.following' do
   erb :followlist
 end
 
-post '/create/user' do
+post '/users/submit_regis' do
   u = check(params[:user])
   if u
     @user = User.new(u)
@@ -101,7 +105,7 @@ post '/create/user' do
   "Password not match"
 end
 
-post "/signin" do
+post "/users/submit" do
   @tring_logging_in = params[:user]
   if auth(@tring_logging_in)
     username = @tring_logging_in["username"]
@@ -112,7 +116,7 @@ post "/signin" do
   end
 end
 
-post "/create/twitter" do
+post "/users/submit_twitter" do
   tweet = {}
   tweet[:content] = params[:tweet]
   tweet[:media_url] = nil
@@ -126,7 +130,7 @@ post "/create/twitter" do
   end
 end
 
-post '/create/follow' do
+post '/followings/create' do
   @follow = Follow.new()
   @follow.follower_id = params[:follow_from_id]
   @follow.followee_id = params[:follow_to_id]
@@ -139,7 +143,7 @@ post '/create/follow' do
   end
 end
 
-post '/delete/follow' do
+post '/followings/destroy' do
   follow = Follow.find_by(followee_id: params[:follow_to_id], follower_id: params[:follow_from_id])
   follow_to_name = User.find_by(id: params[:follow_to_id]).username
   if follow != nil
