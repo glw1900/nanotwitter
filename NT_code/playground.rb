@@ -31,9 +31,12 @@ def pretty_print(stuff)
 	f.close
 end
 
-rt = user_a_look_at_user_b_homepage(1065, 1102)
+# rt = user_a_look_at_user_b_homepage(1065, 1102)
 
-# puts JSON.pretty_generate(JSON.parse(rt.to_json))
-pretty_print(rt)
+# # puts JSON.pretty_generate(JSON.parse(rt.to_json))
+# pretty_print(rt)
 
-puts "how_many_do_i_follow(1102):  #{how_many_do_i_follow(1102)} ==== "
+# puts "how_many_do_i_follow(1102):  #{how_many_do_i_follow(1102)} ==== "
+
+puts "------------------------"
+puts get_followees(2)

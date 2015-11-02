@@ -1,140 +1,42 @@
-{
-  "logged_user_profile": {
-    "username": "Mrs. Alden Schoen",
-    "profile_photo_url": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Barack_Obama_and_Bill_Clinton_profile.jpg",
-    "follow_number": 1,
-    "follower_number": 5
+[
+  {
+    "username": "username89",
+    "followed_at_time": "2015-11-02 17:06:03.594076",
+    "profile_photo_url": "http://vignette1.wikia.nocookie.net/webarebears/images/d/d6/Bear_stack.jpg/revision/latest?cb=20150706002256"
   },
-  "homepage_tweet_list": [
-    {
-      "text": "Qui laudantium non et a animi.",
-      "time": "2015-08-24 01:57:44.000000",
-      "by_user": "Clifford Wilderman III",
-      "favourite_number": 10,
-      "comment": {
-        "commenter_name": "fake_name_1",
-        "content": "fake_content_2",
-        "time": "2007-10-23 22:15:15 UTC",
-        "reply_to": "fake_content_3"
-      },
-      "has_this_user_favorited_this_tweet": false
-    },
-    {
-      "text": "Doloribus est totam voluptates architecto doloremque.",
-      "time": "2015-10-02 10:31:54.000000",
-      "by_user": "Clifford Wilderman III",
-      "favourite_number": 10,
-      "comment": {
-        "commenter_name": "fake_name_1",
-        "content": "fake_content_2",
-        "time": "2007-10-23 22:15:15 UTC",
-        "reply_to": "fake_content_3"
-      },
-      "has_this_user_favorited_this_tweet": false
-    },
-    {
-      "text": "Qui eos sint molestiae soluta at eligendi dolorem temporibus.",
-      "time": "2015-10-16 14:21:50.000000",
-      "by_user": "Clifford Wilderman III",
-      "favourite_number": 10,
-      "comment": {
-        "commenter_name": "fake_name_1",
-        "content": "fake_content_2",
-        "time": "2007-10-23 22:15:15 UTC",
-        "reply_to": "fake_content_3"
-      },
-      "has_this_user_favorited_this_tweet": false
-    },
-    {
-      "text": "Dolores sunt assumenda odit eligendi totam nemo sit.",
-      "time": "2015-10-09 10:48:26.000000",
-      "by_user": "Clifford Wilderman III",
-      "favourite_number": 10,
-      "comment": {
-        "commenter_name": "fake_name_1",
-        "content": "fake_content_2",
-        "time": "2007-10-23 22:15:15 UTC",
-        "reply_to": "fake_content_3"
-      },
-      "has_this_user_favorited_this_tweet": false
-    },
-    {
-      "text": "Qui tempora itaque eaque dolorem aut dolores excepturi.",
-      "time": "2015-08-24 02:08:29.000000",
-      "by_user": "Clifford Wilderman III",
-      "favourite_number": 10,
-      "comment": {
-        "commenter_name": "fake_name_1",
-        "content": "fake_content_2",
-        "time": "2007-10-23 22:15:15 UTC",
-        "reply_to": "fake_content_3"
-      },
-      "has_this_user_favorited_this_tweet": false
-    },
-    {
-      "text": "Delectus quod possimus cumque cum dignissimos qui.",
-      "time": "2015-10-21 00:51:13.000000",
-      "by_user": "Clifford Wilderman III",
-      "favourite_number": 10,
-      "comment": {
-        "commenter_name": "fake_name_1",
-        "content": "fake_content_2",
-        "time": "2007-10-23 22:15:15 UTC",
-        "reply_to": "fake_content_3"
-      },
-      "has_this_user_favorited_this_tweet": false
-    },
-    {
-      "text": "Dolorem hic et assumenda odit facilis ut sapiente.",
-      "time": "2015-08-20 06:49:39.000000",
-      "by_user": "Clifford Wilderman III",
-      "favourite_number": 10,
-      "comment": {
-        "commenter_name": "fake_name_1",
-        "content": "fake_content_2",
-        "time": "2007-10-23 22:15:15 UTC",
-        "reply_to": "fake_content_3"
-      },
-      "has_this_user_favorited_this_tweet": false
-    },
-    {
-      "text": "Debitis quae earum recusandae sunt veritatis.",
-      "time": "2015-08-04 16:37:53.000000",
-      "by_user": "Clifford Wilderman III",
-      "favourite_number": 10,
-      "comment": {
-        "commenter_name": "fake_name_1",
-        "content": "fake_content_2",
-        "time": "2007-10-23 22:15:15 UTC",
-        "reply_to": "fake_content_3"
-      },
-      "has_this_user_favorited_this_tweet": false
-    },
-    {
-      "text": "Labore quo esse nihil est et eius.",
-      "time": "2015-09-11 00:01:12.000000",
-      "by_user": "Clifford Wilderman III",
-      "favourite_number": 10,
-      "comment": {
-        "commenter_name": "fake_name_1",
-        "content": "fake_content_2",
-        "time": "2007-10-23 22:15:15 UTC",
-        "reply_to": "fake_content_3"
-      },
-      "has_this_user_favorited_this_tweet": false
-    },
-    {
-      "text": "Laborum dignissimos rerum est id iusto.",
-      "time": "2015-09-24 06:55:05.000000",
-      "by_user": "Clifford Wilderman III",
-      "favourite_number": 10,
-      "comment": {
-        "commenter_name": "fake_name_1",
-        "content": "fake_content_2",
-        "time": "2007-10-23 22:15:15 UTC",
-        "reply_to": "fake_content_3"
-      },
-      "has_this_user_favorited_this_tweet": false
-    }
-  ]
-}
+  {
+    "username": "username91",
+    "followed_at_time": "2015-11-02 17:06:03.659826",
+    "profile_photo_url": "http://vignette1.wikia.nocookie.net/webarebears/images/d/d6/Bear_stack.jpg/revision/latest?cb=20150706002256"
+  },
+  {
+    "username": "username26",
+    "followed_at_time": "2015-11-02 17:06:03.664835",
+    "profile_photo_url": "http://vignette1.wikia.nocookie.net/webarebears/images/d/d6/Bear_stack.jpg/revision/latest?cb=20150706002256"
+  },
+  {
+    "username": "username22",
+    "followed_at_time": "2015-11-02 17:06:03.801727",
+    "profile_photo_url": "http://vignette1.wikia.nocookie.net/webarebears/images/d/d6/Bear_stack.jpg/revision/latest?cb=20150706002256"
+  },
+  {
+    "username": "username78",
+    "followed_at_time": "2015-11-02 17:06:03.850097",
+    "profile_photo_url": "http://vignette1.wikia.nocookie.net/webarebears/images/d/d6/Bear_stack.jpg/revision/latest?cb=20150706002256"
+  },
+  {
+    "username": "username25",
+    "followed_at_time": "2015-11-02 17:06:04.102356",
+    "profile_photo_url": "http://vignette1.wikia.nocookie.net/webarebears/images/d/d6/Bear_stack.jpg/revision/latest?cb=20150706002256"
+  },
+  {
+    "username": "username37",
+    "followed_at_time": "2015-11-02 17:06:04.256281",
+    "profile_photo_url": "http://vignette1.wikia.nocookie.net/webarebears/images/d/d6/Bear_stack.jpg/revision/latest?cb=20150706002256"
+  },
+  {
+    "username": "username6",
+    "followed_at_time": "2015-11-02 17:06:04.499064",
+    "profile_photo_url": "http://vignette1.wikia.nocookie.net/webarebears/images/d/d6/Bear_stack.jpg/revision/latest?cb=20150706002256"
+  }
+]
