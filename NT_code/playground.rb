@@ -29,6 +29,6 @@ def pretty_print(stuff)
 	f.write(JSON.pretty_generate(JSON.parse(stuff.to_json)))
 end
 
-a = get_time_line(270)
+a = get_time_line(912)
 
 pretty_print(a)
