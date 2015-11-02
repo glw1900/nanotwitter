@@ -15,8 +15,8 @@ post '/create/user' do
   
   @user = User.new(params)
   if @user.save
-    redirect '/signin'
     response["successfully_sign_up"] = true
+    redirect '/signin'
   end
   
 end
