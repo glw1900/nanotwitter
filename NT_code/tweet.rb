@@ -1,4 +1,3 @@
-
 post "/create/tweet" do
   return_message = {}
   tweet = {}
@@ -14,7 +13,6 @@ post "/create/tweet" do
     redirect '/timeline'
   end
 end
-
 
 post "/delete/tweet" do
   tweet_id = params["tweet_id"]

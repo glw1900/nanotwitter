@@ -27,5 +27,4 @@ post '/delete/user/:username' do
     user.destroy
     response["successfully_deleted"] = true
   end
-  
 end
