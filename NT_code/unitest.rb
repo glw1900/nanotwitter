@@ -118,22 +118,5 @@ describe "creation / deletion " do
     
   end
 end
- 
-
-#     describe "sign in as chen" do
-#       it "sign in as chen" do
-#       post '/signin',  {"username" => "user1", "password" => "1234"}
-#       attributes = JSON.parse(last_response.to_json) # RACK
-# #       attributes[:status].must_equal == 200
-#       write_Json(attributes)
-#       end
-#     end # it
-    
-  #   it "create and delete new user" do
-  #     post '/user/submit_regis', {"user" => {"username" => "chen", "password" => "123"}}.to_json
-  #     attributes = JSON.parse(last_response.to_json) # RACK
-  #     write_Json(attributes)
-  #   end # it
-  # end # describe
   
   
