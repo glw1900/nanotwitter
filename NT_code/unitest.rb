@@ -106,7 +106,7 @@ describe "creation / deletion " do
     
     headers = JSON.parse(last_response.to_json)["header"]
     # write_Json(attributes)
-    posted_tweet_id = headers["tweet_id"]
+    posted_tweet_id = headers["posted_tweet_id"]
     get_value_by_key_from_header("successfully_posted").must_equal true
     
     # begin deleting tweet
@@ -115,7 +115,6 @@ describe "creation / deletion " do
     }
     
     get_value_by_key_from_header("successfully_deleted").must_equal true
-    
     
   end
 end
