@@ -1,0 +1,29 @@
+{
+  "original_headers": {
+    "Content-Type": "text/html;charset=utf-8",
+    "Content-Length": "2738",
+    "X-XSS-Protection": "1; mode=block",
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "SAMEORIGIN",
+    "Set-Cookie": "rack.session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiRTQ4YjkxODg5ZjUwMWIzZDcxZTA2%0ANDQyYzE2NDEyNTVlNjgxYzNkM2Q0NDdhMzZjMDE1NWFjNDdkN2RlZDZlYjIG%0AOwBGSSIJY3NyZgY7AEZJIiUzNjkyNWI4NTVmYmQ2MDZhYzc2ODQyOGFiMjhj%0AYWE5ZgY7AEZJIg10cmFja2luZwY7AEZ7B0kiFEhUVFBfVVNFUl9BR0VOVAY7%0AAFRJIi1kYTM5YTNlZTVlNmI0YjBkMzI1NWJmZWY5NTYwMTg5MGFmZDgwNzA5%0ABjsARkkiGUhUVFBfQUNDRVBUX0xBTkdVQUdFBjsAVEkiLWRhMzlhM2VlNWU2%0AYjRiMGQzMjU1YmZlZjk1NjAxODkwYWZkODA3MDkGOwBG%0A; path=/; HttpOnly"
+  },
+  "errors": "127.0.0.1 - - [01/Nov/2015:21:14:32 -0500] \"GET / \" 200 2738 0.0095\n",
+  "body_string": null,
+  "status": 200,
+  "header": {
+    "Content-Type": "text/html;charset=utf-8",
+    "Content-Length": "2738",
+    "X-XSS-Protection": "1; mode=block",
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "SAMEORIGIN",
+    "Set-Cookie": "rack.session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiRTQ4YjkxODg5ZjUwMWIzZDcxZTA2%0ANDQyYzE2NDEyNTVlNjgxYzNkM2Q0NDdhMzZjMDE1NWFjNDdkN2RlZDZlYjIG%0AOwBGSSIJY3NyZgY7AEZJIiUzNjkyNWI4NTVmYmQ2MDZhYzc2ODQyOGFiMjhj%0AYWE5ZgY7AEZJIg10cmFja2luZwY7AEZ7B0kiFEhUVFBfVVNFUl9BR0VOVAY7%0AAFRJIi1kYTM5YTNlZTVlNmI0YjBkMzI1NWJmZWY5NTYwMTg5MGFmZDgwNzA5%0ABjsARkkiGUhUVFBfQUNDRVBUX0xBTkdVQUdFBjsAVEkiLWRhMzlhM2VlNWU2%0AYjRiMGQzMjU1YmZlZjk1NjAxODkwYWZkODA3MDkGOwBG%0A; path=/; HttpOnly"
+  },
+  "chunked": false,
+  "writer": {
+  },
+  "block": null,
+  "length": 2738,
+  "body": [
+    "<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"utf-8\">\n    <title>HomePage</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"css/bootstrap.min.css\">\n    <link rel=\"stylesheet\" href=\"css/bootstrap-theme.min.css\">\n    <script src=\"http://code.jquery.com/jquery-latest.min.js\" type=\"text/javascript\"></script>\n    <script src=\"js/bootstrap.min.js\"></script>\n</head>\n\n<body>\n    <h1>NanoTwitter</h1>\n    <nav class=\"navbar navbar-default\">\n      <div class=\"container-fluid\">\n    <!-- Brand and toggle get grouped for better mobile display -->\n        <div class=\"navbar-header\">\n          <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"true\">\n            <span class=\"sr-only\">Toggle navigation</span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n          </button>\n          <a class=\"navbar-brand\" href=\"#\">Brand</a>\n        </div>\n\n    <!-- Collect the nav links, forms, and other content for toggling -->\n        <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n          <ul class=\"nav navbar-nav\">\n            <li class=\"active\"><a href=\"#\">Link <span class=\"sr-only\">(current)</span></a></li>\n            <li><a href=\"#\">Link</a></li>\n            <li class=\"dropdown\">\n              <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">Dropdown <span class=\"caret\"></span></a>\n              <ul class=\"dropdown-menu\" aria-labelledby=\"dLabel\">\n                <li><a href=\"#\">Action</a></li>\n                <li><a href=\"#\">Another action</a></li>\n                <li><a href=\"#\">Something else here</a></li>\n                <li role=\"separator\" class=\"divider\"></li>\n                <li><a href=\"#\">Separated link</a></li>\n                <li role=\"separator\" class=\"divider\"></li>\n                <li><a href=\"#\">One more separated link</a></li>\n              </ul>\n            </li>\n          </ul>\n          <form class=\"navbar-form navbar-left\" role=\"search\">\n            <div class=\"form-group\">\n              <input type=\"text\" class=\"form-control\" placeholder=\"Search\">\n            </div>\n            <button type=\"submit\" class=\"btn btn-default\">Submit</button>\n          </form>\n          <ul class=\"nav navbar-nav navbar-right\">\n            <li><a href=\"http://0.0.0.0:4567/signin\" class=\"btn btn-default\">SIGN IN</a></li>\n          </ul>\n        </div><!-- /.navbar-collapse -->\n      </div><!-- /.container-fluid -->\n    </nav>\n    <br>\n\n\n    <h2>50 tweets</h2>\n\n</body>\n</html>\n"
+  ]
+}

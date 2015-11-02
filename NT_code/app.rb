@@ -16,17 +16,6 @@ enable :sessions
 set :public_folder, File.dirname(__FILE__)+'/bootstrap-3.3.5-dist'
 require 'pry-byebug'
 
-# get '/' do
-#   @logged_in = false #0 when no user log in
-#   if session["username"] != nil
-#     @logged_in = true
-#     @username = session["username"]
-#   end
-#   @parameters = Hash.new 
-#   @parameters["unlogged_twitter_list"] = first_50_tweets_list
-#   erb :home
-# end
-
 get '/' do
   @parameters = Hash.new 
   @parameters["unlogged_twitter_list"] = first_50_tweets_lst
