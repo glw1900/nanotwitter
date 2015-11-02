@@ -12,7 +12,7 @@
 
 <body>
 
-  <h1>Timeline of <%= @parameters[username]%> </h1>
+  <h1>Timeline of <%= @parameters["username"]%> </h1>
   <nav class="navbar navbar-default">
     <div class="container-fluid">
   <!-- Brand and toggle get grouped for better mobile display -->
@@ -76,7 +76,7 @@
             </tr>
         </thead>
         <tbody>
-          <% if !@parameters[timeline_twitter_list].nil? %>
+          <% if !@parameters[timeline_twitter_list] %>
             <% @parameters[timeline_twitter_list].each do |twitter| %>
               <tr>
                   <td><%= twitter["by_user"] %></td>
