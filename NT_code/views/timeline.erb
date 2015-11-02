@@ -4,16 +4,24 @@
     <meta charset="utf-8">
     <title>Timeline</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 </head>
 
 <body>
+  <form role="form" action="/create/twitter"method="POST">
+    <div class="span6">
+        <textarea class="form-control" name="tweet[content]" id="textarea" rows="6" placeholder="Enter a short synopsis" tabindex="1"></textarea>
+        <br>
+        <button class="btn">Tweet</button>
+        <input type="submit" value="Tweet" class="btn btn-primary btn-block btn-lg" tabindex="2">
+    </div>
+</form>
 <div class="bs-example">
     <table class="table table-striped">
-        <thead>
+        <thead>  
             <tr>
                 <th>user_id</th>
                 <th>content</th>

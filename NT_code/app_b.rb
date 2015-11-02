@@ -69,13 +69,13 @@ post "/users/submit_twitter" do
   end
 end
 
-get '/users/timeline' do
+get 'users/timeline' do
   username = session[:username]
   @uname = username
   user_id = User.find_by(username: username).id
   if !session["username"].nil?
     @tweet_list = Tweet.where(user_id: user_id)
-    erb :timeline2
+    erb :timeline
   end
 end
 
