@@ -76,7 +76,7 @@
             </tr>
         </thead>
         <tbody>
-          <% if !@parameters[timeline_twitter_list] %>
+          <% if !@parameters[timeline_twitter_list].nil? %>
             <% @parameters[timeline_twitter_list].each do |twitter| %>
               <tr>
                   <td><%= twitter["by_user"] %></td>

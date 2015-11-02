@@ -15,29 +15,38 @@ require './process'
 enable :sessions
 set :public_folder, File.dirname(__FILE__)+'/bootstrap-3.3.5-dist'
 require 'pry-byebug'
+require_relative 'users'
+require_relative 'follow'
+require_relative 'tweet'
+
+# get '/' do
+#   @logged_in = false #0 when no user log in
+#   if session["username"] != nil
+#     @logged_in = true
+#     @username = session["username"]
+#   end
+#   @parameters = Hash.new
+#   @parameters["unlogged_twitter_list"] = first_50_tweets_list
+#   erb :home
+# end
 
 get '/' do
-  @parameters = {}
+  @parameters = Hash.new
   @parameters["unlogged_twitter_list"] = first_50_tweets_lst
   erb :home
 end
 
-get '/timeline' do
-  # user_id = User.find_by(username: username).id
-  # tweet_list = []
-  # if !session["username"].nil?
-  #   tweet_list = Tweet.where(user_id: user_id)
-  #   tweet_list.each do |tweet|
-  #     tweet_hash = {}
-  #     tweet_hash[]
 
-  # end
-  # @parameters = {}
-  # @parameters["username"] = session[:username]
-  # @paramaters["ttimeline_twitter_list"] = tweet_list
-  # erb :timeline
-  #=================waiting for Chen's sql join and hash result
+get '/timeline' do
+  logged_username = session[:username]
+  logged_id = User.find_by(username: logged_username).id
+  @parameters = {}
+  if !session["username"].nil?
+    @parameters = get_time_line(logged_id)
+    erb :timeline
+  end
 end
+
 
 get '/signup' do
   erb :regist
@@ -47,29 +56,45 @@ get '/signin' do
   erb :sign_in
 end
 
+get '/logout' do
+  erb :home
+end
+
+
 #go to the person page of some one
+# get '/users/:username' do
+#   if User.find_by(username: params[:username]).nil?
+#     @mode = -1
+#   else
+#     @follow_from_id = User.find_by(username: session[:username]).id
+#     @follow_to_id = User.find_by(username: params[:username]).id
+#     @pageuser = params[:username]
+#     if @follow_from_id == @follow_to_id
+#       #user is checiing his or her own page
+#       @mode = 0
+#     elsif Follow.where(follower_id: @follow_from_id, followee_id: @follow_to_id).size > 0
+#       #alreadt followed, show a button to unfollow
+#       @mode = 1
+#     else
+#       #show a follow button
+#       @mode = 2
+#     end
+#   end
+#   @uname = params[:username]
+#   user_id = User.find_by(username: @uname).id
+#   @tweet_list = Tweet.where(user_id: user_id)
+#   erb :personpage2
+# end
+
 get '/users/:username' do
-  if User.find_by(username: params[:username]).nil?
-    @mode = -1
-  else
-    @follow_from_id = User.find_by(username: session[:username]).id
-    @follow_to_id = User.find_by(username: params[:username]).id
-    @pageuser = params[:username]
-    if @follow_from_id == @follow_to_id
-      #user is checiing his or her own page
-      @mode = 0
-    elsif Follow.where(follower_id: @follow_from_id, followee_id: @follow_to_id).size > 0
-      #alreadt followed, show a button to unfollow
-      @mode = 1
-    else
-      #show a follow button
-      @mode = 2
-    end
-  end
-  @uname = params[:username]
-  user_id = User.find_by(username: @uname).id
-  @tweet_list = Tweet.where(user_id: user_id)
-  erb :personpage2
+  logged_username = session[:username]
+  logged_id = User.find_by(username: username).id
+  
+  look_at_username = params[:username]
+  look_at_user_id = User.find_by(username: look_at_username).id
+  
+  @parameters = user_a_look_at_user_b_homepage(logged_id, look_at_user_id)
+  # TODO: erb here
 end
 
 get '/follow/:username' do
@@ -86,7 +111,7 @@ get '/follow/:username' do
   erb :followlist
 end
 
-post '/create/user' do
+post '/users/submit_regis' do
   u = check(params[:user])
   if u
     @user = User.new(u)
@@ -97,7 +122,7 @@ post '/create/user' do
   "Password not match"
 end
 
-post "/signin" do
+post "/users/submit" do
   @tring_logging_in = params[:user]
   if auth(@tring_logging_in)
     username = @tring_logging_in["username"]
@@ -122,7 +147,7 @@ post "/users/submit_twitter" do
   end
 end
 
-post '/create/follow' do
+post '/followings/create' do
   @follow = Follow.new()
   @follow.follower_id = params[:follow_from_id]
   @follow.followee_id = params[:follow_to_id]
@@ -135,7 +160,7 @@ post '/create/follow' do
   end
 end
 
-post '/delete/follow' do
+post '/followings/destroy' do
   follow = Follow.find_by(followee_id: params[:follow_to_id], follower_id: params[:follow_from_id])
   follow_to_name = User.find_by(id: params[:follow_to_id]).username
   if follow != nil
