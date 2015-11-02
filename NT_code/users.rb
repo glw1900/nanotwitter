@@ -12,15 +12,20 @@ get '/users/:username' do
 end
 
 post '/create/user' do
+  
   @user = User.new(params)
   if @user.save
     redirect '/signin'
+    response["successfully_sign_up"] = true
   end
+  
 end
 
 post '/delete/user/:username' do
   user = User.find_by(username: params[:username])
   if user != nil
     user.destroy
+    response["successfully_deleted"] = true
   end
+  
 end

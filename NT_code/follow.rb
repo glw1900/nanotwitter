@@ -44,6 +44,7 @@ post '/create/follow' do
   @follow.followee_id = params[:followee_id]
   if @follow.save
     username = User.find_by(id: params[:follower_id]).username
+    response["successfully_add_follow"] = true
     redirect '/follow/' + username
   else
     "error when creating follow"
@@ -55,6 +56,7 @@ post '/delete/follow' do
   follow_to_name = User.find_by(id: params[:followee_id]).username
   if follow != nil
     follow.destroy
+    response["successfully_deleted"] = true
     'unfollow success' + follow_to_name
   else
     "ooooooooooooops, you've never been a fan, are you?"
