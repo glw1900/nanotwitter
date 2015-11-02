@@ -15,6 +15,7 @@ require './process'
 enable :sessions
 set :public_folder, File.dirname(__FILE__)+'/bootstrap-3.3.5-dist'
 require 'pry-byebug'
+require 'json'
 require_relative 'process'
 
 def get_followees(user_id)
@@ -27,8 +28,12 @@ end
 def pretty_print(stuff)
 	f = open("readable_json.json", "w")
 	f.write(JSON.pretty_generate(JSON.parse(stuff.to_json)))
+	f.close
 end
 
-a = get_time_line(912)
+rt = user_a_look_at_user_b_homepage(1065, 1102)
 
-pretty_print(a)
+# puts JSON.pretty_generate(JSON.parse(rt.to_json))
+pretty_print(rt)
+
+puts "how_many_do_i_follow(1102):  #{how_many_do_i_follow(1102)} ==== "

@@ -43,6 +43,8 @@ for i in 0...300
 end
 
 for id in pool
-  Tweet.create(user_id:id, content: Faker::Lorem.sentence, created_at: Faker::Time.between(100.days.ago, Time.now, :all))
+  for i in 0...10
+    Tweet.create(user_id:id, content: Faker::Lorem.sentence, created_at: Faker::Time.between(100.days.ago, Time.now, :all))
+  end
 end
 

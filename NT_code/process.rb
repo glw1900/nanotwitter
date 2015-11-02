@@ -26,6 +26,16 @@ def check(user)
   end
 end
 
+def how_many_do_i_follow(user_id)
+  rt = Follow.select(:followee_id).where("follower_id = #{user_id}")
+  return rt.count
+end
+
+def how_many_follow_me(user_id)
+  rt = Follow.select(:follower_id).where("followee_id = #{user_id}")
+  return rt.count
+end
+
 def tweet_array_to_hash(records_array, logged)
   rt = Array.new
   records_array.each do |tw|
@@ -60,14 +70,10 @@ def first_50_tweets_lst
   return rt
 end
 
-
-
-
 def get_time_line_tweets(user_id)
   /#
   return an array of hash
   #/
-  # s = "SELECT followee_id FROM follows WHERE follower_id = #{user_id}"
   sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND T.user_id = #{user_id} OR T.user_id IN 
   (SELECT followee_id FROM follows WHERE follower_id = #{user_id} )"
   records_array = ActiveRecord::Base.connection.execute(sql)
@@ -75,17 +81,38 @@ def get_time_line_tweets(user_id)
   return rt
 end
 
-def get_time_line(user_id)
+def get_user_profile(user_id)
   image_url = "https://upload.wikimedia.org/wikipedia/commons/f/f6/Barack_Obama_and_Bill_Clinton_profile.jpg"
   
   rt = {}
-  rt["logged_user_profile"] = {}
-  rt["logged_user_profile"]["username"] = User.find_by(id: user_id).username
-  rt["logged_user_profile"]["profile_photo_url"] = image_url
+  rt["username"] = User.find_by(id: user_id).username
+  rt["profile_photo_url"] = image_url
+  rt["follow_number"] = how_many_do_i_follow(user_id)
+  rt["follower_number"] = how_many_follow_me(user_id)
+  return rt
+end
+
+def get_time_line(user_id)
+  rt = {}
+  rt["logged_user_profile"] = get_user_profile(user_id)
   rt["timeline_twitter_list"] = get_time_line_tweets(user_id)
   return rt
 end
 
 # print check({:re_password=>"abc", :password=>"abc"})
+
+def user_a_look_at_user_b_homepage(user_a_id, user_b_id)
+  # TODO: MISS FAVOURITES, FOLLOW NUMBER, FOLLOWER NUMBER
+  sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND T.user_id = #{user_b_id} "
+  records_array = ActiveRecord::Base.connection.execute(sql)
+  tw_array = tweet_array_to_hash(records_array, true)
+  
+  image_url = "https://upload.wikimedia.org/wikipedia/commons/f/f6/Barack_Obama_and_Bill_Clinton_profile.jpg"
+  
+  rt = {}
+  rt["logged_user_profile"] = get_user_profile(user_a_id)
+  rt["homepage_tweet_list"] = tw_array
+  return rt
+end
 
 
