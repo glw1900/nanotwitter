@@ -22,7 +22,7 @@ Tweet.destroy_all()
 Follow.destroy_all()
 
 100.times do |i|
-  User.create(username: Faker::Name.name, email: Faker::Internet.email,
+  User.create(username: "username#{i}", email: Faker::Internet.email,
     password: "1234", profile: nil)  
 end
 
