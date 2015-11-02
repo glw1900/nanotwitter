@@ -21,25 +21,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Brand</a>
+      <a class="navbar-brand" href="#">Home</a>
+      <a class="navbar-brand" href="#">Notifications</a>
+      <a class="navbar-brand" href="#">Moments</a>
+      <a class="navbar-brand" href="#">Messages</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
         </li>
       </ul>
       <form class="navbar-form navbar-left" role="search">
@@ -48,25 +39,13 @@
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
-      </ul>
+       <ul class="nav  navbar-right"><li>
+        <button type="button" class="btn btn-danger btn-lg">Tweet!</button>
+       </li></ul>
+
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
-
-  <h3> Homepage for user5<span class="label label-default"></span></h3>
-
   <div class="media">
   <div class="media-left media-middle">
     <a href="#">
@@ -84,51 +63,69 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a href="#">
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tweets</button>
+          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Tweets <br> <%= @tweet_list.size()%> </button>
           </a>
         </li>
 
         <li><a href="#">
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Following</button>
+          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Following<br> 2</button>
           </a>
         </li>
         <li><a href="#">
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Followers</button>
+          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Followers<br> 4 </button>
           </a>
         </li>
 
         <li><a href="#">
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Favorites</button>
+          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Favorites<br> 13 </button>
           </a>
         </li>
       
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href = '#'>
-        <button type="button" class="btn btn-success">Following</button>
-        </a>
-        </li>
+        <%if @mode == 1%>
+          <li><a href = '#'>
+            <button type="button" class="btn btn-success">Unfollow</button>
+          </a>
+          </li>
+        <%elsif @mode == 2%>
+          <li><a href = '#'>
+            <button type="button" class="btn btn-danger">Follow</button>
+          </a>
+          </li>
+        <%end%>
       </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
 
-<div class="row">
-  <div class="col-md-1 col-md-offset-1"><a href="#">
-      <img src="http://txq.520sunny.com/wp-content/uploads/2014/08/1408954661135-1.jpg" style="width: 150; height: 150px;">
-  </a></div>
-</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="img-responsive">
+        <iframe class="embed-responsive-item" src="https://lh3.googleusercontent.com/-3Zqv6Of_vlk/AAAAAAAAAAI/AAAAAAAAAAA/JiFX6Ovb6nc/photo.jpg" width="300px" height="220px"></iframe>
+      </div>
+      <h1>  <%=@uname%> </h1>
+    </div>
+    <div class="col-sm-9">
+      <ul class="list-group">
+        <% if !@tweet_list.nil? %>
+          <% @tweet_list.each do |tweet| %>
 
-<div class="row">
-  <div class="col-md-1 col-md-offset-1"><a href="#">
-    <h3>User5<span class="label label-default"></span></h3>
-  </a></div>
+            <li class="list-group-item"> 
+              <h3><strong> <%= @uname %></strong> <small>@<%= tweet.created_at %></small></h3>
+              <p><%= tweet.content * 16 %> </p>
+              <button type="button" class="btn btn-info">Reply</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <button type="button" class="btn btn-info">Retweet</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <button type="button" class="btn btn-info">Favorite</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <% end %>
+        <%else%>
+          <p>publish some tweets!</p>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 </div>
-
-<div class="row">
-  <div class="col-md-1 col-md-offset-1"><a href="#">
-    <h3>User5<span class="label label-default"></span></h3>
-  </a></div>
 </div>
 </body>
 </html>

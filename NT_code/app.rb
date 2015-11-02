@@ -22,22 +22,24 @@ get '/' do
   erb :home
 end
 
-get '/timeline' do
-  # user_id = User.find_by(username: username).id
-  # tweet_list = []
-  # if !session["username"].nil?
-  #   tweet_list = Tweet.where(user_id: user_id)
-  #   tweet_list.each do |tweet|
-  #     tweet_hash = {}
-  #     tweet_hash[]
+# get '/timeline' do
+#   user_id = User.find_by(username: username).id
+#   tweet_list = []
+#   if !session["username"].nil?
+#     tweet_list = Tweet.where(user_id: user_id)
+#     tweet_list.each do |tweet|
+#       tweet_hash = {}
+#       tweet_hash["text"] = tweet.content
+#       tweet_hash["time"] = tweet.created_at
+#       tweet_hash["by_user"] = User.find_by（
 
-  # end
-  # @parameters = {}
-  # @parameters["username"] = session[:username]
-  # @paramaters["ttimeline_twitter_list"] = tweet_list
-  # erb :timeline
-  #=================waiting for Chen's sql join and hash result
-end
+#   end
+#   @parameters = {}
+#   @parameters["username"] = session[:username]
+#   @paramaters["ttimeline_twitter_list"] = tweet_list
+#   erb :timeline
+#   =================waiting for Chen's sql join and hash result
+# end
 
 get '/signup' do
   erb :regist
