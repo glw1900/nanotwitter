@@ -15,6 +15,8 @@ require './process'
 enable :sessions
 set :public_folder, File.dirname(__FILE__)+'/bootstrap-3.3.5-dist'
 require 'pry-byebug'
+require_relative 'users'
+require_relative 'follow'
 
 # get '/' do
 #   @logged_in = false #0 when no user log in

@@ -41,7 +41,6 @@ def tweet_array_to_hash(records_array, logged)
   records_array.each do |tw|
     t = Hash.new()
     t["text"] = tw["content"]
-    puts "tw[:content]", tw["content"]
     t["time"] = tw["created_at"]
     t["by_user"] = tw["username"]
     # below is made up
@@ -115,4 +114,35 @@ def user_a_look_at_user_b_homepage(user_a_id, user_b_id)
   return rt
 end
 
+def get_following(user_id)
+  sql = "SELECT U.username, F.created_at 
+        FROM users AS U, follows as F 
+        WHERE U.id = F.followee_id 
+        AND F.follower_id = #{user_id}"
+  records_array = ActiveRecord::Base.connection.execute(sql)
+  return create_user_ls_from_sql_result(records_array)
+end
 
+def get_followers(user_id)
+  sql = "SELECT U.username, F.created_at 
+        FROM users AS U, follows as F 
+        WHERE U.id = F.follower_id 
+        AND F.followee_id = #{user_id}"
+  records_array = ActiveRecord::Base.connection.execute(sql)
+  return create_user_ls_from_sql_result(records_array)
+end
+
+
+
+def create_user_ls_from_sql_result(arr)
+  ls = []
+  image_url = "http://vignette1.wikia.nocookie.net/webarebears/images/d/d6/Bear_stack.jpg/revision/latest?cb=20150706002256"
+  arr.each do |user|
+    user_hash = {}
+    user_hash["username"] = user[0]
+    user_hash["followed_at_time"] = user[1]
+    user_hash["profile_photo_url"] = image_url
+    ls.push(user_hash)
+  end
+  return ls
+end

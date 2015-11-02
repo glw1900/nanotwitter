@@ -1,15 +1,19 @@
-get '/user/:username/following' do
-  @username = params[:username]
-  #get the id of the current pageuser
-  user_id = User.find_by(username: @username).id
-  follow_ids = Follow.where(follower_id: user_id)
-  # binding.pry
-  @follow_users = []
-  follow_ids.each do |follow|
-    fname = User.find_by(id: follow.followee_id)
-    @follow_users << fname
-  end
-  erb :followlist
+get '/users/:username/following' do
+  username = params[:username]
+  user_id = User.find_by(username: username).id
+  @parameters = {}
+  @parameters[:logged_user_profile] = get_user_profile(user_id)
+  @parameters[:users_list] = get_following(user_id)
+  erb :test
+end
+
+get '/users/:username/followers' do
+  username = params[:username]
+  user_id = User.find_by(username: username).id
+  @parameters = {}
+  @parameters[:logged_user_profile] = get_user_profile(user_id)
+  @parameters[:users_list] = get_followers(user_id)
+  erb :test
 end
 
 post '/create/user' do
@@ -36,11 +40,10 @@ end
 
 post '/create/follow' do
   @follow = Follow.new()
-  @follow.follower_id = params[:follow_from_id]
-  @follow.followee_id = params[:follow_to_id]
-  # binding.pry
+  @follow.follower_id = params[:follower_id]
+  @follow.followee_id = params[:followee_id]
   if @follow.save
-    username = User.find_by(id: params[:follow_from_id]).username
+    username = User.find_by(id: params[:follower_id]).username
     redirect '/follow/' + username
   else
     "error when creating follow"
@@ -48,8 +51,8 @@ post '/create/follow' do
 end
 
 post '/delete/follow' do
-  follow = Follow.find_by(followee_id: params[:follow_to_id], follower_id: params[:follow_from_id])
-  follow_to_name = User.find_by(id: params[:follow_to_id]).username
+  follow = Follow.find_by(followee_id: params[:followee_id], follower_id: params[:follower_id])
+  follow_to_name = User.find_by(id: params[:followee_id]).username
   if follow != nil
     follow.destroy
     'unfollow success' + follow_to_name

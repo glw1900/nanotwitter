@@ -33,6 +33,7 @@ end
 
 # rt = user_a_look_at_user_b_homepage(1065, 1102)
 
+<<<<<<< HEAD
 # # puts JSON.pretty_generate(JSON.parse(rt.to_json))
 # pretty_print(rt)
 
@@ -40,3 +41,9 @@ end
 
 puts "------------------------"
 puts get_followees(2)
+=======
+# puts JSON.pretty_generate(JSON.parse(rt.to_json))
+# pretty_print(rt)
+
+# puts "how_many_do_i_follow(1102):  #{how_many_do_i_follow(1102)} ==== "
+>>>>>>> fa175970e0aca214cc9b320b9516b4d8808901d3

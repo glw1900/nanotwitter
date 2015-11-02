@@ -12,14 +12,10 @@ get '/users/:username' do
 end
 
 post '/create/user' do
-  u = check(params[:user])
-  if u
-    @user = User.new(u)
-    if @user.save
-      redirect '/signin'
-    end
+  @user = User.new(params)
+  if @user.save
+    redirect '/signin'
   end
-  "Password not match"
 end
 
 post '/delete/user/:username' do
