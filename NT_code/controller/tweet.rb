@@ -9,8 +9,8 @@ post "/create/tweet" do
   tweet["pub_time"] = nil
   @new_tweet = Tweet.new(tweet)
   if @new_tweet.save
-    response["posted_tweet_id"] = @new_tweet.id
-    response["successfully_posted"] = true
+    # response["posted_tweet_id"] = @new_tweet.id
+    # response["successfully_posted"] = true
     redirect '/timeline'
   end
 end
