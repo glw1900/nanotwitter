@@ -6,6 +6,7 @@ post "/create/tweet" do
   tweet["retweet_id"] = params[:retweet_id]
   tweet["user_id"] = User.find_by(username: session["username"]).id
   tweet["pub_time"] = nil
+  binding.pry
   @new_tweet = Tweet.new(tweet)
   if @new_tweet.save
     response["posted_tweet_id"] = @new_tweet.id
