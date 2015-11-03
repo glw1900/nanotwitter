@@ -12,8 +12,11 @@ get '/users/:username' do
 end
 
 post '/create/user' do
-  
-  @user = User.new(params)
+  user_checked = check(params)
+  if user_checked.class == String
+    redirect '/signup'
+  end
+  @user = User.new(user_checked)
   if @user.save
     response["successfully_sign_up"] = "true"
     redirect '/signin'

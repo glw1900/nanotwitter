@@ -20,7 +20,6 @@ def write_Json(attributes)
   end
 end
 
-
 def num_follow(follower_id, followee_id)
   return Follow.find_by_sql("SELECT * FROM follows WHERE follower_id = #{follower_id} AND followee_id = #{followee_id}").count
 end
@@ -53,6 +52,7 @@ describe "creation / deletion " do
     post '/create/user',  {
       "username" => fake_username,
  	    "password" => "1234",
+      "re_password" => "1234",
  	    "email" => "386783131@qq.com",
  	    "profile" => "info about this man"
  }
@@ -108,7 +108,6 @@ describe "creation / deletion " do
     headers = JSON.parse(last_response.to_json)["header"]
     # write_Json(attributes)
     posted_tweet_id = Integer(headers["posted_tweet_id"])
-    binding.pry
     get_value_by_key_from_header("successfully_posted").must_equal "true"
     
     # begin deleting tweet
