@@ -3,8 +3,9 @@ ENV['RACK_ENV'] = 'development'
 require 'rack/test'
 require 'json'
 require 'minitest/autorun'
-require_relative 'app'
+require_relative 'main'
 require 'faker'
+require './controller/require_rb'
 
 include Rack::Test::Methods
 
