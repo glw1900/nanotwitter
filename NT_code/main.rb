@@ -34,7 +34,7 @@ get '/timeline' do
   if !session["username"].nil?
     @parameters = get_time_line(logged_id)
   end
-  erb :test
+  erb :timeline
 end
 
 get '/signup' do
@@ -56,4 +56,3 @@ post "/signin" do
     "Wrong Password"
   end
 end
-

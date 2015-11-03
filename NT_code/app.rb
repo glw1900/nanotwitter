@@ -52,10 +52,10 @@ end
 get '/users/:username' do
   logged_username = session[:username]
   logged_id = User.find_by(username: username).id
-  
+
   look_at_username = params[:username]
   look_at_user_id = User.find_by(username: look_at_username).id
-  
+
   @parameters = user_a_look_at_user_b_homepage(logged_id, look_at_user_id)
   # TODO: erb here
 end
