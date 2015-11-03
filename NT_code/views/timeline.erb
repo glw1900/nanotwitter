@@ -105,33 +105,13 @@
         <% if !@parameters["timeline_twitter_list"].nil? %>
           <% @parameters["timeline_twitter_list"].each do |tweet| %>
 
-<<<<<<< HEAD
             <li class="list-group-item">
               <h3><strong> <%= tweet["by_user"] %></strong> <small>@<%= tweet["time"] %></small></h3>
-              <p><%= tweet["text"] * 16 %> </p>
+              <p><%= tweet["text"] %> </p>
               <button type="button" class="btn btn-info">Reply</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <button type="button" class="btn btn-info">Retweet</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <button type="button" class="btn btn-info">Favorite</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-=======
-<div class="bs-example">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>user_id</th>
-                <th>content</th>
-                <th>created_at</th>
-            </tr>
-        </thead>
-        <tbody>
-          <% if @parameters["timeline_twitter_list"] %>
-            <% @parameters["timeline_twitter_list"].each do |twitter| %>
-              <tr>
-                  <td><a href="/users/<%= twitter["by_user"] %>"><%= twitter["by_user"] %></a></td>
-                  <td><%= twitter["text"]%></td>
-                  <td><%= twitter["time"]%></td>
-              </tr>
-            <% end %>
->>>>>>> 8ed190ddd91be3d151077d55e6e6291a4fdef398
+
           <% end %>
         <%else%>
           <p>publish some tweets!</p>
