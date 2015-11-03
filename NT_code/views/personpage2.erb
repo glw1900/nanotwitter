@@ -63,32 +63,32 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a href="#">
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Tweets <br> <%= @tweet_list.size()%> </button>
+          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Tweets <br> <%= @parameters["homepage_tweet_list"].size()%> </button>
           </a>
         </li>
 
         <li><a href="#">
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Following<br> 2</button>
+          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Following<br> <%=@parameters["follow_number"]%> </button>
           </a>
         </li>
         <li><a href="#">
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Followers<br> 4 </button>
+          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Followers<br> <%=@parameters["follower_number"]%> </button>
           </a>
         </li>
 
         <li><a href="#">
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Favorites<br> 13 </button>
+          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Favorites<br> 4 </button>
           </a>
         </li>
       
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <%if @mode == 1%>
+        <%if @parameters["mode"] == "user_viewing_followed"%>
           <li><a href = '#'>
             <button type="button" class="btn btn-success">Unfollow</button>
           </a>
           </li>
-        <%elsif @mode == 2%>
+        <%elsif @parameters["mode"] == "user_viewing_unfollowed"%>
           <li><a href = '#'>
             <button type="button" class="btn btn-danger">Follow</button>
           </a>
@@ -105,16 +105,16 @@
       <div class="img-responsive">
         <iframe class="embed-responsive-item" src="https://lh3.googleusercontent.com/-3Zqv6Of_vlk/AAAAAAAAAAI/AAAAAAAAAAA/JiFX6Ovb6nc/photo.jpg" width="300px" height="220px"></iframe>
       </div>
-      <h1>  <%=@uname%> </h1>
+      <h1>  <%=@parameters["username"]%> </h1>
     </div>
     <div class="col-sm-9">
       <ul class="list-group">
-        <% if !@tweet_list.nil? %>
-          <% @tweet_list.each do |tweet| %>
+        <% if !@parameters["homepage_tweet_list"].nil? %>
+          <% @parameters["homepage_tweet_list"].each do |tweet| %>
 
             <li class="list-group-item"> 
-              <h3><strong> <%= @uname %></strong> <small>@<%= tweet.created_at %></small></h3>
-              <p><%= tweet.content * 16 %> </p>
+              <h3><strong> <%= @parameters["username"] %></strong> <small>@<%= tweet["time"] %></small></h3>
+              <p><%= tweet["text"] * 16 %> </p>
               <button type="button" class="btn btn-info">Reply</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <button type="button" class="btn btn-info">Retweet</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <button type="button" class="btn btn-info">Favorite</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
