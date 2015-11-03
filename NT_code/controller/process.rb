@@ -110,7 +110,6 @@ def user_a_look_at_user_b_homepage(user_a_id, user_b_id)
   rt = {}
   rt["logged_user_profile"] = get_user_profile(user_a_id)
   rt["homepage_tweet_list"] = tw_array
-<<<<<<< HEAD:NT_code/process.rb
   rt["username"] = User.find_by(id: user_b_id).username
   rt["follow_number"] = how_many_do_i_follow(user_b_id)
   rt["follower_number"] = how_many_follow_me(user_b_id)
@@ -124,12 +123,6 @@ def user_a_look_at_user_b_homepage(user_a_id, user_b_id)
     end
   end
   rt["mode"] = mode
-||||||| merged common ancestors
-  rt["username"] = User.find_by(id: user_b_id).username
-  rt["follow_number"] = how_many_do_i_follow(user_b_id)
-  rt["follower_number"] = how_many_follow_me(user_b_id)
-=======
->>>>>>> ff4fe66208a1a7ef98c695fb4058811c210359d8:NT_code/controller/process.rb
   return rt
 end
 
