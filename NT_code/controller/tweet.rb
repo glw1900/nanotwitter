@@ -1,10 +1,11 @@
+
 post "/create/tweet" do
   return_message = {}
   tweet = {}
   tweet["content"] = params[:content]
   tweet["media_url"] = params[:media_url]
   tweet["retweet_id"] = params[:retweet_id]
-  tweet["user_id"] = User.find_by(username: session["username"]).id
+  tweet["user_id"] = User.find_by(username: params["username"]).id
   tweet["pub_time"] = nil
   binding.pry
   @new_tweet = Tweet.new(tweet)
@@ -14,6 +15,7 @@ post "/create/tweet" do
     redirect '/timeline'
   end
 end
+
 
 post "/delete/tweet" do
   tweet_id = params["tweet_id"]
