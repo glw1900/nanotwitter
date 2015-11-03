@@ -59,7 +59,8 @@
 
   <div class="modal-body">
       <form class="form col-md-12 center-block" action="/create/tweet" method="POST">
-          <textarea  cols="100" id="textarea" name="tweet[content]" rows="6" placeholder="New Tweet"></textarea>
+          <textarea  cols="100" id="textarea" name= "content" rows="6" placeholder="New Tweet"></textarea>
+          <input type="hidden" name="username" value=<%= @parameters["logged_user_profile"]["username"]%>>
           <br>
           <button class="btn btn-primary">Tweet</button>
       </form>
