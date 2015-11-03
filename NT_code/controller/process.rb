@@ -115,9 +115,6 @@ def user_a_look_at_user_b_homepage(user_a_id, user_b_id)
   rt = {}
   rt["logged_user_profile"] = get_user_profile(user_a_id)
   rt["homepage_tweet_list"] = tw_array
-  rt["username"] = User.find_by(id: user_b_id).username
-  rt["follow_number"] = how_many_do_i_follow(user_b_id)
-  rt["follower_number"] = how_many_follow_me(user_b_id)
   return rt
 end
 

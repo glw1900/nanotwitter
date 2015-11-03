@@ -11,11 +11,7 @@ require './models/t_mention'
 require './models/tag'
 require './models/user'
 require './models/tweet'
-require './process'
-require './users'
-require './tweet'
-require './follow'
-
+require './controller/require_rb'
 enable :sessions
 set :public_folder, File.dirname(__FILE__)+'/bootstrap-3.3.5-dist'
 require 'pry-byebug'
@@ -45,6 +41,10 @@ get '/signin' do
   erb :sign_in
 end
 
+get '/logout' do
+  session[":username"] = nil
+  redirect "/"
+end
 
 post "/signin" do
   @tring_logging_in = params[:user]
