@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Timeline</title>
+    <title>Homepage</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
@@ -80,7 +80,7 @@
           <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Favorites<br> 4 </button>
           </a>
         </li>
-      
+
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <%if @parameters["mode"] == "user_viewing_followed"%>
@@ -112,7 +112,7 @@
         <% if !@parameters["homepage_tweet_list"].nil? %>
           <% @parameters["homepage_tweet_list"].each do |tweet| %>
 
-            <li class="list-group-item"> 
+            <li class="list-group-item">
               <h3><strong> <%= @parameters["username"] %></strong> <small>@<%= tweet["time"] %></small></h3>
               <p><%= tweet["text"] * 16 %> </p>
               <button type="button" class="btn btn-info">Reply</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

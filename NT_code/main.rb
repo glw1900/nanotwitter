@@ -41,7 +41,7 @@ get '/signin' do
   erb :sign_in
 end
 
-post '/logout' do
+get '/logout' do
   session[":username"] = nil
   redirect "/"
 end
