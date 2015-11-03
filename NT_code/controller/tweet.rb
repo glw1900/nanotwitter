@@ -2,13 +2,13 @@
 post "/create/tweet" do
   return_message = {}
   tweet = {}
-  tweet[:content] = params[:content]
-  tweet[:media_url] = params[:media_url]
-  tweet[:retweet_id] = 0
-  tweet[:user_id] = User.find_by(username: params["username"]).id
-  tweet[:pub_time] = nil
-  binding.pry
+  tweet["content"] = params[:content]
+  tweet["media_url"] = params[:media_url]
+  tweet["retweet_id"] = 0
+  tweet["user_id"] = User.find_by(username: params["username"]).id
+  tweet["pub_time"] = nil
   @new_tweet = Tweet.new(tweet)
+  binding.pry
   if @new_tweet.save
     response["posted_tweet_id"] = @new_tweet.id
     response["successfully_posted"] = true

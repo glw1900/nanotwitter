@@ -56,6 +56,8 @@ def tweet_array_to_hash(records_array, logged)
     end
     rt << t
   end
+  rt.sort { |x, y| x["time"] <=> y["time"] }
+  rt = rt.reverse
   return rt
 end
 
@@ -73,8 +75,10 @@ def get_time_line_tweets(user_id)
   /#
   return an array of hash
   #/
-  sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND T.user_id = #{user_id} OR T.user_id IN 
-  (SELECT followee_id FROM follows WHERE follower_id = #{user_id} )"
+  
+  
+  sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND ( (T.user_id = #{user_id}) OR (T.user_id IN 
+  (SELECT DISTINCT followee_id FROM follows AS F WHERE F.follower_id = #{user_id})) ) ORDER BY T.created_at ASC"
   records_array = ActiveRecord::Base.connection.execute(sql)
   rt = tweet_array_to_hash(records_array, true)
   return rt
