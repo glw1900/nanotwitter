@@ -8,9 +8,8 @@ post "/create/tweet" do
   tweet["user_id"] = User.find_by(username: params["username"]).id
   tweet["pub_time"] = nil
   @new_tweet = Tweet.new(tweet)
-  binding.pry
   if @new_tweet.save
-    response["posted_tweet_id"] = @new_tweet.id
+    # response["posted_tweet_id"] = @new_tweet.id
     response["successfully_posted"] = true
     redirect '/timeline'
   end
