@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Timeline</title>
+    <title>Homepage</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
@@ -21,7 +21,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Home</a>
+      <a class="navbar-brand" href="/timeline">Home</a>
       <a class="navbar-brand" href="#">Notifications</a>
       <a class="navbar-brand" href="#">Moments</a>
       <a class="navbar-brand" href="#">Messages</a>
@@ -40,7 +40,7 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
        <ul class="nav  navbar-right"><li>
-        <button type="button" class="btn btn-danger btn-lg">Tweet!</button>
+        <button type="button" class="btn btn-success btn-lg"><a href="/timeline">Tweet!</a></button>
        </li></ul>
 
       </div><!-- /.navbar-collapse -->
@@ -52,7 +52,7 @@
       <img src="http://farm8.staticflickr.com/7011/6642321061_644a1f2ee1_b.jpg" style="width: 1388px; height: 500px;">
     </a>
   </div>
-</div>
+</div> -->
 
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -80,10 +80,10 @@
           <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Favorites<br> 4 </button>
           </a>
         </li>
-      
+
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <%if @parameters["mode"] == "user_viewing_followed"%>
+         <%if @parameters["mode"] == "user_viewing_followed"%>
           <li><a href = '#'>
             <button type="button" class="btn btn-success">Unfollow</button>
           </a>
@@ -94,6 +94,7 @@
           </a>
           </li>
         <%end%>
+
       </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -103,7 +104,9 @@
   <div class="row">
     <div class="col-sm-3">
       <div class="img-responsive">
-        <iframe class="embed-responsive-item" src="https://lh3.googleusercontent.com/-3Zqv6Of_vlk/AAAAAAAAAAI/AAAAAAAAAAA/JiFX6Ovb6nc/photo.jpg" width="300px" height="220px"></iframe>
+        <img class="embed-responsive-item" src="https://lh3.googleusercontent.com/-3Zqv6Of_vlk/AAAAAAAAAAI/AAAAAAAAAAA/JiFX6Ovb6nc/photo.jpg" width="300px" height="220px"></iframe>
+        <!-- <code> $(".embed-responsive-item img").addClass("carousel-inner img-responsive img-rounded");  <code> -->
+
       </div>
       <h1>  <%=@parameters["username"]%> </h1>
     </div>
@@ -112,7 +115,7 @@
         <% if !@parameters["homepage_tweet_list"].nil? %>
           <% @parameters["homepage_tweet_list"].each do |tweet| %>
 
-            <li class="list-group-item"> 
+            <li class="list-group-item">
               <h3><strong> <%= @parameters["username"] %></strong> <small>@<%= tweet["time"] %></small></h3>
               <p><%= tweet["text"] * 16 %> </p>
               <button type="button" class="btn btn-info">Reply</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
