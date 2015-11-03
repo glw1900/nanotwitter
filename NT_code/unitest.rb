@@ -60,13 +60,13 @@ describe "creation / deletion " do
     user = User.find_by(username: fake_username)
     user.username.must_equal fake_username
 
-    get_value_by_key_from_header("successfully_sign_up").must_equal true
+    get_value_by_key_from_header("successfully_sign_up").must_equal "true"
     
     post '/delete/user/' + fake_username
     user = User.find_by(username: fake_username)
     user.must_be_nil
     
-    get_value_by_key_from_header("successfully_deleted").must_equal true
+    get_value_by_key_from_header("successfully_deleted").must_equal "true"
     
   end
   
@@ -84,7 +84,7 @@ describe "creation / deletion " do
        "followee_id" => followee_id
       }
     num_follow(follower_id, followee_id).must_equal 1
-    get_value_by_key_from_header("successfully_add_follow").must_equal true
+    get_value_by_key_from_header("successfully_add_follow").must_equal "true"
     # begin deleting
     
     post '/delete/follow', {
@@ -92,7 +92,7 @@ describe "creation / deletion " do
        "followee_id" => followee_id
       }
       num_follow(follower_id, followee_id).must_equal 0
-      get_value_by_key_from_header("successfully_deleted").must_equal true
+      get_value_by_key_from_header("successfully_deleted").must_equal "true"
   end
   
   it "create and delete a tweet" do
@@ -107,15 +107,15 @@ describe "creation / deletion " do
     
     headers = JSON.parse(last_response.to_json)["header"]
     # write_Json(attributes)
-    posted_tweet_id = headers["posted_tweet_id"]
-    get_value_by_key_from_header("successfully_posted").must_equal true
+    posted_tweet_id = Integer(headers["posted_tweet_id"])
+    binding.pry
+    get_value_by_key_from_header("successfully_posted").must_equal "true"
     
     # begin deleting tweet
     post '/delete/tweet', {
       "tweet_id" => "#{posted_tweet_id}",
     }
-    
-    get_value_by_key_from_header("successfully_deleted").must_equal true
+    get_value_by_key_from_header("successfully_deleted").must_equal "true"
     
   end
 end
