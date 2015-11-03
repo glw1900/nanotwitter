@@ -42,7 +42,7 @@ get '/signin' do
 end
 
 get '/logout' do
-  session[":username"] = nil
+  session["username"] = nil
   redirect "/"
 end
 
