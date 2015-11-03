@@ -41,6 +41,10 @@ get '/signin' do
   erb :sign_in
 end
 
+post '/logout' do
+  session[":username"] = nil
+  redirect "/"
+end
 
 post "/signin" do
   @tring_logging_in = params[:user]
