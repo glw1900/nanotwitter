@@ -20,7 +20,6 @@ def write_Json(attributes)
   end
 end
 
-
 def num_follow(follower_id, followee_id)
   return Follow.find_by_sql("SELECT * FROM follows WHERE follower_id = #{follower_id} AND followee_id = #{followee_id}").count
 end

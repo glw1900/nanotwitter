@@ -11,7 +11,6 @@ post "/create/tweet" do
   if @new_tweet.save
     # response["posted_tweet_id"] = @new_tweet.id
     # response["successfully_posted"] = true
-
     redirect '/timeline'
   end
 end

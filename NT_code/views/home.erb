@@ -72,7 +72,7 @@
               <% if !@parameters["unlogged_twitter_list"].nil? %>
                 <% @parameters["unlogged_twitter_list"].each do |twitter| %>
                   <tr>
-                      <td><%= twitter["by_user"] %></td>
+                      <td><a href="/users/<%= twitter["by_user"] %>"><%= twitter["by_user"] %></a></td>
                       <td><%= twitter["text"] %></td>
                       <td><%= twitter["time"] %></td>
                   </tr>
