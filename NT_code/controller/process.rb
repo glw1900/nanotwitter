@@ -15,6 +15,10 @@ def auth(user)
 end
 
 def check(user)
+  username_to_create = user[:username]
+  if(User.find_by(username: username_to_create) != nil)
+    return "name already registered" 
+  end
   password = user["password"]
   re_password = user["re_password"]
   user["regist_date"] = nil
@@ -22,7 +26,7 @@ def check(user)
     user.delete("re_password")
     return user
   else
-    return nil
+    return "passwords do not match"
   end
 end
 
