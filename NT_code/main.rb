@@ -19,7 +19,7 @@ require 'pry-byebug'
 get '/' do
   @parameters = {}
   @parameters["unlogged_twitter_list"] = first_50_tweets_lst
-  erb :home
+  erb :home2
 end
 
 

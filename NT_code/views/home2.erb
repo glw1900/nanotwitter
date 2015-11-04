@@ -39,66 +39,17 @@
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
-       <ul class="nav  navbar-right"><li>
-        <button type="button" class="btn btn-default btn-lg"><a href="/timeline">Tweet!</a></button>
-       </li></ul>
+       <ul class="nav  navbar-right">
+         <li>
+        <button type="button" class="btn btn-default btn-lg"><a href="/signin">Sign In</a></button>
+        <button type="button" class="btn btn-default btn-lg"><a href="/signup">Sign Up</a></button>
+        </li></ul>
 
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
-  <div class="media">
-  <div class="media-left media-middle">
-    <a href="#">
-      <img src="http://farm8.staticflickr.com/7011/6642321061_644a1f2ee1_b.jpg" style="width: 1388px; height: 500px;">
-    </a>
-  </div>
-</div>
-
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
 
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><a href="#">
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Tweets <br> <%= @parameters["homepage_tweet_list"].size()%> </button>
-          </a>
-        </li>
-
-        <li><a href="#">
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Following<br> <%=@parameters["follow_number"]%> </button>
-          </a>
-        </li>
-        <li><a href="#">
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Followers<br> <%=@parameters["follower_number"]%> </button>
-          </a>
-        </li>
-
-        <li><a href="#">
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Favorites<br> 4 </button>
-          </a>
-        </li>
-
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-         <%if @parameters["mode"] == "user_viewing_followed"%>
-          <li><a href = '#'>
-            <button type="button" class="btn btn-success">Unfollow</button>
-          </a>
-          </li>
-        <%elsif @parameters["mode"] == "user_viewing_unfollowed"%>
-          <li><a href = '#'>
-            <button type="button" class="btn btn-danger">Follow</button>
-          </a>
-          </li>
-        <%end%>
-
-      </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
 
 <div class="container-fluid">
   <div class="row">
@@ -108,15 +59,15 @@
         <!-- <code $(".embed-responsive-item img").addClass("carousel-inner img-responsive img-rounded");  <code> -->
 
       </div>
-      <h1>  <%=@parameters["username"]%> </h1>
+      <h1>  Unlogged User</h1>
     </div>
     <div class="col-sm-9">
       <ul class="list-group">
-        <% if !@parameters["homepage_tweet_list"].nil? %>
-          <% @parameters["homepage_tweet_list"].each do |tweet| %>
+        <% if !@parameters["unlogged_twitter_list"].nil? %>
+          <% @parameters["unlogged_twitter_list"].each do |tweet| %>
 
             <li class="list-group-item">
-              <h3><strong> <%= @parameters["username"] %></strong> <small>@<%= tweet["time"] %></small></h3>
+              <h3><strong> <%= tweet["by_user"] %></strong> <small>@<%= tweet["time"] %></small></h3>
               <p><%= tweet["text"] %> </p>
               <button type="button" class="btn btn-info">Reply</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <button type="button" class="btn btn-info">Retweet</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
