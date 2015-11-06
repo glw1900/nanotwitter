@@ -8,7 +8,7 @@ get '/users/:username' do
   
   @parameters = user_a_look_at_user_b_homepage(logged_id, look_at_user_id)
   # TODO: erb here
-  erb :personpage2
+  erb :personpage
 end
 
 post '/create/user' do
