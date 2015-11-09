@@ -125,9 +125,9 @@ def user_a_look_at_user_b_homepage(user_a_id, user_b_id)
   if user_a_id != user_b_id
     follow_list = Follow.where(followee_id: user_b_id, follower_id: user_a_id)
     if follow_list.size() == 1
-      mode = "user_viewing_unfollowed"
-    else
       mode = "user_viewing_followed"
+    else
+      mode = "user_viewing_unfollowed"
     end
   end
   rt["mode"] = mode
