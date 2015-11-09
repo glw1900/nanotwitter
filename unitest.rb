@@ -8,7 +8,7 @@ require 'faker'
 require './controller/require_rb'
 
 include Rack::Test::Methods
-test_user_name = "testuser"
+
 # helper functions
 def app
   Sinatra::Application
@@ -117,52 +117,6 @@ describe "creation / deletion " do
     get_value_by_key_from_header("successfully_deleted").must_equal "true"
     
   end
-end
-
-describe "test test_interface" do 
-    it "test reset" do
-      
-      get '/test/reset', {}.to_json
-      rt = User.find_by(username: test_user_name)
-      rt.wont_be_nil
-      if rt != nil
-        test_user_id = rt.id
-        Tweet.find_by_sql("SELECT * FROM tweets WHERE user_id = #{test_user_id}").count.must_equal 0
-        Follow.find_by_sql("SELECT * FROM follows WHERE followee_id = #{test_user_id}").count.must_equal 0
-    end
-  end
-
-  it "test making seed users" do
-    prev_num_user = User.all.count
-      get '/test/seed/1234', {}.to_json
-      after_user_count = User.all.count
-      (after_user_count - prev_num_user).must_equal 1234
-  end
-	
-	it "test making fake user generating tweets" do
-		rt = User.find_by(username: test_user_name)
-  		rt.wont_be_nil
-  		if rt != nil
-  			test_user_id = rt.id
-			prev_num_tweet = Tweet.find_by_sql("SELECT id FROM tweets WHERE user_id = #{test_user_id}").count
-			get '/test/tweets/1234'
-			after_num_tweet = Tweet.find_by_sql("SELECT id FROM tweets WHERE user_id = #{test_user_id}").count
-		end
-		(after_num_tweet - prev_num_tweet).must_equal 1234
-	end
-  
-	it "test making other users follow the fake guys" do
-		rt = User.find_by(username: test_user_name)
-  		rt.wont_be_nil
-  		if rt != nil
-  			test_user_id = rt.id
-        get '/test/follow/1234'
-        follower_num = Follow.find_by_sql("SELECT follower_id FROM follows WHERE followee_id = #{test_user_id}").count
-        follower_num.must_equal 1234
-      end
-	end
-	
-	
 end
   
   
