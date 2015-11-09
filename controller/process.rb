@@ -123,11 +123,11 @@ def user_a_look_at_user_b_homepage(user_a_id, user_b_id)
   rt["follower_number"] = how_many_follow_me(user_b_id)
   mode = "user_viewing_self"
   if user_a_id != user_b_id
-    follow_list = Follow.where("followee_id"=> user_b_id, "follower_id"=> user_a_id)
-    if follow_list.nil?
-      mode = "user_viewing_unfollowed"
-    else
+    follow_list = Follow.where(followee_id: user_b_id, follower_id: user_a_id)
+    if follow_list.size() == 1
       mode = "user_viewing_followed"
+    else
+      mode = "user_viewing_unfollowed"
     end
   end
   rt["mode"] = mode
