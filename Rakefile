@@ -1,2 +1,2 @@
-require ‘./controller_test/main’
+require './main'
 require 'sinatra/activerecord/rake'
