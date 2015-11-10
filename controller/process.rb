@@ -171,17 +171,15 @@ end
 
 #======================for test interface
 
-def make_follower(followee, num)
+def make_follower(followee_id, num)
   sample_ids = User.pluck(:id).sample(num)
-# columns = [:follower_id, :followee_id]
-# values = []
-  sample_ids.each do |follower_id|
-#     values.push [follower_id, $testuser_id]
-        f = Follow.new(follower_id: follower_id, followee_id: followee)
-        binding.pry
-        f.save
-    end
-# Follow.bulk_insert(values, columns)
+
+  i = 0
+  while(i < num) do
+    Follow.create(follower_id: sample_ids[i], followee_id: followee_id)
+    i = i + 1
+  end
+
 end
 
 def make_fake_tweets(user_name, num)
@@ -190,7 +188,8 @@ def make_fake_tweets(user_name, num)
   values = []
   columns = [:tweet_id, :content]
 # binding.pry
-  num.times do |time|
+  i = 0
+  while( i < num) do
       values.push [testuser_id, Faker::Lorem.sentence]
     end
     
