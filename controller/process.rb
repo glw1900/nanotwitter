@@ -168,3 +168,36 @@ def create_user_ls_from_sql_result(arr)
   end
   return ls
 end
+
+#======================for test interface
+
+def make_follower(followee, num)
+  sample_ids = User.pluck(:id).sample(num)
+# columns = [:follower_id, :followee_id]
+    binding.pry
+# values = []
+  sample_ids.each do |follower_id|
+#     values.push [follower_id, $testuser_id]
+        binding.pry
+        
+        f = Follow.new(follower_id: follower_id, followee_id: followee)
+        f.save
+    end
+# Follow.bulk_insert(values, columns)
+end
+
+def make_fake_tweets(user_name, num)
+# binding.pry
+  testuser_id = User.find_by(username: "testuser")
+  values = []
+  columns = [:tweet_id, :content]
+# binding.pry
+  num.times do |time|
+      values.push [testuser_id, Faker::Lorem.sentence]
+    end
+    
+# binding.pry
+    Tweet.bulk_insert(values, columns)
+#    binding.pry
+end
+
