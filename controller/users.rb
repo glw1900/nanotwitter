@@ -1,5 +1,6 @@
 #go to the person page of some one
 get '/users/:username' do
+  #add follower_id and followee_id to @parameters
   logged_username = session[:username]
   logged_id = User.find_by(username: logged_username).id
   
