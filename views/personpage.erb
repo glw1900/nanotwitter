@@ -86,22 +86,19 @@
           <%if @parameters["mode"] == "user_viewing_followed"%>
           
           <form action="/delete/follow" method="POST">
-            <input type = "hidden" value = "<%=followee_id%>" name = "follower_id">
-            <input type = "hidden" value = "" name = "followee_id">
-            <input type = "submit" value = "Unfollow">
+            <input type = "hidden" value = "<%= @parameters["logged_user_profile"]["follower_id"]%>" name = "follower_id">
+            <input type = "hidden" value = "<%= @parameters["followee_id"]%>" name = "follower_id">
+            <input type = "submit" class="btn btn-success" value = "Unfollow">
           </form>
-          
-          <li><a href = '#'>
-            <button type="button" class="btn btn-success">Unfollow</button>
-          </a></li>
 
         <%elsif @parameters["mode"] == "user_viewing_unfollowed"%>
-          <li><a href = '#'>
-            <button type="button" class="btn btn-danger">Follow</button>
-          </a>
-          </li>
+          
+          <form action="/create/follow" method="POST">
+            <input type = "hidden" value = "<%= @parameters["logged_user_profile"]["follower_id"]%>" name = "follower_id">
+            <input type = "hidden" value = "<%= @parameters["followee_id"]%>" name = "follower_id">
+            <input type = "submit" class="btn btn-danger" value = "Follow">
+          </form>
         <%end%>
-
       </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
