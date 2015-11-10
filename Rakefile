@@ -12,5 +12,5 @@ require './models/tweet'
 require './controller/require_rb'
 require 'sinatra/activerecord/rake'
 
-task :default => :test
-task :TOP => :default
+
+run Sinatra::Application
