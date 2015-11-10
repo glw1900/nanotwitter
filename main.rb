@@ -16,7 +16,7 @@ enable :sessions
 set :public_folder, File.dirname(__FILE__)+'/bootstrap-3.3.5-dist'
 require 'pry-byebug'
 
-get'/loaderio-e31204017626d3e3dbf093a153b06bd3'
+get '/loaderio-e31204017626d3e3dbf093a153b06bd3' do
   'loaderio-e31204017626d3e3dbf093a153b06bd3'
 end
 
