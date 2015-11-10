@@ -42,7 +42,7 @@ post '/create/follow' do
   follow = Follow.new()
   follow.follower_id = params[:follower_id]
   follow.followee_id = params[:followee_id]
-  viewed_username = User.fing_by(id: params[:followee_id]).username
+  viewed_username = User.find_by(id: params[:followee_id]).username
   if follow.save
     response["successfully_add_follow"] = "true"
     redirect '/user/' + viewed_username
@@ -55,7 +55,7 @@ post '/delete/follow' do
   #using name to destroy follow
   follower_id = params[:follower_id]
   followee_id = params[:followee_id]
-  viewed_username = User.fing_by(id: params[:followee_id]).username
+  viewed_username = User.find_by(id: follower_id).username
   follow = Follow.find_by(followee_id: followee_id, follower_id: follower_id)
   if follow != nil
     follow.destroy
