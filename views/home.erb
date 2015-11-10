@@ -65,7 +65,7 @@
     <div class="col-sm-9">
       <ul class="list-group">
         <% if !@parameters["unlogged_twitter_list"].nil? %>
-          <% @parameters["unlogged_twitter_list"].each do |tweet| %>
+          <% @parameters["unlogged_twitter_list"].reverse!.each do |tweet| %>
 
             <li class="list-group-item">
               <h3><strong> <%= tweet["by_user"] %></strong> <small>@<%= tweet["time"] %></small></h3>

@@ -2,12 +2,12 @@ require 'faker'
 require 'bulk-insert-active-record'
 test_user_name = "testuser"
 
-get '/test/tweets/1234' do
+get '/test/tweets/:num' do
   $testuser_id = User.find_by(username: test_user_name)
   testuser_id = User.find_by(username: "testuser").id
 	values_tweet = Array.new
 	columns_tweet = [:user_id, :content]
-	1234.times do |i|
+    params[:num].times do |i|
     	values_tweet.push [testuser_id, Faker::Lorem.sentence]
     end
     
@@ -33,17 +33,17 @@ get '/test/reset' do
 end
 
 
-get '/test/seed/1234' do
-  $testuser_id = User.find_by(username: test_user_name)
-	1234.times do |i|
-  		User.create(username: "test_username#{i}", email: Faker::Internet.email,
-    	password: "1234", profile: nil) 
+get '/test/seed/:num' do
+    $testuser_id = User.find_by(username: test_user_name)
+	  params[:num].times do |i|
+  	User.create(username: "test_username#{i}", email: Faker::Internet.email,
+    password: "1234", profile: nil) 
 	end
 end
 
 
-get '/test/follow/1234' do
+get '/test/follow/:num' do
     $testuser_id = User.find_by(username: test_user_name)
-	make_follower($testuser_id, 1234)
+    make_follower($testuser_id, params[:num])
 end
 
