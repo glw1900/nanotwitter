@@ -13,8 +13,9 @@ get '/test/tweets/:num' do
     Tweet.bulk_insert(values_tweet, columns_tweet)
 end
 
+
 get '/test/reset' do
-    $testuser_id = User.find_by(username: test_user_name)
+  $testuser_id = User.find_by(username: test_user_name)
 	testuser = User.find_by(username: test_user_name)
 	if testuser != nil
     $testuser_id = testuser.id
@@ -32,8 +33,8 @@ end
 get '/test/seed/:num' do
     $testuser_id = User.find_by(username: test_user_name)
 	params[:num].to_i.times do |i|
-  		User.create(username: "test_username#{i}", email: Faker::Internet.email,
-    	password: "1234", profile: nil) 
+    User.create(username: "test_username#{i}", email: Faker::Internet.email,
+    password: "1234", profile: nil)
 	end
 end
 
