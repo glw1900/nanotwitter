@@ -93,6 +93,7 @@ def get_user_profile(user_id)
   
   rt = {}
   rt["username"] = User.find_by(id: user_id).username
+  rt["follower_id"] = user_id
   rt["profile_photo_url"] = image_url
   rt["follow_number"] = how_many_do_i_follow(user_id)
   rt["follower_number"] = how_many_follow_me(user_id)
@@ -117,6 +118,7 @@ def user_a_look_at_user_b_homepage(user_a_id, user_b_id)
   image_url = "https://upload.wikimedia.org/wikipedia/commons/f/f6/Barack_Obama_and_Bill_Clinton_profile.jpg"
   rt = {}
   rt["logged_user_profile"] = get_user_profile(user_a_id)
+  rt["followee_id"] = user_b_id
   rt["homepage_tweet_list"] = tw_array
   rt["username"] = User.find_by(id: user_b_id).username
   rt["follow_number"] = how_many_do_i_follow(user_b_id)
@@ -166,3 +168,36 @@ def create_user_ls_from_sql_result(arr)
   end
   return ls
 end
+
+#======================for test interface
+
+def make_follower(followee, num)
+  sample_ids = User.pluck(:id).sample(num)
+# columns = [:follower_id, :followee_id]
+    binding.pry
+# values = []
+  sample_ids.each do |follower_id|
+#     values.push [follower_id, $testuser_id]
+        binding.pry
+        
+        f = Follow.new(follower_id: follower_id, followee_id: followee)
+        f.save
+    end
+# Follow.bulk_insert(values, columns)
+end
+
+def make_fake_tweets(user_name, num)
+# binding.pry
+  testuser_id = User.find_by(username: "testuser")
+  values = []
+  columns = [:tweet_id, :content]
+# binding.pry
+  num.times do |time|
+      values.push [testuser_id, Faker::Lorem.sentence]
+    end
+    
+# binding.pry
+    Tweet.bulk_insert(values, columns)
+#    binding.pry
+end
+
