@@ -93,6 +93,7 @@ def get_user_profile(user_id)
   
   rt = {}
   rt["username"] = User.find_by(id: user_id).username
+  rt["follower_id"] = user_id
   rt["profile_photo_url"] = image_url
   rt["follow_number"] = how_many_do_i_follow(user_id)
   rt["follower_number"] = how_many_follow_me(user_id)
@@ -117,6 +118,7 @@ def user_a_look_at_user_b_homepage(user_a_id, user_b_id)
   image_url = "https://upload.wikimedia.org/wikipedia/commons/f/f6/Barack_Obama_and_Bill_Clinton_profile.jpg"
   rt = {}
   rt["logged_user_profile"] = get_user_profile(user_a_id)
+  rt["followee_id"] = user_b_id
   rt["homepage_tweet_list"] = tw_array
   rt["username"] = User.find_by(id: user_b_id).username
   rt["follow_number"] = how_many_do_i_follow(user_b_id)
