@@ -11,4 +11,3 @@ gem "pry-byebug"
 gem "faker"
 gem "bulk-insert-active-record"
 gem "pg"
-gem “sqlite3”
