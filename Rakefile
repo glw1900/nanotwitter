@@ -11,3 +11,6 @@ require './models/user'
 require './models/tweet'
 require './controller/require_rb'
 require 'sinatra/activerecord/rake'
+
+
+run Sinatra::Application

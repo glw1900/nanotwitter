@@ -173,11 +173,13 @@ end
 
 def make_follower(followee_id, num)
   sample_ids = User.pluck(:id).sample(num)
+
   i = 0
   while(i < num) do
     Follow.create(follower_id: sample_ids[i], followee_id: followee_id)
     i = i + 1
   end
+
 end
 
 def make_fake_tweets(user_name, num)
