@@ -3,7 +3,6 @@ require 'bulk-insert-active-record'
 # test_user_name = "testuser"
 
 get '/test/tweets/:num' do
-    $testuser_id = User.find_by(username: test_user_name)
     testuser_id = User.find_by(username: "testuser").id
 	values_tweet = Array.new
 	columns_tweet = [:user_id, :content]
@@ -22,7 +21,7 @@ get '/test/reset' do
 		Tweet.destroy_all("user_id = " + testuser_id.to_s)
 		Follow.destroy_all("follower_id = " + testuser_id.to_s)
 		Follow.destroy_all("followee_id = " + testuser_id.to_s)
-		User.create(username: "testuser", email: Faker::Internet.email, password: "1234", profile: nil) 
+		# User.create(username: "testuser", email: Faker::Internet.email, password: "1234", profile: nil) 
 	else
 		User.create(username: "testuser", email: Faker::Internet.email, password: "1234", profile: nil) 
 	end
@@ -43,5 +42,6 @@ end
 get '/test/follow/:num' do
     testuser_id = User.find_by(username: "testuser").id
     make_follower(testuser_id, params[:num].to_i)
+    "follow relationship set"
 end
 
