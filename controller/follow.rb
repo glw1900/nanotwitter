@@ -39,14 +39,13 @@ post "/signin" do
 end
 
 post '/create/follow' do
-  #using name to create follow
-  #delete @
   follow = Follow.new()
-  follow.follower_id = User.find_by(username: params[:follower_name]).id
-  follow.followee_id = User.find_by(username: params[:followee_name]).id
+  follow.follower_id = params[:follower_id]
+  follow.followee_id = params[:followee_id]
+  viewed_username = User.fing_by(id: params[:followee_id]).username
   if follow.save
     response["successfully_add_follow"] = "true"
-    redirect '/follow/' + params[:followee_name]
+    redirect '/user/' + viewed_username
   else
     "error when creating follow"
   end
@@ -54,15 +53,16 @@ end
 
 post '/delete/follow' do
   #using name to destroy follow
-  follower_id = User.find_by(username: params[:follower_name]).id
-  followee_id = User.find_by(username: params[:followee_name]).id
+  follower_id = params[:follower_id]
+  followee_id = params[:followee_id]
+  viewed_username = User.fing_by(id: params[:followee_id]).username
   follow = Follow.find_by(followee_id: followee_id, follower_id: follower_id)
   if follow != nil
     follow.destroy
     response["successfully_deleted"] = "true"
-    'unfollow success' + params[:followee_name]
+    'unfollow success' + viewed_username
   else
     "ooooooooooooops, you've never been a fan, are you?"
   end
-  redirect '/users/' + params[:followee_name]
+  redirect '/users/' + viewed_username
 end
