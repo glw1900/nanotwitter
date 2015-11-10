@@ -84,15 +84,12 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <%if @parameters["mode"] == "user_viewing_followed"%>
-          
           <form action="/delete/follow" method="POST">
             <input type = "hidden" value = "<%= @parameters["logged_user_profile"]["follower_id"]%>" name = "follower_id">
             <input type = "hidden" value = "<%= @parameters["followee_id"]%>" name = "followee_id">
             <input type = "submit" class="btn btn-success" value = "Unfollow">
           </form>
-        
         <%elsif @parameters["mode"] == "user_viewing_unfollowed"%>
-          
           <form action="/create/follow" method="POST">
             <input type = "hidden" value = "<%= @parameters["logged_user_profile"]["follower_id"]%>" name = "follower_id">
             <input type = "hidden" value = "<%= @parameters["followee_id"]%>" name = "followee_id">

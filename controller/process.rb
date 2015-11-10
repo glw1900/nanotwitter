@@ -174,13 +174,11 @@ end
 def make_follower(followee, num)
   sample_ids = User.pluck(:id).sample(num)
 # columns = [:follower_id, :followee_id]
-    binding.pry
 # values = []
   sample_ids.each do |follower_id|
 #     values.push [follower_id, $testuser_id]
-        binding.pry
-        
         f = Follow.new(follower_id: follower_id, followee_id: followee)
+        binding.pry
         f.save
     end
 # Follow.bulk_insert(values, columns)
