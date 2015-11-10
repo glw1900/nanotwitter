@@ -13,4 +13,4 @@ require './controller/require_rb'
 require 'sinatra/activerecord/rake'
 
 
-run Sinatra::Application
+
