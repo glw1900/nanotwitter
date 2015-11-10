@@ -10,6 +10,6 @@ test:
   username: <%= ENV['PG_USER'] %>
   password: <%= ENV['PG_PASS'] %>
   host: localhost
-# development:
-#   adapter: sqlite3
-#   database: db/test.sqlite3
+development:
+  adapter: sqlite3
+  database: db/test.sqlite3

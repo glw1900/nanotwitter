@@ -12,6 +12,7 @@ require './models/tag'
 require './models/user'
 require './models/tweet'
 require './controller/require_rb'
+set :environment, :production
 enable :sessions
 set :public_folder, File.dirname(__FILE__)+'/bootstrap-3.3.5-dist'
 require 'pry-byebug'
