@@ -29,7 +29,7 @@ get '/test/reset' do
   if User.find_by(username: "testuser").nil?
     "dame it"
   else
-    'reset finished, testuser created'
+    'reset finished, testuser created' + User.find_by(username: "testuser").username
   end  
 end
 
