@@ -26,7 +26,11 @@ get '/test/reset' do
 	else
 		User.create(username: "testuser", email: Faker::Internet.email, password: "1234", profile: nil) 
 	end
-	'reset finished, testuser created' + User.find_by(username: "testuser").id
+  if User.find_by(username: "testuser").nil?
+    "dame it"
+  else
+    'reset finished, testuser created'
+  end  
 end
 
 
