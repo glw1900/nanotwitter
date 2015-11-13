@@ -9,6 +9,7 @@ get '/test/tweets/:num' do
       Tweet.create(user_id:testuser_id, content: Faker::Lorem.sentence)
       num -= 1
     end
+    "" + Tweet.find_by(user_id:testuser_id).content
     # params[:num].to_i.times do |i|
     #     Tweet.create(user_id:testuser_id, content: Faker::Lorem.sentence)
     # end
