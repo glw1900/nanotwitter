@@ -4,9 +4,9 @@ require 'bulk-insert-active-record'
 
 get '/test/tweets/:num' do
     # if User.find_by(username: "testuser")
-    # testuser_id = User.find_by(username: "testuser").id
+    testuser_id = User.find_by(username: "testuser").id
     params['num'].to_i.times do |i|
-        Tweet.create(user_id: User.pluck(:id).sample(1), content: Faker::Lorem.sentence)
+        Tweet.create(user_id:testuser_id, content: Faker::Lorem.sentence)
     end
 end
 
@@ -24,11 +24,22 @@ get '/test/reset' do
 	else
 		User.create(username: "testuser", email: Faker::Internet.email, password: "1234", profile: nil) 
 	end
-  if User.find_by(username: "testuser").nil?
-    "dame it"
+  'reset finished, testuser created'
+end
+
+get '/test/1' do
+  testuser = User.new
+  testuser.username = "testuser"
+  if testuser.save
+    id = User.find_by(username: "testuser").id
+    temp = "#{id}"
+    time = User.find_by(username: "testuser").created_at
+    "create success" + temp + time
   else
-    'reset finished, testuser created'
-  end  
+    id = User.find_by(username: "testuser").id
+    temp = "#{id}"
+    time = User.find_by(username: "testuser").created_at
+    "create failure" + temp + time
 end
 
 
