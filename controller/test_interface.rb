@@ -27,20 +27,22 @@ get '/test/reset' do
 end
 
 get '/test/1' do
-  tweet = {}
-  tweet["content"] = "asdf"
-  tweet["media_url"] = "www"
-  tweet["retweet_id"] = 0
-  tweet["user_id"] = User.find_by(username: "testuser").id
-  tweet["pub_time"] = nil
-  tweet = Tweet.new(tweet)
-  if tweet.save
-    # time = User.find_by(username: "testuser").created_at
-    "create success"
-  else
-    # time = User.find_by(username: "testuser").created_at
-    "create failure"
-  end
+  # tweet = {}
+  # tweet["content"] = "asdf"
+  # tweet["media_url"] = "www"
+  # tweet["retweet_id"] = 0
+  # tweet["user_id"] = User.find_by(username: "testuser").id
+  # tweet["pub_time"] = nil
+  # tweet = Tweet.new(tweet)
+  Tweet.create(user_id:User.find_by(username: "testuser").id, content:"time")
+  "create success"
+  # if tweet.save
+  #   # time = User.find_by(username: "testuser").created_at
+  #   "create success"
+  # else
+  #   # time = User.find_by(username: "testuser").created_at
+  #   "create failure"
+  # end
 end
 
 
