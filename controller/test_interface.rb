@@ -3,14 +3,19 @@ require 'bulk-insert-active-record'
 # test_user_name = "testuser"
 
 get '/test/tweets/:num' do
-    testuser_id = User.find_by(username: "testuser").id
-    i = 0
-    num = params['num'].to_i
-    while(i < num) do
-        Tweet.create(user_id: testuser_id, content: "a fake tweet")
-        i = i + 1
+    testuser = User.find_by(username: "testuser")
+    if(testuser != nil)
+        testuser_id = testuser.id
+        i = 0
+        num = params['num'].to_i
+        while(i < num) do
+            Tweet.create(user_id: testuser_id, content: "a fake tweet")
+            i = i + 1
+        end
+        'test fweets'
+    else
+    'testuser not exist'
     end
-    "test fweets"
 end
 
 
