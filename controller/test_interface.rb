@@ -8,6 +8,7 @@ get '/test/tweets/:num' do
       Tweet.create(user_id:testuser_id, content: Faker::Lorem.sentence)
       num -= 1
     end
+    "succeed"
 end
 
 
