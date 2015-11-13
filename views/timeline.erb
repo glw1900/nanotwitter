@@ -88,7 +88,7 @@
         <img class="embed-responsive-item" src="https://lh3.googleusercontent.com/-3Zqv6Of_vlk/AAAAAAAAAAI/AAAAAAAAAAA/JiFX6Ovb6nc/photo.jpg" style="height:230px; width: 250px; display:block;"></img>
 
       </div>
-      <a href = 'http://0.0.0.0:4567/users/<%=@parameters["logged_user_profile"]["username"] %>'><h1>  <%=@parameters["logged_user_profile"]["username"]%> </h1></a>
+      <a href = '/users/<%=@parameters["logged_user_profile"]["username"] %>'><h1>  <%=@parameters["logged_user_profile"]["username"]%> </h1></a>
     </div>
     <div class="col-sm-9">
       <div class="modal-body">
@@ -106,7 +106,7 @@
           <% @parameters["timeline_twitter_list"].each do |tweet| %>
 
             <li class="list-group-item">
-              <a href = 'http://0.0.0.0:4567/users/<%=tweet["by_user"] %>'><h3><strong> <%= tweet["by_user"] %></strong> <small>@<%= tweet["time"] %></small></h3></a>
+              <a href = '/users/<%=tweet["by_user"] %>'><h3><strong> <%= tweet["by_user"] %></strong> <small>@<%= tweet["time"] %></small></h3></a>
 
               <p><%= tweet["text"] %> </p>
               <button type="button" class="btn btn-info">Reply</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
