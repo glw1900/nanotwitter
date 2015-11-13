@@ -29,7 +29,7 @@ get '/test/reset' do
   if User.find_by(username: "testuser").nil?
     "dame it"
   else
-    'reset finished, testuser created' + User.find_by(username: "testuser").id
+    'reset finished, testuser created'
   end  
 end
 
@@ -47,6 +47,6 @@ end
 get '/test/follow/:num' do
     testuser_id = User.find_by(username: "testuser").id
     make_follower(testuser_id, params[:num].to_i)
-    "follow relationship set"
+    "follow relationship set" + testuser_id
 end
 
