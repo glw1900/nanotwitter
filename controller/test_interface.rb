@@ -2,9 +2,8 @@ require 'faker'
 require 'bulk-insert-active-record'
 # test_user_name = "testuser"
 get '/test/tweets/:num' do
-    # if User.find_by(username: "testuser")
     testuser_id = User.find_by(username: "testuser").id
-    num = params[:num].to_i
+    num = params['num'].to_i
     while num > 0
       Tweet.create(user_id:testuser_id, content: Faker::Lorem.sentence)
       num -= 1
