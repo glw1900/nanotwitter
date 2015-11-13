@@ -9,10 +9,6 @@ get '/test/tweets/:num' do
       Tweet.create(user_id:testuser_id, content: Faker::Lorem.sentence)
       num -= 1
     end
-    "" + Tweet.find_by(user_id:testuser_id).content
-    # params[:num].to_i.times do |i|
-    #     Tweet.create(user_id:testuser_id, content: Faker::Lorem.sentence)
-    # end
 end
 
 
@@ -30,24 +26,6 @@ get '/test/reset' do
 		User.create(username: "testuser", email: Faker::Internet.email, password: "1234", profile: nil) 
 	end
   'reset finished, testuser created'
-end
-
-get '/test/1' do
-  # tweet = {}
-  # tweet["content"] = "asdf"
-  # tweet["media_url"] = "www"
-  # tweet["retweet_id"] = 0
-  # tweet["user_id"] = User.find_by(username: "testuser").id
-  # tweet["pub_time"] = nil
-  # tweet = Tweet.new(tweet)
-  # Tweet.create(user_id:User.find_by(username: "testuser").id, content:"time")
-  # if tweet.save
-  #   # time = User.find_by(username: "testuser").created_at
-  #   "create success"
-  # else
-  #   # time = User.find_by(username: "testuser").created_at
-  #   "create failure"
-  # end
 end
 
 
