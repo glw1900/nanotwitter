@@ -1,8 +1,6 @@
 require 'faker'
 require 'bulk-insert-active-record'
 # test_user_name = "testuser"
-
-
 get '/test/tweets/:num' do
     # if User.find_by(username: "testuser")
     testuser_id = User.find_by(username: "testuser").id
@@ -41,6 +39,7 @@ get '/test/1' do
     temp = "#{id}"
     time = User.find_by(username: "testuser").created_at
     "create failure" + temp + time
+  end
 end
 
 
