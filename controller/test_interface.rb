@@ -29,7 +29,13 @@ get '/test/reset' do
 	else
 		User.create(username: "testuser", email: Faker::Internet.email, password: "1234", profile: nil) 
 	end
-	'reset finished, testuser created'
+    id =  User.find_by(username:"testuser").id
+    # temp = "#{id}"
+	"reset finished, testuser created #{id}"
+end
+
+get '/ttt' do
+    'heiheihei'
 end
 
 
