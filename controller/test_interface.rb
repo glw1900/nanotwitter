@@ -27,9 +27,13 @@ get '/test/reset' do
 end
 
 get '/test/1' do
-  tweet = Tweet.new
-  tweet.content = "testuser"
-  tweet.user_id = User.find_by(username: "testuser").id
+  tweet = {}
+  tweet["content"] = "asdf"
+  tweet["media_url"] = "www"
+  tweet["retweet_id"] = 0
+  tweet["user_id"] = User.find_by(username: "testuser").id
+  tweet["pub_time"] = nil
+  tweet = Tweet.new(tweet)
   if tweet.save
     # time = User.find_by(username: "testuser").created_at
     "create success" + temp
