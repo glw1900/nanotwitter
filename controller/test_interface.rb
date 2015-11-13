@@ -4,7 +4,7 @@ require 'bulk-insert-active-record'
 
 get '/test/tweets/:num' do
     testuser = User.find_by(username: "testuser")
-    if(testuser != nil)
+    if testuser != nil
         testuser_id = testuser.id
         i = 0
         num = params['num'].to_i

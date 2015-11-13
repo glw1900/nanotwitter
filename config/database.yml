@@ -4,19 +4,20 @@ production:
   username: <%= ENV['PG_USER'] %>
   password: <%= ENV['PG_PASS'] %>
   host: localhost
+ 
 test:
   adapter: postgresql
   database: development
   username: <%= ENV['PG_USER'] %>
   password: <%= ENV['PG_PASS'] %>
   host: localhost
-# development:
-#   adapter: postgresql
-#   database: development
-#   username: <%= ENV['PG_USER'] %>
-#   password: <%= ENV['PG_PASS'] %>
-#   host: localhost
-
+  
 development:
-  adapter: sqlite3
-  database: db/test.sqlite3
+  adapter: postgresql
+  encoding: unicode
+  database: myapp_dev
+  pool: 5
+  username: tianzhichen
+  password: tianzhic
+  host: localhost
+  port: 5432

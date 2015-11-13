@@ -1,5 +1,5 @@
 require './main'
-require './models/c_mention'        #Model class
+require './models/c_mention'
 require './models/comment'
 require './models/favorite'
 require './models/follow'
