@@ -4,7 +4,7 @@ require 'bulk-insert-active-record'
 get '/test/tweets/:num' do
     # if User.find_by(username: "testuser")
     testuser_id = User.find_by(username: "testuser").id
-    params['num'].to_i.times do |i|
+    params[:num].to_i.times do |i|
         Tweet.create(user_id:testuser_id, content: Faker::Lorem.sentence)
     end
 end
@@ -34,8 +34,7 @@ get '/test/1' do
   # tweet["user_id"] = User.find_by(username: "testuser").id
   # tweet["pub_time"] = nil
   # tweet = Tweet.new(tweet)
-  Tweet.create(user_id:User.find_by(username: "testuser").id, content:"time")
-  "create success"
+  # Tweet.create(user_id:User.find_by(username: "testuser").id, content:"time")
   # if tweet.save
   #   # time = User.find_by(username: "testuser").created_at
   #   "create success"
