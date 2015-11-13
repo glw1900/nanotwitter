@@ -5,10 +5,10 @@ require 'bulk-insert-active-record'
 get '/test/tweets/:num' do
     # if User.find_by(username: "testuser")
 
-    testuser_id = User.find_by(username: "testuser").id
+    # testuser_id = User.find_by(username: "testuser").id
     params['num'].to_i.times do |i|
         # Tweet.create(user_id: testuser_id, content: "lalal")
-        # Tweet.create(user_id: testuser_id, content: Faker::Lorem.sentence)
+        Tweet.create(user_id: 1, content: Faker::Lorem.sentence)
     end
 end
 
@@ -47,6 +47,6 @@ end
 get '/test/follow/:num' do
     testuser_id = User.find_by(username: "testuser").id
     make_follower(testuser_id, params[:num].to_i)
-    "follow relationship set" + testuser_id
+    "follow relationship set"
 end
 
