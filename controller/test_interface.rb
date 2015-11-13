@@ -4,11 +4,9 @@ require 'bulk-insert-active-record'
 
 get '/test/tweets/:num' do
     testuser_id = User.find_by(username: "testuser").id
-	values_tweet = Array.new
-	columns_tweet = [:user_id, :content]
-    # params['num'].to_i.times do |i|
-    #     Tweet.create(user_id: testuser_id, content: Faker::Lorem.sentence)
-    # end
+    params['num'].to_i.times do |i|
+        Tweet.create(user_id: testuser_id, content: Faker::Lorem.sentence)
+    end
 end
 
 
