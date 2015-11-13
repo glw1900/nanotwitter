@@ -36,10 +36,10 @@ get '/test/1' do
   tweet = Tweet.new(tweet)
   if tweet.save
     # time = User.find_by(username: "testuser").created_at
-    "create success" + temp
+    "create success"
   else
     # time = User.find_by(username: "testuser").created_at
-    "create failure" + temp
+    "create failure"
   end
 end
 
