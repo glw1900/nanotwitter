@@ -27,16 +27,13 @@ get '/test/reset' do
 end
 
 get '/test/1' do
-  testuser = User.new
-  testuser.username = "testuser"
-  if testuser.save
-    id = User.find_by(username: "testuser").id
-    temp = "#{id}"
+  tweet = Tweet.new
+  tweet.content = "testuser"
+  tweet.user_id = User.find_by(username: "testuser").id
+  if tweet.save
     # time = User.find_by(username: "testuser").created_at
     "create success" + temp
   else
-    id = User.find_by(username: "testuser").id
-    temp = "#{id}"
     # time = User.find_by(username: "testuser").created_at
     "create failure" + temp
   end
