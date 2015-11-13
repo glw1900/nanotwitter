@@ -12,7 +12,7 @@ get '/test/tweets/:num' do
             Tweet.create(user_id: testuser_id, content: "a fake tweet")
             i = i + 1
         end
-        'test fweets'
+        Tweet.find_by(user_id: testuser_id).content
     else
     'testuser not exist'
     end
