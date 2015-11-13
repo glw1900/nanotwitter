@@ -39,7 +39,7 @@ get '/test/1' do
     temp = "#{id}"
     # time = User.find_by(username: "testuser").created_at
     "create failure" + temp
-  # end
+  end
 end
 
 
