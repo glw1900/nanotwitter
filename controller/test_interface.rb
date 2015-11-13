@@ -32,14 +32,14 @@ get '/test/1' do
   if testuser.save
     id = User.find_by(username: "testuser").id
     temp = "#{id}"
-    time = User.find_by(username: "testuser").created_at
-    "create success" + temp + time
+    # time = User.find_by(username: "testuser").created_at
+    "create success" + temp
   else
     id = User.find_by(username: "testuser").id
     temp = "#{id}"
-    time = User.find_by(username: "testuser").created_at
-    "create failure" + temp + time
-  end
+    # time = User.find_by(username: "testuser").created_at
+    "create failure" + temp
+  # end
 end
 
 
