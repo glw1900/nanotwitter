@@ -21,7 +21,7 @@ get '/loaderio-d3a485382ba9e01e149ff5b014cd52e3/' do
   'loaderio-d3a485382ba9e01e149ff5b014cd52e3'
 end
 
-get 'loaderio-f3cc423b8dcef53b6cafc74290cff52f' do
+get '/loaderio-f3cc423b8dcef53b6cafc74290cff52f/' do
   'loaderio-f3cc423b8dcef53b6cafc74290cff52f'
 end
 
