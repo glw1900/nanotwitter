@@ -10,6 +10,7 @@ gem "minitest"
 gem "pry-byebug"
 gem "faker"
 gem "bulk-insert-active-record"
-gem "pg"
+gem “pg"
+gem “puma”
 
-#gem "sqlite3"
+
