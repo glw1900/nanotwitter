@@ -26,6 +26,7 @@ GEM
     json (1.8.3)
     method_source (0.8.2)
     minitest (5.8.2)
+    newrelic_rpm (3.14.0.305)
     pg (0.18.3)
     pry (0.10.3)
       coderay (~> 1.1.0)
@@ -60,6 +61,7 @@ DEPENDENCIES
   faker
   json
   minitest
+  newrelic_rpm
   pg
   pry-byebug
   rack
