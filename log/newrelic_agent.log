@@ -76,3 +76,20 @@
 [2015-11-16 20:23:40 -0500 Meiyues-MacBook-Pro.local (5924)] INFO : Starting Agent shutdown
 [2015-11-16 20:23:40 -0500 Meiyues-MacBook-Pro.local (5925)] INFO : Starting Agent shutdown
 [2015-11-16 20:23:40 -0500 Meiyues-MacBook-Pro.local (5914)] INFO : Starting Agent shutdown
+[2015-11-16 20:46:54 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : Starting the New Relic agent in "development" environment.
+[2015-11-16 20:46:54 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[2015-11-16 20:46:54 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : Reading configuration from config/newrelic.yml (/Users/sleep/Dropbox/cosi105b_meiyue/nanotwitter/nanotwitter)
+[2015-11-16 20:46:54 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : Environment: development
+[2015-11-16 20:46:54 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : Dispatcher: Puma
+[2015-11-16 20:46:54 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : Application: nanotwitter_relic (Development)
+[2015-11-16 20:46:54 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : Installing ActiveRecord 4 instrumentation
+[2015-11-16 20:46:54 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : Installing Net instrumentation
+[2015-11-16 20:46:54 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : Installing Sinatra instrumentation
+[2015-11-16 20:46:54 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : Installing deferred Rack instrumentation
+[2015-11-16 20:46:54 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : Installing Rack::Builder middleware instrumentation
+[2015-11-16 20:46:54 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : Finished instrumentation
+[2015-11-16 20:46:54 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : Doing deferred dependency-detection before Rack startup
+[2015-11-16 20:46:56 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : Reporting to: https://rpm.newrelic.com/accounts/1150571/applications/10172141
+[2015-11-16 20:48:04 -0500 Meiyues-MacBook-Pro.local (6108)] INFO : Starting Agent shutdown
+[2015-11-16 20:48:04 -0500 Meiyues-MacBook-Pro.local (6109)] INFO : Starting Agent shutdown
+[2015-11-16 20:48:04 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : Starting Agent shutdown
