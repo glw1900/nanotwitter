@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151015023318) do
+ActiveRecord::Schema.define(version: 20151117001744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 20151015023318) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "c_mentions", ["tweet_id"], name: "index_c_mentions_on_tweet_id", using: :btree
+
   create_table "comments", force: :cascade do |t|
     t.integer  "tweet_id"
     t.integer  "commenter_id"
@@ -32,6 +34,8 @@ ActiveRecord::Schema.define(version: 20151015023318) do
     t.datetime "updated_at",   null: false
   end
 
+  add_index "comments", ["tweet_id"], name: "index_comments_on_tweet_id", using: :btree
+
   create_table "favorites", force: :cascade do |t|
     t.integer  "tweet_id"
     t.integer  "user_id"
@@ -40,6 +44,8 @@ ActiveRecord::Schema.define(version: 20151015023318) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
+
   create_table "follows", force: :cascade do |t|
     t.integer  "followee_id"
     t.integer  "follower_id"
@@ -47,6 +53,8 @@ ActiveRecord::Schema.define(version: 20151015023318) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "follows", ["followee_id"], name: "index_follows_on_followee_id", using: :btree
 
   create_table "hash_tags", force: :cascade do |t|
     t.string "name"
@@ -61,12 +69,17 @@ ActiveRecord::Schema.define(version: 20151015023318) do
     t.datetime "updated_at",  null: false
   end
 
+  add_index "messages", ["receiver_id"], name: "index_messages_on_receiver_id", using: :btree
+  add_index "messages", ["sender_id"], name: "index_messages_on_sender_id", using: :btree
+
   create_table "t_mentions", force: :cascade do |t|
     t.integer  "tweet_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "t_mentions", ["tweet_id"], name: "index_t_mentions_on_tweet_id", using: :btree
 
   create_table "tags", force: :cascade do |t|
     t.integer "hash_id"
@@ -83,6 +96,8 @@ ActiveRecord::Schema.define(version: 20151015023318) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "tweets", ["user_id"], name: "index_tweets_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email"
     t.string   "username"
@@ -92,5 +107,8 @@ ActiveRecord::Schema.define(version: 20151015023318) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "users", ["id"], name: "index_users_on_id", using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", using: :btree
 
 end
