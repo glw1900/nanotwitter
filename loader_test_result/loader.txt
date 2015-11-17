@@ -1,0 +1,16 @@
+no index:
+
+make 12 users
+Average	673 ms
+Min/Max	116 / 3250 ms
+
+make 12 tweets
+Average	53 ms
+Min/Max	15 / 215 ms
+
+make 12 follow
+Average	561 ms
+Min/Max	141 / 2081 ms
+
+
+with index
