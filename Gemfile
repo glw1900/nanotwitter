@@ -11,6 +11,7 @@ gem "minitest"
 gem "pry-byebug"
 gem "faker"
 gem "bulk-insert-active-record"
+gem "puma"
+gem "newrelic_rpm"
 gem "pg"
-gem 'newrelic_rpm'
 gem 'puma'
