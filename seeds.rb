@@ -28,3 +28,9 @@ Follow.destroy_all()
   Tweet.create(user_id:260,content:"This is my #{i} th tweet, do you like it?")
 end
 
+
+
+
+
+
+
