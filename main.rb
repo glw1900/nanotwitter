@@ -12,6 +12,7 @@ require './models/tag'
 require './models/user'
 require './models/tweet'
 require './controller/require_rb'
+require 'newrelic_rpm'
 set :environment, :production
 enable :sessions
 set :public_folder, File.dirname(__FILE__)+'/bootstrap-3.3.5-dist'
@@ -21,6 +22,9 @@ get '/loaderio-d3a485382ba9e01e149ff5b014cd52e3/' do
   'loaderio-d3a485382ba9e01e149ff5b014cd52e3'
 end
 
+get '/loaderio-f3cc423b8dcef53b6cafc74290cff52f/' do
+  'loaderio-f3cc423b8dcef53b6cafc74290cff52f'
+end
 
 get '/' do
   @parameters = {}

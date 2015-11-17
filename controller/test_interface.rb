@@ -1,7 +1,6 @@
 require 'faker'
 require 'bulk-insert-active-record'
 # test_user_name = "testuser"
-
 get '/test/tweets/:num' do
     testuser = User.find_by(username: "testuser")
     if(testuser != nil)
@@ -16,6 +15,7 @@ get '/test/tweets/:num' do
     else
     'testuser not exist'
     end
+    "succeed"
 end
 
 
@@ -29,6 +29,7 @@ get '/test/reset' do
 	else
 		User.create(username: "testuser", email: Faker::Internet.email, password: "1234", profile: nil) 
 	end
+<<<<<<< HEAD
     id =  User.find_by(username:"testuser").id
     # temp = "#{id}"
 	"reset finished, testuser created #{id}"
@@ -36,6 +37,9 @@ end
 
 get '/ttt' do
     'heiheihei'
+=======
+  'reset finished, testuser created'
+>>>>>>> 6f55943d9c6f879ce5741d2d976e3bcd67158abe
 end
 
 

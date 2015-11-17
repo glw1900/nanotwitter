@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
+# ruby '2.2.0'
 gem "sinatra"
 gem "activerecord"
 gem "activesupport"
@@ -11,7 +12,5 @@ gem "pry-byebug"
 gem "faker"
 gem "bulk-insert-active-record"
 gem "pg"
-# gem "sqlite3"
-
-
-
+gem 'newrelic_rpm'
+gem 'puma'

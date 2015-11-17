@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20151015023318) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "c_mentions", force: :cascade do |t|
     t.integer  "tweet_id"
     t.integer  "user_id"
