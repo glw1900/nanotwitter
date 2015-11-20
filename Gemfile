@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby '2.2.0'
+# ruby '2.2.0'
 gem "sinatra"
 gem "activerecord"
 gem "activesupport"
@@ -14,4 +14,4 @@ gem "bulk-insert-active-record"
 gem "puma"
 gem "newrelic_rpm"
 gem "pg"
-
+gem 'puma'

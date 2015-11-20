@@ -28,5 +28,3 @@ Min/Max	54 / 510 ms
 make follow 12
 Average	159 ms
 Min/Max	57 / 520 ms
-
-

@@ -11,7 +11,7 @@ get '/test/tweets/:num' do
             Tweet.create(user_id: testuser_id, content: "a fake tweet")
             i = i + 1
         end
-        'test fweets'
+        Tweet.find_by(user_id: testuser_id).content
     else
     'testuser not exist'
     end
@@ -29,8 +29,12 @@ get '/test/reset' do
 	else
 		User.create(username: "testuser", email: Faker::Internet.email, password: "1234", profile: nil) 
 	end
-  'reset finished, testuser created'
+    id =  User.find_by(username:"testuser").id
+    # temp = "#{id}"
+	"reset finished, testuser created #{id}"
 end
+
+# 
 
 
 get '/test/seed/:num' do

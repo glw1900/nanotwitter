@@ -42,3 +42,71 @@
 [2015-11-16 19:40:45 -0500 Tianzhis-MacBook-Pro.local (51559)] INFO : Reporting to: https://rpm.newrelic.com/accounts/1150571/applications/10172141
 [2015-11-16 19:40:58 -0500 Tianzhis-MacBook-Pro.local (51559)] INFO : Doing deferred dependency-detection before Rack startup
 [2015-11-16 19:42:27 -0500 Tianzhis-MacBook-Pro.local (51559)] WARN : Skipping RUM instrumentation. Unable to find <body> tag in first 50000 bytes of document.
+[2015-11-16 20:22:06 -0500 Meiyues-MacBook-Pro.local (5883)] INFO : Starting the New Relic agent in "development" environment.
+[2015-11-16 20:22:06 -0500 Meiyues-MacBook-Pro.local (5883)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[2015-11-16 20:22:06 -0500 Meiyues-MacBook-Pro.local (5883)] INFO : Reading configuration from config/newrelic.yml (/Users/sleep/Dropbox/cosi105b_meiyue/nanotwitter/nanotwitter)
+[2015-11-16 20:22:06 -0500 Meiyues-MacBook-Pro.local (5883)] INFO : Environment: development
+[2015-11-16 20:22:06 -0500 Meiyues-MacBook-Pro.local (5883)] INFO : Dispatcher: Puma
+[2015-11-16 20:22:06 -0500 Meiyues-MacBook-Pro.local (5883)] INFO : Application: nanotwitter_relic (Development)
+[2015-11-16 20:22:06 -0500 Meiyues-MacBook-Pro.local (5883)] INFO : Installing ActiveRecord 4 instrumentation
+[2015-11-16 20:22:06 -0500 Meiyues-MacBook-Pro.local (5883)] INFO : Installing Net instrumentation
+[2015-11-16 20:22:06 -0500 Meiyues-MacBook-Pro.local (5883)] INFO : Installing Sinatra instrumentation
+[2015-11-16 20:22:06 -0500 Meiyues-MacBook-Pro.local (5883)] INFO : Installing deferred Rack instrumentation
+[2015-11-16 20:22:06 -0500 Meiyues-MacBook-Pro.local (5883)] INFO : Installing Rack::Builder middleware instrumentation
+[2015-11-16 20:22:06 -0500 Meiyues-MacBook-Pro.local (5883)] INFO : Finished instrumentation
+[2015-11-16 20:22:06 -0500 Meiyues-MacBook-Pro.local (5883)] INFO : Doing deferred dependency-detection before Rack startup
+[2015-11-16 20:22:08 -0500 Meiyues-MacBook-Pro.local (5883)] INFO : Reporting to: https://rpm.newrelic.com/accounts/1150571/applications/10172141
+[2015-11-16 20:22:41 -0500 Meiyues-MacBook-Pro.local (5898)] INFO : Starting Agent shutdown
+[2015-11-16 20:22:41 -0500 Meiyues-MacBook-Pro.local (5897)] INFO : Starting Agent shutdown
+[2015-11-16 20:22:41 -0500 Meiyues-MacBook-Pro.local (5883)] INFO : Starting Agent shutdown
+[2015-11-16 20:23:30 -0500 Meiyues-MacBook-Pro.local (5914)] INFO : Starting the New Relic agent in "development" environment.
+[2015-11-16 20:23:30 -0500 Meiyues-MacBook-Pro.local (5914)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[2015-11-16 20:23:30 -0500 Meiyues-MacBook-Pro.local (5914)] INFO : Reading configuration from config/newrelic.yml (/Users/sleep/Dropbox/cosi105b_meiyue/nanotwitter/nanotwitter)
+[2015-11-16 20:23:30 -0500 Meiyues-MacBook-Pro.local (5914)] INFO : Environment: development
+[2015-11-16 20:23:30 -0500 Meiyues-MacBook-Pro.local (5914)] INFO : Dispatcher: Puma
+[2015-11-16 20:23:30 -0500 Meiyues-MacBook-Pro.local (5914)] INFO : Application: nanotwitter_relic (Development)
+[2015-11-16 20:23:30 -0500 Meiyues-MacBook-Pro.local (5914)] INFO : Installing ActiveRecord 4 instrumentation
+[2015-11-16 20:23:30 -0500 Meiyues-MacBook-Pro.local (5914)] INFO : Installing Net instrumentation
+[2015-11-16 20:23:30 -0500 Meiyues-MacBook-Pro.local (5914)] INFO : Installing Sinatra instrumentation
+[2015-11-16 20:23:30 -0500 Meiyues-MacBook-Pro.local (5914)] INFO : Installing deferred Rack instrumentation
+[2015-11-16 20:23:30 -0500 Meiyues-MacBook-Pro.local (5914)] INFO : Installing Rack::Builder middleware instrumentation
+[2015-11-16 20:23:30 -0500 Meiyues-MacBook-Pro.local (5914)] INFO : Finished instrumentation
+[2015-11-16 20:23:30 -0500 Meiyues-MacBook-Pro.local (5914)] INFO : Doing deferred dependency-detection before Rack startup
+[2015-11-16 20:23:32 -0500 Meiyues-MacBook-Pro.local (5914)] INFO : Reporting to: https://rpm.newrelic.com/accounts/1150571/applications/10172141
+[2015-11-16 20:23:40 -0500 Meiyues-MacBook-Pro.local (5924)] INFO : Starting Agent shutdown
+[2015-11-16 20:23:40 -0500 Meiyues-MacBook-Pro.local (5925)] INFO : Starting Agent shutdown
+[2015-11-16 20:23:40 -0500 Meiyues-MacBook-Pro.local (5914)] INFO : Starting Agent shutdown
+[2015-11-16 20:46:54 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : Starting the New Relic agent in "development" environment.
+[2015-11-16 20:46:54 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[2015-11-16 20:46:54 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : Reading configuration from config/newrelic.yml (/Users/sleep/Dropbox/cosi105b_meiyue/nanotwitter/nanotwitter)
+[2015-11-16 20:46:54 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : Environment: development
+[2015-11-16 20:46:54 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : Dispatcher: Puma
+[2015-11-16 20:46:54 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : Application: nanotwitter_relic (Development)
+[2015-11-16 20:46:54 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : Installing ActiveRecord 4 instrumentation
+[2015-11-16 20:46:54 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : Installing Net instrumentation
+[2015-11-16 20:46:54 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : Installing Sinatra instrumentation
+[2015-11-16 20:46:54 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : Installing deferred Rack instrumentation
+[2015-11-16 20:46:54 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : Installing Rack::Builder middleware instrumentation
+[2015-11-16 20:46:54 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : Finished instrumentation
+[2015-11-16 20:46:54 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : Doing deferred dependency-detection before Rack startup
+[2015-11-16 20:46:56 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : Reporting to: https://rpm.newrelic.com/accounts/1150571/applications/10172141
+[2015-11-16 20:48:04 -0500 Meiyues-MacBook-Pro.local (6108)] INFO : Starting Agent shutdown
+[2015-11-16 20:48:04 -0500 Meiyues-MacBook-Pro.local (6109)] INFO : Starting Agent shutdown
+[2015-11-16 20:48:04 -0500 Meiyues-MacBook-Pro.local (6092)] INFO : Starting Agent shutdown
+[2015-11-16 20:57:04 -0500 Meiyues-MacBook-Pro.local (6178)] INFO : Starting the New Relic agent in "development" environment.
+[2015-11-16 20:57:04 -0500 Meiyues-MacBook-Pro.local (6178)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[2015-11-16 20:57:04 -0500 Meiyues-MacBook-Pro.local (6178)] INFO : Reading configuration from config/newrelic.yml (/Users/sleep/Dropbox/cosi105b_meiyue/nanotwitter/nanotwitter)
+[2015-11-16 20:57:04 -0500 Meiyues-MacBook-Pro.local (6178)] INFO : Environment: development
+[2015-11-16 20:57:04 -0500 Meiyues-MacBook-Pro.local (6178)] INFO : Dispatcher: Puma
+[2015-11-16 20:57:04 -0500 Meiyues-MacBook-Pro.local (6178)] INFO : Application: nanotwitter_relic (Development)
+[2015-11-16 20:57:04 -0500 Meiyues-MacBook-Pro.local (6178)] INFO : Installing ActiveRecord 4 instrumentation
+[2015-11-16 20:57:04 -0500 Meiyues-MacBook-Pro.local (6178)] INFO : Installing Net instrumentation
+[2015-11-16 20:57:04 -0500 Meiyues-MacBook-Pro.local (6178)] INFO : Installing Sinatra instrumentation
+[2015-11-16 20:57:04 -0500 Meiyues-MacBook-Pro.local (6178)] INFO : Installing deferred Rack instrumentation
+[2015-11-16 20:57:04 -0500 Meiyues-MacBook-Pro.local (6178)] INFO : Installing Rack::Builder middleware instrumentation
+[2015-11-16 20:57:04 -0500 Meiyues-MacBook-Pro.local (6178)] INFO : Finished instrumentation
+[2015-11-16 20:57:04 -0500 Meiyues-MacBook-Pro.local (6178)] INFO : Doing deferred dependency-detection before Rack startup
+[2015-11-16 20:57:05 -0500 Meiyues-MacBook-Pro.local (6178)] INFO : Reporting to: https://rpm.newrelic.com/accounts/1150571/applications/10172141
+[2015-11-16 20:57:22 -0500 Meiyues-MacBook-Pro.local (6193)] INFO : Starting Agent shutdown
+[2015-11-16 20:57:22 -0500 Meiyues-MacBook-Pro.local (6194)] INFO : Starting Agent shutdown
+[2015-11-16 20:57:22 -0500 Meiyues-MacBook-Pro.local (6178)] INFO : Starting Agent shutdown
