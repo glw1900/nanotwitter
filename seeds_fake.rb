@@ -11,7 +11,7 @@ require './models/t_mention'
 require './models/tag'
 require './models/user'
 require './models/tweet'
-require './process'
+#require 'controller/process'
 require 'faker'
 enable :sessions
 set :public_folder, File.dirname(__FILE__)+'/bootstrap-3.3.5-dist'

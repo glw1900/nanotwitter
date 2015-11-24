@@ -1,5 +1,5 @@
 require "pry-byebug"
-
+$redis = Redis.new(:url => "redis://redistogo:6089d2a4552e7700e65eebca0fdbca63@panga.redistogo.com:9792")
 def auth(user)
   username = user["username"]
   password = user["password"]
@@ -65,14 +65,36 @@ def tweet_array_to_hash(records_array, logged)
   return rt
 end
 
+# def first_50_tweets_lst
+#   /#
+#   return an array of hash
+#   #/
+#   sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id ORDER BY T.created_at DESC LIMIT 50"
+#   records_array = ActiveRecord::Base.connection.execute(sql)
+#   rt = tweet_array_to_hash(records_array, false)
+#   return rt
+# end
+
 def first_50_tweets_lst
   /#
   return an array of hash
   #/
-  sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id ORDER BY T.created_at DESC LIMIT 50"
-  records_array = ActiveRecord::Base.connection.execute(sql)
-  rt = tweet_array_to_hash(records_array, false)
-  return rt
+  newest_50_queue = "newest50queue"
+  # if first_50_queue is empty
+  if(!$redis.exists(newest_50_queue))
+    sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id ORDER BY T.created_at DESC LIMIT 50"
+    records_array =  ActiveRecord::Base.connection.execute(sql)
+    rt = tweet_array_to_hash(records_array, false)
+    rt.each do |tweet|
+    $redis.rpush(newest_50_queue, tweet.to_json)
+    end
+  end
+  array_of_jsons = $redis.lrange( "newest50queue",0,-1)
+  rt_array = Array.new
+  array_of_jsons.each do |js|
+      rt_array << JSON.parse(js)
+  end
+  return rt_array
 end
 
 def get_time_line_tweets(user_id)

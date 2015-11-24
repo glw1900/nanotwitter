@@ -15,3 +15,4 @@ gem "puma"
 gem "newrelic_rpm"
 gem "pg"
 gem 'puma'
+gem 'redis', '~>3.2'
