@@ -90,7 +90,7 @@ def first_50_tweets_lst
     $redis.rpush(newest_50_queue, tweet.to_json)
     end
   end
-  array_of_jsons = $redis.lrange( "newest50queue",0,-1)
+  array_of_jsons = $redis.lrange( "newest50queue",0,49)
   rt_array = Array.new
   array_of_jsons.each do |js|
       rt_array << JSON.parse(js)
@@ -102,8 +102,6 @@ def get_time_line_tweets(user_id)
   /#
   return an array of hash
   #/
-  
-  
   sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND ( (T.user_id = #{user_id}) OR (T.user_id IN 
   (SELECT DISTINCT followee_id FROM follows AS F WHERE F.follower_id = #{user_id})) ) ORDER BY T.created_at ASC"
   records_array = ActiveRecord::Base.connection.execute(sql)
