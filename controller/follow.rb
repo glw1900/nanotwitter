@@ -4,7 +4,7 @@ get '/users/:username/following' do
   @parameters = {}
   @parameters[:logged_user_profile] = get_user_profile(user_id)
   @parameters[:users_list] = get_following(user_id)
-  erb :test
+  erb :follow
 end
 
 get '/users/:username/followers' do
@@ -13,7 +13,7 @@ get '/users/:username/followers' do
   @parameters = {}
   @parameters[:logged_user_profile] = get_user_profile(user_id)
   @parameters[:users_list] = get_followers(user_id)
-  erb :test
+  erb :follow
 end
 
 post '/create/user' do

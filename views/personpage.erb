@@ -67,17 +67,17 @@
           </a>
         </li>
 
-        <li><a href="#">
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Following<br> <%=@parameters["follow_number"]%> </button>
+        <li><a href='/users/<%=@parameters["logged_user_profile"]["username"] %>/following'>
+          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Following <br> <%=@parameters["follow_number"]%> </button>
           </a>
         </li>
-        <li><a href="#">
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Followers<br> <%=@parameters["follower_number"]%> </button>
+        <li><a href="/users/<%=@parameters["logged_user_profile"]["username"] %>/followers">
+          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Followers <br> <%=@parameters["follower_number"]%> </button>
           </a>
         </li>
 
         <li><a href="#">
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Favorites<br> 4 </button>
+          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Favorites <br> 4 </button>
           </a>
         </li>
 
