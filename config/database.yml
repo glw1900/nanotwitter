@@ -6,7 +6,7 @@ production:
   host: localhost
  
 test:
-  adapter: postgresql
+  adapter: sqlite3
   database: development
   username: <%= ENV['PG_USER'] %>
   password: <%= ENV['PG_PASS'] %>

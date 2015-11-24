@@ -1,15 +1,3 @@
-<!-- <h3>show follow relationship</h3>
-<ul>
-
-<% @follow_users.each do |follow_user| %>
-	<li>
-		<%= follow_user.follower_id %>
-	
-	</li>
-<% end %>
-</ul>
-<a href="/">Back to Home</a>
- -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,16 +62,16 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a href="#">
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Tweets <br> <%= @parameters["homepage_tweet_list"].size()%> </button>
+          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Tweets <br> 100 </button>
           </a>
         </li>
 
         <li><a href='/users/<%=@parameters["logged_user_profile"]["username"] %>/following'>
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Following <br> <%=@parameters["follow_number"]%> </button>
+          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Following <br> <%=@parameters["logged_user_profile"]["follow_number"]%> </button>
           </a>
         </li>
         <li><a href="/users/<%=@parameters["logged_user_profile"]["username"] %>/followers">
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Followers <br> <%=@parameters["follower_number"]%> </button>
+          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Followers <br> <%=@parameters["logged_user_profile"]["follower_number"]%> </button>
           </a>
         </li>
 
