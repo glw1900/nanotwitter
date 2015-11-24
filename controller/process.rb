@@ -1,5 +1,5 @@
 require "pry-byebug"
-bundle.require
+require "redis"
 $redis = Redis.new(:url => "redis://redistogo:6089d2a4552e7700e65eebca0fdbca63@panga.redistogo.com:9792")
 def auth(user)
   username = user["username"]
