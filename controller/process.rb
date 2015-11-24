@@ -44,27 +44,56 @@ end
 def tweet_array_to_hash(records_array, logged)
   rt = Array.new
   records_array.each do |tw|
-    t = Hash.new()
-    t["text"] = tw["content"]
-    t["time"] = tw["created_at"]
-    t["by_user"] = tw["username"]
-    # below is made up
-    t["favourite_number"] = 10
-    t["comment"] = Hash.new
-    t["comment"]["commenter_name"] = "fake_name_1"
-    t["comment"]["content"] = "fake_content_2"
-    t["comment"]["time"] = "2007-10-23 22:15:15 UTC"
-    t["comment"]["reply_to"] = "fake_content_3"
-    if logged
-      #fake data
-       t["has_this_user_favorited_this_tweet"] = false
-    end
+    t = sql_to_hash(tw, logged)
     rt << t
   end
   rt.sort { |x, y| x["time"] <=> y["time"] }
   rt = rt.reverse
   return rt
 end
+
+
+def sql_to_hash(tw, logged)
+  t = Hash.new()
+  t["text"] = tw["content"]
+  t["time"] = tw["created_at"]
+  t["by_user"] = tw["username"]
+  # below is made up
+  t["favourite_number"] = 10
+  t["comment"] = Hash.new
+  t["comment"]["commenter_name"] = "fake_name_1"
+  t["comment"]["content"] = "fake_content_2"
+  t["comment"]["time"] = "2007-10-23 22:15:15 UTC"
+  t["comment"]["reply_to"] = "fake_content_3"
+  if logged
+    #fake data
+     t["has_this_user_favorited_this_tweet"] = false
+  end
+  return t
+end
+
+
+def sql_to_hash_single(tw, logged)
+  t = Hash.new()
+  t["text"] = tw["content"]
+  t["time"] = tw["created_at"]
+  t["by_user"] = tw["username"]
+  # below is made up
+  t["favourite_number"] = 10
+  t["comment"] = Hash.new
+  t["comment"]["commenter_name"] = "fake_name_1"
+  t["comment"]["content"] = "fake_content_2"
+  t["comment"]["time"] = "2007-10-23 22:15:15 UTC"
+  t["comment"]["reply_to"] = "fake_content_3"
+  if logged
+    #fake data
+     t["has_this_user_favorited_this_tweet"] = false
+  end
+  return t
+end
+
+
+
 
 # def first_50_tweets_lst
 #   /#
