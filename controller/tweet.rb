@@ -1,5 +1,4 @@
-
-post "/create/tweet" do
+def create_tweet(params)
   return_message = {}
   tweet = {}
   tweet["content"] = params[:content]
@@ -16,8 +15,11 @@ post "/create/tweet" do
     $redis.lpop(newest_50_queue)
     response["posted_tweet_id"] = "#{@new_tweet.id}"
     response["successfully_posted"] = "true"
-    redirect '/timeline'
   end
+end
+
+post "/create/tweet" do
+  create_tweet(params)
   redirect '/timeline'
 end
 
