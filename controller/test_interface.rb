@@ -18,7 +18,6 @@ get '/test/tweets/:num' do
     "succeed"
 end
 
-
 get '/test/reset' do
 	testuser = User.find_by(username: "testuser")
 	if testuser != nil
