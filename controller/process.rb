@@ -15,10 +15,33 @@ def auth(user)
   return false
 end
 
+
+def create_tweet(params)
+  return_message = {}
+  tweet = {}
+  tweet["content"] = params[:content]
+  tweet["media_url"] = params[:media_url]
+  tweet["retweet_id"] = 0
+  tweet["user_id"] = User.find_by(username: params["username"]).id
+  tweet["pub_time"] = nil
+  newest_50_queue = "newest50queue"
+  @new_tweet = Tweet.new(tweet)
+  if @new_tweet.save!
+    h = sql_to_hash(@new_tweet, false)
+    h["by_user"] = params["username"]
+    $redis.rpush(newest_50_queue, h.to_json)
+    $redis.lpop(newest_50_queue)
+    response["posted_tweet_id"] = "#{@new_tweet.id}"
+    response["successfully_posted"] = "true"
+    redirect '/timeline'
+  end
+  redirect '/timeline'
+end
+
 def check(user)
   username_to_create = user[:username]
   if(User.find_by(username: username_to_create) != nil)
-    return "name already registered" 
+    return "name already registered"
   end
   password = user["password"]
   re_password = user["re_password"]
@@ -131,7 +154,7 @@ def get_time_line_tweets(user_id)
   /#
   return an array of hash
   #/
-  sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND ( (T.user_id = #{user_id}) OR (T.user_id IN 
+  sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND ( (T.user_id = #{user_id}) OR (T.user_id IN
   (SELECT DISTINCT followee_id FROM follows AS F WHERE F.follower_id = #{user_id})) ) ORDER BY T.created_at ASC"
   records_array = ActiveRecord::Base.connection.execute(sql)
   rt = tweet_array_to_hash(records_array, true)
@@ -140,7 +163,7 @@ end
 
 def get_user_profile(user_id)
   image_url = "https://upload.wikimedia.org/wikipedia/commons/f/f6/Barack_Obama_and_Bill_Clinton_profile.jpg"
-  
+
   rt = {}
   rt["username"] = User.find_by(id: user_id).username
   rt["follower_id"] = user_id
@@ -164,7 +187,7 @@ def user_a_look_at_user_b_homepage(user_a_id, user_b_id)
   sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND T.user_id = #{user_b_id} "
   records_array = ActiveRecord::Base.connection.execute(sql)
   tw_array = tweet_array_to_hash(records_array, true)
-  
+
   image_url = "https://upload.wikimedia.org/wikipedia/commons/f/f6/Barack_Obama_and_Bill_Clinton_profile.jpg"
   rt = {}
   rt["logged_user_profile"] = get_user_profile(user_a_id)
@@ -187,18 +210,18 @@ def user_a_look_at_user_b_homepage(user_a_id, user_b_id)
 end
 
 def get_following(user_id)
-  sql = "SELECT U.username, F.created_at 
-        FROM users AS U, follows as F 
-        WHERE U.id = F.followee_id 
+  sql = "SELECT U.username, F.created_at
+        FROM users AS U, follows as F
+        WHERE U.id = F.followee_id
         AND F.follower_id = #{user_id}"
   records_array = ActiveRecord::Base.connection.execute(sql)
   return create_user_ls_from_sql_result(records_array)
 end
 
 def get_followers(user_id)
-  sql = "SELECT U.username, F.created_at 
-        FROM users AS U, follows as F 
-        WHERE U.id = F.follower_id 
+  sql = "SELECT U.username, F.created_at
+        FROM users AS U, follows as F
+        WHERE U.id = F.follower_id
         AND F.followee_id = #{user_id}"
   records_array = ActiveRecord::Base.connection.execute(sql)
   return create_user_ls_from_sql_result(records_array)
@@ -242,9 +265,8 @@ def make_fake_tweets(user_name, num)
   while( i < num) do
       values.push [testuser_id, Faker::Lorem.sentence]
     end
-    
+
 # binding.pry
     Tweet.bulk_insert(values, columns)
 #    binding.pry
 end
-

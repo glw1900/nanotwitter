@@ -1,6 +1,6 @@
 require 'faker'
 require 'bulk-insert-active-record'
-# test_user_name = "testuser"
+require 'http'
 get '/test/tweets/:num' do
     testuser = User.find_by(username: "testuser")
     if(testuser != nil)
@@ -27,14 +27,14 @@ get '/test/reset' do
 		Follow.destroy_all("follower_id = " + testuser_id.to_s)
 		Follow.destroy_all("followee_id = " + testuser_id.to_s)
 	else
-		User.create(username: "testuser", email: Faker::Internet.email, password: "1234", profile: nil) 
+		User.create(username: "testuser", email: Faker::Internet.email, password: "1234", profile: nil)
 	end
     id =  User.find_by(username:"testuser").id
     # temp = "#{id}"
 	"reset finished, testuser created #{id}"
 end
 
-# 
+#
 
 
 get '/test/seed/:num' do
@@ -48,8 +48,35 @@ end
 
 
 get '/test/follow/:num' do
-    testuser_id = User.find_by(username: "testuser").id
-    make_follower(testuser_id, params[:num].to_i)
+  testuser_id = User.find_by(username: "testuser").id
+  make_follower(testuser_id, params[:num].to_i)
     "follow relationship set"
 end
 
+get '/test/status' do
+  rt = Hash.new
+  rt["number_users"] = User.all.count
+  rt["number_tweets"] = Tweet.all.count
+  rt["number_follow"] = Follow.all.count
+  testuser = User.find_by(username: "testuser")
+  if testuser != nil
+    rt["testuser_exist"] = true
+    rt["testuser_id"] = testuser.id
+  else
+    rt["testuser_exist"] = false
+    rt["testuser_id"] = -1
+  end
+  rt.to_json
+end
+
+get '/test/tweet/:userid' do
+  user_name = User.find_by(id: params[:userid].to_i).username
+  new_tweet =  {
+    "content" => "this is fake twitter",
+    "media_url" => "http://somepic.jpg",
+    "retweet_id" => "34",
+    "username" => user_name
+  }
+  create_tweet(new_tweet)
+  "one tweet is created by " + user_name
+end
