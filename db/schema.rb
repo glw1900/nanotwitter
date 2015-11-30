@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20151117001744) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "c_mentions", force: :cascade do |t|
     t.integer  "tweet_id"
     t.integer  "user_id"
@@ -23,7 +20,7 @@ ActiveRecord::Schema.define(version: 20151117001744) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "c_mentions", ["tweet_id"], name: "index_c_mentions_on_tweet_id", using: :btree
+  add_index "c_mentions", ["tweet_id"], name: "index_c_mentions_on_tweet_id"
 
   create_table "comments", force: :cascade do |t|
     t.integer  "tweet_id"
@@ -34,7 +31,7 @@ ActiveRecord::Schema.define(version: 20151117001744) do
     t.datetime "updated_at",   null: false
   end
 
-  add_index "comments", ["tweet_id"], name: "index_comments_on_tweet_id", using: :btree
+  add_index "comments", ["tweet_id"], name: "index_comments_on_tweet_id"
 
   create_table "favorites", force: :cascade do |t|
     t.integer  "tweet_id"
@@ -44,7 +41,7 @@ ActiveRecord::Schema.define(version: 20151117001744) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
+  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id"
 
   create_table "follows", force: :cascade do |t|
     t.integer  "followee_id"
@@ -54,7 +51,7 @@ ActiveRecord::Schema.define(version: 20151117001744) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "follows", ["followee_id"], name: "index_follows_on_followee_id", using: :btree
+  add_index "follows", ["followee_id"], name: "index_follows_on_followee_id"
 
   create_table "hash_tags", force: :cascade do |t|
     t.string "name"
@@ -69,8 +66,8 @@ ActiveRecord::Schema.define(version: 20151117001744) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "messages", ["receiver_id"], name: "index_messages_on_receiver_id", using: :btree
-  add_index "messages", ["sender_id"], name: "index_messages_on_sender_id", using: :btree
+  add_index "messages", ["receiver_id"], name: "index_messages_on_receiver_id"
+  add_index "messages", ["sender_id"], name: "index_messages_on_sender_id"
 
   create_table "t_mentions", force: :cascade do |t|
     t.integer  "tweet_id"
@@ -79,7 +76,7 @@ ActiveRecord::Schema.define(version: 20151117001744) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "t_mentions", ["tweet_id"], name: "index_t_mentions_on_tweet_id", using: :btree
+  add_index "t_mentions", ["tweet_id"], name: "index_t_mentions_on_tweet_id"
 
   create_table "tags", force: :cascade do |t|
     t.integer "hash_id"
@@ -96,7 +93,7 @@ ActiveRecord::Schema.define(version: 20151117001744) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "tweets", ["user_id"], name: "index_tweets_on_user_id", using: :btree
+  add_index "tweets", ["user_id"], name: "index_tweets_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email"
@@ -108,7 +105,7 @@ ActiveRecord::Schema.define(version: 20151117001744) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "users", ["id"], name: "index_users_on_id", using: :btree
-  add_index "users", ["username"], name: "index_users_on_username", using: :btree
+  add_index "users", ["id"], name: "index_users_on_id"
+  add_index "users", ["username"], name: "index_users_on_username"
 
 end

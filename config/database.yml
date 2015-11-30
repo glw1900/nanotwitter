@@ -7,17 +7,18 @@ production:
  
 test:
   adapter: sqlite3
-  database: development
-  username: <%= ENV['PG_USER'] %>
-  password: <%= ENV['PG_PASS'] %>
-  host: localhost
+  database: db/test1.sqlite3
   
+
 development:
-  adapter: postgresql
-  encoding: unicode
-  database: myapp_dev
-  pool: 5
-  username: tianzhichen
-  password: tianzhic
-  host: localhost
-  port: 5432
+  adapter: sqlite3
+  database: db/development.sqlite3
+
+  # adapter: postgresql
+  # encoding: unicode
+  # database: myapp_dev
+  # pool: 5
+  # username: tianzhichen
+  # password: tianzhic
+  # host: localhost
+  # port: 5432

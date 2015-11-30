@@ -55,32 +55,31 @@
 
 <nav class="navbar navbar-default">
   <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
 
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="#">
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Tweets <br> 100 </button>
+        <li><a href="/users/<%=@username%>">
+          <button type="button" class="btn btn-danger" > Tweets <br> 100 </button>
           </a>
         </li>
 
-        <li><a href='/users/<%=@parameters["logged_user_profile"]["username"] %>/following'>
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Following <br> <%=@parameters["logged_user_profile"]["follow_number"]%> </button>
+        <li><a href='/users/<%=@username %>/following'>
+          <button type="button" class="btn btn-danger"> Following <br> 5 </button>
           </a>
         </li>
-        <li><a href="/users/<%=@parameters["logged_user_profile"]["username"] %>/followers">
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Followers <br> <%=@parameters["logged_user_profile"]["follower_number"]%> </button>
+        
+        <li><a href="/users/<%=@username %>/followers">
+          <button type="button" class="btn btn-danger"> Followers <br> 4 </button>
           </a>
         </li>
 
         <li><a href="#">
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Favorites <br> 4 </button>
+          <button type="button" class="btn btn-danger" > Favorites <br> 4 </button>
           </a>
         </li>
 
       </ul>
+
       <ul class="nav navbar-nav navbar-right">
         <%if @parameters["mode"] == "user_viewing_followed"%>
           <form action="/delete/follow" method="POST">
@@ -105,7 +104,7 @@
     <div class="col-sm-3">
       <div class="img-responsive">
         <img class="embed-responsive-item" src="https://lh3.googleusercontent.com/-3Zqv6Of_vlk/AAAAAAAAAAI/AAAAAAAAAAA/JiFX6Ovb6nc/photo.jpg" style="height:230px; width: 270px; display:block;"></iframe>
-        <!-- <code $(".embed-responsive-item img").addClass("carousel-inner img-responsive img-rounded");  <code> -->
+       
       </div>
       <h1>  <%=@parameters["username"]%> </h1>
     </div>
@@ -115,7 +114,7 @@
         <% if !@parameters["users_list"].nil? %>
           <% @parameters["users_list"].each do |users| %>
             <li class="list-group-item">
-              <h3><strong> <%= user[username] %></strong> <small>@<%= user["followed_at_time"] %></small></h3>
+              <h3><strong> <%= users["username"] %></strong> <small>@<%= users["followed_at_time"] %></small></h3>
               <button type="button" class="btn btn-info">Follow</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <% end %>
         <%else%>
@@ -127,5 +126,6 @@
   </div>
 </div>
 </div>
+
 </body>
 </html>
