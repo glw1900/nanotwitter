@@ -1,0 +1,40 @@
+
+Note: All the tests are "clients per minute". We know it is better to the third method -- "maintain client load". But we did not know that it is better. And, to compare with previous results, we still use the "clients per minute" for now, but we added the "maintain client load" test statistics since the tests with Redis.
+Important:  Please use "/test/reset" before any loader.io tests. Thank You!!
+
+No index:
+
+  Make 12 users
+  Average	673 ms
+  Min/Max	116 / 3250 ms
+
+  Make 12 tweets
+  Average	53 ms
+  Min/Max	15 / 215 ms
+
+  Make 12 follow
+  Average	561 ms
+  Min/Max	141 / 2081 ms
+
+
+With index:
+
+  Make 12 users:
+  Average	86 ms
+  Min/Max	55 / 165 ms
+
+  Make 12 tweets:
+  Average	120 ms
+  Min/Max	54 / 510 ms
+
+  Make follow 12:
+  Average	159 ms
+  Min/Max	57 / 520 ms
+
+  Without reds:
+  Average	36 ms
+  Min/Max	9 / 349 ms
+
+  With reds:
+  Average	24 ms
+  Min/Max	13 / 91 ms
