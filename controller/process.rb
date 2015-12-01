@@ -15,7 +15,6 @@ def auth(user)
   return false
 end
 
-
 def check(user)
   username_to_create = user[:username]
   if(User.find_by(username: username_to_create) != nil)
@@ -92,19 +91,6 @@ def sql_to_hash_single(tw, logged)
   end
   return t
 end
-
-
-
-
-# def first_50_tweets_lst
-#   /#
-#   return an array of hash
-#   #/
-  # sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id ORDER BY T.created_at DESC LIMIT 50"
-#   records_array = ActiveRecord::Base.connection.execute(sql)
-#   rt = tweet_array_to_hash(records_array, false)
-#   return rt
-# end
 
 def first_50_tweets_lst
   /#

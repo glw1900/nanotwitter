@@ -1,0 +1,5 @@
+I use Redis for two parts of the app:
+
+1. When users are viewing the app and unlogged, they are able to see the newest 50 tweets from all users. We put the 50 newest tweets in a queue in Redis. When a user generates a new tweet, we insert the tweet into the end of the queue and if the length of the queue is 51, we do a poll() on the queue to maintain a length of 50. By doing so, whenever we need the 50 newest tweet, we do not need to go to the database to fetch the data, we can directly get the data from the Redis.
+
+2. For each user, we have a lazy-loaded queue (conceptually more like a stack ) for each user's timeline. When other users goes to his or her homepage, they can read all the tweets he or she has ever posted. When a user, say user_1, looks at, say user_2's homepage, if no one has ever looked at user_2's homepage, we fetch all user_2's tweets from the database and put them into a queue that is especially for user_2 and display them. By doing so, next time any other user looks at user_2's homepage, we can just get the tweets from the Redis. Also, when user_2 posts any new tweet, we insert it into the queue in Redis.

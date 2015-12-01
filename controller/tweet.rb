@@ -16,7 +16,9 @@ def create_tweet(params)
     response["posted_tweet_id"] = "#{@new_tweet.id}"
     response["successfully_posted"] = "true"
     timelineOfB = "timelineOf" + tweet["user_id"].to_s
-    $redis.rpush(timelineOfB, h.to_json)
+    if(!$redis.exists(timelineOfB))
+      $redis.rpush(timelineOfB, h.to_json)
+    end
   end
 end
 
