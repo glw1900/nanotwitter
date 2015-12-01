@@ -63,21 +63,22 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a href="#">
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Tweets <br> <%= @parameters["homepage_tweet_list"].size()%> </button>
+          <button type="button" class="btn btn-danger"> Tweets <br> <%= @parameters["homepage_tweet_list"].size()%> </button>
+          </a>
+        </li>
+
+        <li><a href='/users/<%=@parameters["username"]%>/following'>
+          <button type="button" class="btn btn-danger"> Following <br> <%=@parameters["follow_number"]%> </button>
+          </a>
+        </li>
+
+        <li><a href="/users/<%=@parameters["username"] %>/followers">
+          <button type="button" class="btn btn-danger"> Followers <br> <%=@parameters["follower_number"]%> </button>
           </a>
         </li>
 
         <li><a href="#">
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Following<br> <%=@parameters["follow_number"]%> </button>
-          </a>
-        </li>
-        <li><a href="#">
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Followers<br> <%=@parameters["follower_number"]%> </button>
-          </a>
-        </li>
-
-        <li><a href="#">
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Favorites<br> 4 </button>
+          <button type="button" class="btn btn-danger" > Favorites <br> 4 </button>
           </a>
         </li>
 
