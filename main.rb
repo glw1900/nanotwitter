@@ -32,7 +32,6 @@ get '/' do
   erb :home
 end
 
-
 get '/timeline' do
   logged_username = session[:username]
   logged_id = User.find_by(username: logged_username).id

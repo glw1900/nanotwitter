@@ -1,6 +1,7 @@
 require 'faker'
 require 'bulk-insert-active-record'
 require 'http'
+
 get '/test/tweets/:num' do
     testuser = User.find_by(username: "testuser")
     if(testuser != nil)
