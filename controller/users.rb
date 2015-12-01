@@ -1,13 +1,13 @@
 #go to the person page of some one
+$redis = Redis.new(:url => "redis://redistogo:6089d2a4552e7700e65eebca0fdbca63@panga.redistogo.com:9792")
+
 get '/users/:username' do
   #add follower_id and followee_id to @parameters
   logged_username = session[:username]
   logged_id = User.find_by(username: logged_username).id
-  
   look_at_username = params[:username]
   look_at_user_id = User.find_by(username: look_at_username).id
-  
-  @parameters = user_a_look_at_user_b_homepage(logged_id, look_at_user_id)
+  @parameters = user_a_look_at_user_b_homepage_with_redis(logged_id, look_at_user_id)
   erb :personpage
 end
 
@@ -29,5 +29,5 @@ post '/delete/user/:username' do
     user.destroy
     response["successfully_deleted"] = "true"
   end
-  
+
 end

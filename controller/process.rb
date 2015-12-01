@@ -108,7 +108,7 @@ end
 
 def first_50_tweets_lst
   /#
-  return an array of hash
+  # return an array of hash
   #/
   newest_50_queue = "newest50queue"
   # if first_50_queue is empty
@@ -117,9 +117,10 @@ def first_50_tweets_lst
     records_array =  ActiveRecord::Base.connection.execute(sql)
     rt = tweet_array_to_hash(records_array, false)
     rt.each do |tweet|
-    $redis.rpush(newest_50_queue, tweet.to_json)
+      $redis.rpush(newest_50_queue, tweet.to_json)
     end
   end
+
   array_of_jsons = $redis.lrange( "newest50queue",0,49)
   rt_array = Array.new
   array_of_jsons.each do |js|
@@ -159,9 +160,48 @@ def get_time_line(user_id)
 end
 
 # print check({:re_password=>"abc", :password=>"abc"})
+def user_a_look_at_user_b_homepage_with_redis(user_a_id, user_b_id)
+
+  timelineOfB = "timelineOf" + user_b_id.to_s
+
+  if(!$redis.exists(timelineOfB))
+    sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND T.user_id = #{user_b_id} "
+    records_array =  ActiveRecord::Base.connection.execute(sql)
+    rt = tweet_array_to_hash(records_array, false)
+    rt.each do |tweet|
+      $redis.rpush(timelineOfB, tweet.to_json)
+    end
+  end
+    tw_array = Array.new
+    array_of_jsons = $redis.lrange(timelineOfB,0,-1)
+    array_of_jsons.each do |js|
+        tw_array << JSON.parse(js)
+    end
+    image_url = "https://upload.wikimedia.org/wikipedia/commons/f/f6/Barack_Obama_and_Bill_Clinton_profile.jpg"
+    rt = {}
+    rt["logged_user_profile"] = get_user_profile(user_a_id)
+    rt["followee_id"] = user_b_id
+    rt["homepage_tweet_list"] = tw_array
+    rt["username"] = User.find_by(id: user_b_id).username
+    rt["follow_number"] = how_many_do_i_follow(user_b_id)
+    rt["follower_number"] = how_many_follow_me(user_b_id)
+    mode = "user_viewing_self"
+    if user_a_id != user_b_id
+      follow_list = Follow.where(followee_id: user_b_id, follower_id: user_a_id)
+      if follow_list.size() == 1
+        mode = "user_viewing_followed"
+      else
+        mode = "user_viewing_unfollowed"
+      end
+    end
+    rt["mode"] = mode
+    return rt
+end
+
 
 def user_a_look_at_user_b_homepage(user_a_id, user_b_id)
   # TODO: MISS FAVOURITES, FOLLOW NUMBER, FOLLOWER NUMBER
+
   sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND T.user_id = #{user_b_id} "
   records_array = ActiveRecord::Base.connection.execute(sql)
   tw_array = tweet_array_to_hash(records_array, true)

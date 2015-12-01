@@ -15,6 +15,8 @@ def create_tweet(params)
     $redis.lpop(newest_50_queue)
     response["posted_tweet_id"] = "#{@new_tweet.id}"
     response["successfully_posted"] = "true"
+    timelineOfB = "timelineOf" + tweet["user_id"].to_s
+    $redis.rpush(timelineOfB, h.to_json)
   end
 end
 
