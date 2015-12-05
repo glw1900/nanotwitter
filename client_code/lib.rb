@@ -1,5 +1,6 @@
 require 'http'
 
+
 class FantasticFour
   attr_accessor :url, :logged_username, :status
   
@@ -52,6 +53,7 @@ class FantasticFour
     else
       return false
     end
+  end
 
 
   def post_tweet(content, media_url, retweet_id)
@@ -114,9 +116,11 @@ class FantasticFour
       return false
     end
   end
+
+  def get_newest_fifty_tweet()
+    HTTP.get(@url+'/api').to_s
+  end
 end
-
-
 # ff = FantasticFour.new
 # puts ff.set_url("http://0.0.0.0:4567")
 # name = "ctz2"
@@ -131,4 +135,3 @@ end
 # look_at_username = "ctz"
 # puts ff.get_twitter_of_user(look_at_username)
 # ff.create_user(username, password, email, profileInfo)
-

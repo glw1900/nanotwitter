@@ -1,3 +1,7 @@
+get '/api' do
+  first_50_tweets_lst.to_json
+end
+
 get '/api/users/:username' do
   #add follower_id and followee_id to @parameters
   logged_username = session[:username]
