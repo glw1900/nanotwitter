@@ -11,6 +11,8 @@ get '/users/:username' do
   erb :personpage
 end
 
+
+
 post '/create/user' do
   user_checked = check(params)
   if user_checked.class == String
