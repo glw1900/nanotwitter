@@ -53,9 +53,22 @@ def tweet_array_to_hash(records_array, logged)
 end
 
 
+def tweet_array_to_hash(records_array, logged)
+  rt = Array.new
+  records_array.each do |tw|
+    t = sql_to_hash(tw, logged)
+    rt << t
+  end
+  rt.sort { |x, y| x["time"] <=> y["time"] }
+  rt = rt.reverse
+  return rt
+end
+
+
 def sql_to_hash(tw, logged)
   t = Hash.new()
   t["text"] = tw["content"]
+  t["id"] = tw["id"]
   t["time"] = tw["created_at"]
   t["by_user"] = tw["username"]
   # below is made up
@@ -99,7 +112,7 @@ def first_50_tweets_lst
   newest_50_queue = "newest50queue"
   # if first_50_queue is empty
   if(!$redis.exists(newest_50_queue))
-    sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id ORDER BY T.created_at DESC LIMIT 50"
+    sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id ORDER BY T.created_at DESC LIMIT 50"
     records_array =  ActiveRecord::Base.connection.execute(sql)
     rt = tweet_array_to_hash(records_array, false)
     rt.each do |tweet|
@@ -114,6 +127,7 @@ def first_50_tweets_lst
   end
   return rt_array
 end
+
 
 def get_time_line_tweets(user_id)
   /#
