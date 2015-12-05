@@ -39,8 +39,7 @@ class FantasticFour
       "re_password" => password,
  	    "email" => email,
  	    "profile" => profileInfo
-      } )
-    return
+      })
   end
 
   def get_twitter_of_user(look_at_username)
@@ -49,12 +48,11 @@ class FantasticFour
       :params => {
         "logged_username" => @logged_username,
         "username" => look_at_username })
-        return JSON.parse(rt.to_s.gsub(/\=\>/, ':'))["homepage_tweet_list"]
-      return true
+      return JSON.parse(rt.to_s.gsub(/\=\>/, ':'))["homepage_tweet_list"]
     else
       return false
     end
-
+  end
 
   def post_tweet(content, media_url, retweet_id)
     if @status
@@ -70,28 +68,30 @@ class FantasticFour
     end
   end
 
-  def user_unfollow(followee_name)
+
+  def user_follow(followee_name)
     if @status
       HTTP.post(
       @url + '/api/create/follow', :params => {
      "follower_name" => @logged_username,
-     "followee_name" => followee_name
-    })
+     "followee_name" => followee_name})
     else
       return false
     end
   end
 
+
   def user_unfollow(followee_name)
     if @status
       HTTP.post(
-      @url + '/delete/follow', :params => {
+      @url + '/api/delete/follow', :params => {
       "follower_name" => @logged_username,
       "followee_name" => followee_name })
     else
       return false
     end
   end
+
 
   def user_logout()
     if @status
@@ -101,6 +101,7 @@ class FantasticFour
     end
   end
 
+
   def user_delete_everything(username)
     if @status
       HTTP.post(@url+'/delete/user/'+username)
@@ -109,6 +110,7 @@ class FantasticFour
     end
   end
 
+
   def user_get_timeline()
     if @status
       HTTP.get(@url)
@@ -116,14 +118,15 @@ class FantasticFour
       return false
     end
   end
+
 end
 
 
 # <<<<<<< HEAD
-ff = FantasticFour.new
+ff = FantasticFour.new("http://0.0.0.0:4567","ctz2","abcd",email = nil,profileInfo = nil)
 puts ff.set_host_url("http://0.0.0.0:4567")
-name = "ctz2"
-puts ff.user_login(name, "abcd")
+# name = "ctz2"
+# puts ff.user_login(name, "abcd")
 puts ff.post_tweet("this is from api2", "media_url", "32")
 # =======
 # # ff = FantasticFour.new
