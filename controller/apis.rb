@@ -22,3 +22,5 @@ get '/api/timeline/:username' do
   end
   @parameters.to_json
 end
+
+

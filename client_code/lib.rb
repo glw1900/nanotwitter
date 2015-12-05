@@ -1,4 +1,6 @@
 require 'http'
+require 'json'
+
 
 
 class FantasticFour
@@ -118,7 +120,7 @@ class FantasticFour
   end
 
   def get_newest_fifty_tweet()
-    HTTP.get(@url+'/api').to_s
+    return JSON.parse(HTTP.get(@url+'/api').body)
   end
 end
 # ff = FantasticFour.new
