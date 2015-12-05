@@ -30,10 +30,12 @@ class FantasticFour
   end
 
 
-  def get_twitter_of_user(look_at_username)
-    HTTP.get(@url + '/api/users/' + look_at_username,
+  def get_twitter_of_user(look_at_username)to_s
+    rt = HTTP.get(@url + '/api/users/' + look_at_username,
     :params => {
+      "logged_username" => @logged_username,
       "username" => look_at_username })
+      return JSON.parse(rt.to_s.gsub(/\=\>/, ':'))["homepage_tweet_list"]
     end
 
 
@@ -49,7 +51,7 @@ class FantasticFour
 
   def user_follow(followee_name)
     HTTP.post(
-    @url + '/create/follow', :params => {
+    @url + '/api/create/follow', :params => {
    "follower_name" => @logged_username,
    "followee_name" => followee_name
   })
@@ -57,7 +59,7 @@ class FantasticFour
 
   def user_unfollow(followee_name)
     HTTP.post(
-    @url + '/delete/follow', :params => {
+    @url + '/api/delete/follow', :params => {
    "follower_name" => @logged_username,
    "followee_name" => followee_name })
   end
@@ -73,10 +75,10 @@ end
 
 
 ff = FantasticFour.new
-puts ff.set_url("http://0.0.0.0:4567")
+puts ff.set_host_url("http://0.0.0.0:4567")
 name = "ctz2"
 puts ff.user_login(name, "abcd")
-puts ff.post_tweet("this is from API", "media_url", "32")
+puts ff.post_tweet("this is from api2", "media_url", "32")
 
 username = "ctz2"
 password = "abcd"
@@ -85,5 +87,5 @@ profileInfo = "nothing"
 
 look_at_username = "ctz"
 puts ff.get_twitter_of_user(look_at_username)
-# ff.create_user(username, password, email, profileInfo)
-
+puts ff.user_follow(look_at_username)
+puts ff.user_unfollow(look_at_username)
