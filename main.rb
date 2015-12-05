@@ -52,6 +52,7 @@ end
 
 get '/logout' do
   session["username"] = nil
+  response["status"] = "true"
   redirect "/"
 end
 

@@ -2,7 +2,7 @@ require 'http'
 
 class FantasticFour
   attr_accessor :url, :logged_username
-  def set_url(url)
+  def set_host_url(url)
     @url = url
     return @url
   end
@@ -43,7 +43,7 @@ class FantasticFour
           "content" => content,
           "media_url" => media_url,
           "retweet_id" => retweet_id,
-          "username" => @logged_username }).body
+          "username" => @logged_username })
     return rt
   end
 
@@ -61,10 +61,18 @@ class FantasticFour
    "follower_name" => @logged_username,
    "followee_name" => followee_name })
   end
+
+  def user_logout()
+    HTTP.get(@url + '/logout').body
+  end
+
+  def user_delete_everything(username)
+    HTTP.post(@url+'/delete/user/'+username)
+  end
 end
 
-ff = FantasticFour.new
-puts ff.set_url("http://0.0.0.0:4567")
-name = "ctz"
-puts ff.user_login(name, "1234")
-puts ff.post_tweet("this is from API", "media_url", "32")
+# ff = FantasticFour.new
+# puts ff.set_url("http://0.0.0.0:4567")
+# name = "ctz"
+# puts ff.user_login(name, "1234")
+# puts ff.post_tweet("this is from API", "media_url", "32")
