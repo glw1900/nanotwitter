@@ -29,16 +29,6 @@ post '/create/user' do
   "Password not match"
 end
 
-post "/signin" do
-  @tring_logging_in = params[:user]
-  if auth(@tring_logging_in)
-    username = @tring_logging_in["username"]
-    session["username"] = username
-    redirect '/timeline'
-  else
-    "Wrong Password"
-  end
-end
 
 post '/create/follow' do
   follow = Follow.new()
@@ -53,7 +43,7 @@ post '/create/follow' do
   else
     follow.followee_id = User.find_by(username: params[:followee_name]).id
   end
-  
+
   viewed_username = User.find_by(id: params[:followee_id]).username
   if follow.save
     response["successfully_add_follow"] = "true"

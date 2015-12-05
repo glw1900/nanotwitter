@@ -57,6 +57,11 @@ end
 
 post "/signin" do
   @tring_logging_in = params[:user]
+  if @tring_logging_in.is_a? String
+
+    @tring_logging_in = JSON.parse(@tring_logging_in.gsub('=>', ':'))
+  end
+
   if auth(@tring_logging_in)
     username = @tring_logging_in["username"]
     session["username"] = username
