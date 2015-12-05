@@ -5,7 +5,7 @@ require 'json'
 
 class FantasticFour
   attr_accessor :url, :logged_username, :status
-  
+
   def initialize(url,username,password,email = nil,profileInfo = nil)
     self.set_host_url(url)
     @url = url
@@ -33,7 +33,7 @@ class FantasticFour
       }
     })
   end
-  
+
   def create_user(username, password, email, profileInfo)
     HTTP.post(@url + '/create/user',
     :params => {
@@ -42,21 +42,20 @@ class FantasticFour
       "re_password" => password,
  	    "email" => email,
  	    "profile" => profileInfo
-      } )
-    return
+      })
   end
 
   def get_twitter_of_user(look_at_username)
     if @status
-      HTTP.get(@url + '/api/users/' + look_at_username,
+      rt = HTTP.get(@url + '/api/users/' + look_at_username,
       :params => {
+        "logged_username" => @logged_username,
         "username" => look_at_username })
-      return true
+      return JSON.parse(rt.to_s.gsub(/\=\>/, ':'))["homepage_tweet_list"]
     else
       return false
     end
   end
-
 
   def post_tweet(content, media_url, retweet_id)
     if @status
@@ -72,28 +71,30 @@ class FantasticFour
     end
   end
 
+
   def user_follow(followee_name)
     if @status
       HTTP.post(
-      @url + '/create/follow', :params => {
-      "follower_name" => @logged_username,
-      "followee_name" => followee_name
-      })
+      @url + '/api/create/follow', :params => {
+     "follower_name" => @logged_username,
+     "followee_name" => followee_name})
     else
       return false
-    end    
+    end
   end
 
+
   def user_unfollow(followee_name)
-    if @status    
-      HTTP.post(  
-      @url + '/delete/follow', :params => {
+    if @status
+      HTTP.post(
+      @url + '/api/delete/follow', :params => {
       "follower_name" => @logged_username,
       "followee_name" => followee_name })
     else
       return false
     end
   end
+
 
   def user_logout()
     if @status
@@ -103,6 +104,7 @@ class FantasticFour
     end
   end
 
+
   def user_delete_everything(username)
     if @status
       HTTP.post(@url+'/delete/user/'+username)
@@ -110,6 +112,7 @@ class FantasticFour
       return false
     end
   end
+
 
   def user_get_timeline()
     if @status
@@ -123,17 +126,8 @@ class FantasticFour
     return JSON.parse(HTTP.get(@url+'/api').body)
   end
 end
-# ff = FantasticFour.new
-# puts ff.set_url("http://0.0.0.0:4567")
-# name = "ctz2"
-# puts ff.user_login(name, "abcd")
-# puts ff.post_tweet("this is from API", "media_url", "32")
 
-# username = "ctz2"
-# password = "abcd"
-# email = "123@qq.com"
-# profileInfo = "nothing"
 
-# look_at_username = "ctz"
-# puts ff.get_twitter_of_user(look_at_username)
-# ff.create_user(username, password, email, profileInfo)
+
+ff = FantasticFour.new("http://0.0.0.0:4567","ctz2","abcd",email = nil,profileInfo = nil)
+puts ff.set_host_url("http://0.0.0.0:4567")
