@@ -42,8 +42,18 @@ end
 
 post '/create/follow' do
   follow = Follow.new()
-  follow.follower_id = params[:follower_id]
-  follow.followee_id = params[:followee_id]
+  if(params[:follower_id] != nil)
+    follow.follower_id = params[:follower_id]
+  else
+    follow.follower_id = User.find_by(username: params[:follower_name]).id
+  end
+
+  if(params[:followee_id] != nil)
+    follow.followee_id = params[:followee_id]
+  else
+    follow.followee_id = User.find_by(username: params[:followee_name]).id
+  end
+  
   viewed_username = User.find_by(id: params[:followee_id]).username
   if follow.save
     response["successfully_add_follow"] = "true"
