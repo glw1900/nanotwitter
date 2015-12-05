@@ -31,7 +31,7 @@ class FantasticFour
 
 
   def get_twitter_of_user(look_at_username)
-    HTTP.post(@url + '/users/' + look_at_username,
+    HTTP.get(@url + '/api/users/' + look_at_username,
     :params => {
       "username" => look_at_username })
     end
@@ -65,6 +65,15 @@ end
 
 ff = FantasticFour.new
 puts ff.set_url("http://0.0.0.0:4567")
-name = "ctz"
-puts ff.user_login(name, "1234")
+name = "ctz2"
+puts ff.user_login(name, "abcd")
 puts ff.post_tweet("this is from API", "media_url", "32")
+
+username = "ctz2"
+password = "abcd"
+email = "123@qq.com"
+profileInfo = "nothing"
+
+look_at_username = "ctz"
+puts ff.get_twitter_of_user(look_at_username)
+# ff.create_user(username, password, email, profileInfo)
