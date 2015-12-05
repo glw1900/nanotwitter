@@ -5,7 +5,7 @@ def auth(user)
   username = user["username"]
   password = user["password"]
   u = User.find_by(username: username)
-  # binding.pry
+  binding.pry
   if u.nil?
     return false
   end
@@ -256,7 +256,6 @@ def make_follower(followee_id, num)
     Follow.create(follower_id: sample_ids[i], followee_id: followee_id)
     i = i + 1
   end
-
 end
 
 def make_fake_tweets(user_name, num)

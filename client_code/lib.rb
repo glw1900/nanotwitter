@@ -9,11 +9,11 @@ class FantasticFour
 
   def user_login(username, password)
     @logged_username = username
-    HTTP.post( @url + '/signin',
+    HTTP.post( @url + "/signin",
     :params => {
-      :user => {
-        "username" => username,
-        "password" => password
+        :user => {
+          "username" => username,
+          "password" => password
       }
  })
   end
@@ -64,10 +64,7 @@ class FantasticFour
 end
 
 ff = FantasticFour.new
-ff.set_url("http://protected-refuge-6584.herokuapp.com")
-
-name = "chentianzhi"
-
-ff.user_login(name,"1234")
-
-puts ff.post_tweet(name, "media_url", "32")
+puts ff.set_url("http://0.0.0.0:4567")
+name = "ctz"
+puts ff.user_login(name, "1234")
+puts ff.post_tweet("this is from API", "media_url", "32")
