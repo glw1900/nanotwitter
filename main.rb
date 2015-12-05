@@ -40,7 +40,7 @@ get '/mytest' do
   if !session["username"].nil?
     @parameters = get_time_line(logged_id)
   end
-  @parameters
+  @parameters["timeline_twitter_list"][0].["id"]
 end
 
 get '/timeline' do
