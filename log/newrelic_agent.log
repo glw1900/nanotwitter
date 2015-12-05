@@ -990,3 +990,18 @@
 [2015-11-30 20:17:01 -0500 Tianzhis-MacBook-Pro.local (87818)] INFO : Reporting to: https://rpm.newrelic.com/accounts/1150571/applications/10172141
 [2015-11-30 20:18:16 -0500 Tianzhis-MacBook-Pro.local (87818)] WARN : Skipping RUM instrumentation. Unable to find <body> tag in first 50000 bytes of document.
 [2015-11-30 20:23:19 -0500 Tianzhis-MacBook-Pro.local (87818)] WARN : Skipping RUM instrumentation. Unable to find <body> tag in first 50000 bytes of document.
+[2015-12-05 00:22:20 -0500 Tianzhis-MacBook-Pro.local (98561)] INFO : Starting the New Relic agent in "development" environment.
+[2015-12-05 00:22:20 -0500 Tianzhis-MacBook-Pro.local (98561)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[2015-12-05 00:22:20 -0500 Tianzhis-MacBook-Pro.local (98561)] INFO : Reading configuration from config/newrelic.yml (/Users/tianzhichen/Documents/school/scalability/nanotwitter/nanotwitter)
+[2015-12-05 00:22:20 -0500 Tianzhis-MacBook-Pro.local (98561)] INFO : Environment: development
+[2015-12-05 00:22:20 -0500 Tianzhis-MacBook-Pro.local (98561)] INFO : No known dispatcher detected.
+[2015-12-05 00:22:20 -0500 Tianzhis-MacBook-Pro.local (98561)] INFO : Application: nanotwitter_relic (Development)
+[2015-12-05 00:22:20 -0500 Tianzhis-MacBook-Pro.local (98561)] INFO : Installing ActiveRecord 4 instrumentation
+[2015-12-05 00:22:20 -0500 Tianzhis-MacBook-Pro.local (98561)] INFO : Installing Net instrumentation
+[2015-12-05 00:22:20 -0500 Tianzhis-MacBook-Pro.local (98561)] INFO : Installing Sinatra instrumentation
+[2015-12-05 00:22:20 -0500 Tianzhis-MacBook-Pro.local (98561)] INFO : Installing deferred Rack instrumentation
+[2015-12-05 00:22:20 -0500 Tianzhis-MacBook-Pro.local (98561)] INFO : Installing Rack::Builder middleware instrumentation
+[2015-12-05 00:22:20 -0500 Tianzhis-MacBook-Pro.local (98561)] INFO : Installing Redis Instrumentation
+[2015-12-05 00:22:20 -0500 Tianzhis-MacBook-Pro.local (98561)] INFO : Finished instrumentation
+[2015-12-05 00:22:22 -0500 Tianzhis-MacBook-Pro.local (98561)] INFO : Reporting to: https://rpm.newrelic.com/accounts/1150571/applications/10172141
+[2015-12-05 00:23:09 -0500 Tianzhis-MacBook-Pro.local (98561)] INFO : Doing deferred dependency-detection before Rack startup
