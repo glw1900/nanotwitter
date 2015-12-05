@@ -1,6 +1,3 @@
-
-
-
 get '/api/users/:username' do
   #add follower_id and followee_id to @parameters
   logged_username = params[:logged_username]
@@ -47,9 +44,6 @@ post '/api/delete/follow' do
   follower_id = User.find_by(username: params[:follower_name]).id
   followee_id = User.find_by(username: params[:followee_name]).id
 
-
-
-
   viewed_username = params[:followee_name]
   follow = Follow.find_by(followee_id: followee_id, follower_id: follower_id)
   if follow != nil
@@ -60,4 +54,15 @@ post '/api/delete/follow' do
     "ooooooooooooops, you've never been a fan, are you?"
   end
   redirect '/users/' + viewed_username
+end
+
+
+get '/api/timeline/:username' do
+  logged_username = params[:username]
+  logged_id = User.find_by(username: logged_username).id
+  @parameters = {}
+  if !logged_username.nil?
+    @parameters = get_time_line(logged_id)
+  end
+  @parameters.to_json
 end
