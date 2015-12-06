@@ -11,7 +11,8 @@ get '/api/v1/users/:username' do
 end
 
 get '/api/v1/tweets/recent' do
-  first_50_tweets_lst.to_json
+  u = first_50_tweets_lst
+  u.to_json
 end
 
 get '/api/v1/users/:username/tweets' do
