@@ -258,6 +258,40 @@ def get_followers(user_id)
   return create_user_ls_from_sql_result(records_array)
 end
 
+def view_a_twitter(tweet_id)
+  res = {}
+  t = Tweet.find_by(id: tweet_id)
+  res["id"] = tweet_id
+  res["content"] = t.content
+  res["created_at"] = t.created_at
+  res["retweet_id"] = t.retweet_id
+  res["user_id"] = t.user_id
+  res["username"] = User.find_by(id: t.user_id).username
+  res["comment"] = get_comment_list(tweet_id)
+  return res
+end
+
+def get_comment_list(tweet_id)
+  sql = "SELECT u.username,c.content, c.created_at
+        FROM users AS u, comments AS c
+        WHERE u.id = c.commenter_id
+        AND c.tweet_id = #{tweet_id}
+        ORDER BY c.created_at ASC"
+  records_array = ActiveRecord::Base.connection.execute(sql)
+  return comment_arr_to_hash(records_array)
+end
+
+def comment_arr_to_hash(comments_array)
+  arr = Array.new()
+  comments_array.each do |comment|
+    h = Hash.new()
+    h["username"] = comment["username"]
+    h["content"] = comment["content"]
+    h["created_at"] = comment["created_at"]
+    arr << h
+  end
+  return arr  
+end
 
 
 def create_user_ls_from_sql_result(arr)
