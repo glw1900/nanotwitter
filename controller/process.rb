@@ -276,7 +276,7 @@ def get_comment_list(tweet_id)
         FROM users AS u, comments AS c
         WHERE u.id = c.commenter_id
         AND c.tweet_id = #{tweet_id}
-        ORDER BY c.created_at ASC"
+        ORDER BY c.created_at DESC"
   records_array = ActiveRecord::Base.connection.execute(sql)
   return comment_arr_to_hash(records_array)
 end
