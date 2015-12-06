@@ -3,7 +3,7 @@ get '/api/v1/tweet/:tweet_id' do
   t = Tweet.find_by(id: params[:tweet_id]).as_json
 end
 
-get '/api/v1//users/:id' do
+get '/api/v1/users/:id' do
   u = User.find_by(id:params[:id]).as_json
 end
 
