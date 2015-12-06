@@ -1,15 +1,6 @@
 require 'http'
-<<<<<<< HEAD
 require 'json'
 
-||||||| merged common ancestors
-require 'json'
-
-
-
-=======
-
->>>>>>> 6f489698c7db600e91e7386ab4fc27710ade5667
 class FantasticFour
   attr_accessor :url, :logged_username, :status
 
@@ -38,13 +29,8 @@ class FantasticFour
           "username" => username,
           "password" => password
       }
-<<<<<<< HEAD
     }).body)["status"]
-||||||| merged common ancestors
-    })
-=======
-    }).body.to_s
->>>>>>> 6f489698c7db600e91e7386ab4fc27710ade5667
+
   end
 
   def create_user(username, password, email, profileInfo)
