@@ -10,7 +10,7 @@ get '/api/v1/users/:username' do
   u.to_json
 end
 
-get '/api/v1/tweets/recent' do
+get '/api/v1/tweet/recent' do
   u = Hash.new
   u["first50"] = first_50_tweets_lst
   u.to_json
