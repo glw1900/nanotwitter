@@ -15,7 +15,6 @@ get '/test/createcomment' do
 end
 
 
-
 get '/test/song' do
 	session["username"]
 end
