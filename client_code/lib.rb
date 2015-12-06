@@ -1,6 +1,5 @@
 require 'http'
 require 'json'
-
 class FantasticFour
   attr_accessor :url, :logged_username, :status
 
