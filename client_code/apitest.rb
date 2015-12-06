@@ -2,6 +2,7 @@ require 'minitest/autorun'
 require_relative 'lib'
 require_relative 'liangwei'
 
+
 describe "can create and delete user and login" do
   it "can create user and login" do
     @test = FantasticFour.new("http://protected-refuge-6584.herokuapp.com","test1","11","test1@gmail.com","Nothing")
@@ -9,6 +10,7 @@ describe "can create and delete user and login" do
     # @test.user_delete_everything("test1").must_equal true
   end
 end
+
 
 describe "follow and twitter" do
   before do
@@ -49,7 +51,7 @@ end
 #     @test.user_login("test1","11")
 #     @test.user_get_timeline()[0]["text"].must_equal "this is my another tweet"
 #   end
-  
+
 #   after do
 #     @test.user_delete_everything("test1")
 #     @test.user_delete_everything("test2")
