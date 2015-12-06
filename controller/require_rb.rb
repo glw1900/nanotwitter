@@ -1,3 +1,4 @@
+require_relative './apis'
 require_relative './process'
 require_relative './users'
 require_relative './tweet'

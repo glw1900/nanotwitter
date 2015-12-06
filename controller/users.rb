@@ -11,6 +11,8 @@ get '/users/:username' do
   erb :personpage
 end
 
+
+
 post '/create/user' do
   user_checked = check(params)
   if user_checked.class == String
@@ -29,5 +31,4 @@ post '/delete/user/:username' do
     user.destroy
     response["successfully_deleted"] = "true"
   end
-
 end
