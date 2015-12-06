@@ -1,7 +1,4 @@
 require 'http'
-require 'json'
-
-
 
 class FantasticFour
   attr_accessor :url, :logged_username, :status
@@ -31,7 +28,7 @@ class FantasticFour
           "username" => username,
           "password" => password
       }
-    })
+    }).body.to_s
   end
 
   def create_user(username, password, email, profileInfo)
@@ -122,12 +119,4 @@ class FantasticFour
     end
   end
 
-  def get_newest_fifty_tweet()
-    return JSON.parse(HTTP.get(@url+'/api').body)
-  end
 end
-
-
-
-ff = FantasticFour.new("http://0.0.0.0:4567","ctz2","abcd",email = nil,profileInfo = nil)
-puts ff.set_host_url("http://0.0.0.0:4567")

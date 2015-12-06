@@ -69,12 +69,4 @@ get '/api/timeline/:username' do
     @parameters = get_time_line(logged_id)
   end
   @parameters.to_json
-<<<<<<< HEAD
 end
-
-
-||||||| merged common ancestors
-end
-=======
-end
->>>>>>> 78efb3c4a205769c13febd65b3f8ca84159bd5e4

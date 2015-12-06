@@ -4,7 +4,8 @@ require_relative 'liangwei'
 
 describe "can create and delete user and login" do
   it "can create user and login" do
-    @test = FantasticFour.new("http://protected-refuge-6584.herokuapp.com","test1","11","test1@gmail.com","Nothing")
+    # @test = FantasticFour.new("http://protected-refuge-6584.herokuapp.com","test1","11","test1@gmail.com","Nothing")
+    @test = FantasticFour.new("0.0.0.0:4567","test1","11","test1@gmail.com","Nothing")
     @test.status.must_equal true
     @test.user_delete_everything("test1").must_equal true
   end
@@ -49,7 +50,7 @@ end
 #     @test.user_login("test1","11")
 #     @test.user_get_timeline()[0]["text"].must_equal "this is my another tweet"
 #   end
-  
+
 #   after do
 #     @test.user_delete_everything("test1")
 #     @test.user_delete_everything("test2")
