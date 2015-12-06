@@ -290,7 +290,7 @@ def comment_arr_to_hash(comments_array)
     h["created_at"] = comment["created_at"]
     arr << h
   end
-  return arr  
+  return arr
 end
 
 
