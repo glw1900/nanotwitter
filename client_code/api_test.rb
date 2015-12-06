@@ -3,7 +3,6 @@ ENV['RACK_ENV'] = 'development'
 require 'minitest/autorun'
 require_relative 'lib'
 require 'http'
-require_relative 'apitestcode'
 
 $url = "http://hugetwitter.herokuapp.com"
 
