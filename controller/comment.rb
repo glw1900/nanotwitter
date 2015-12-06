@@ -17,11 +17,3 @@ end
 get '/test/createcomment' do
 	erb :test
 end
-<<<<<<< HEAD
-
-
-get '/test/song' do
-	session["username"]
-end
-=======
->>>>>>> a9d29c2e517473411faa0120d1d746bb5e2727c8
