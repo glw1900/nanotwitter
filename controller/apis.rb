@@ -1,4 +1,5 @@
 #api
+
 get '/api/v1/tweets/:tweet_id' do
   t = Tweet.find_by(id: params[:tweet_id]).as_json
   t.to_json

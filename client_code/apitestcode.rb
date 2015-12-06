@@ -11,7 +11,7 @@ def get_user_info(user_name)
 end
 
 def recent_50_tweets()
-  response = JSON.parse(HTTP.get($url + "/api/v1/tweets/recent/").body)
+  response = JSON.parse(HTTP.get($url + "/api/v1/tweets/recent").body)
   return response
 end
 

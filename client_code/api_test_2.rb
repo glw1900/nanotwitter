@@ -9,14 +9,13 @@ $url = "http://hugetwitter.herokuapp.com"
 
 
 
-$tweet_id = 20
+$tweet_id = 3
 $user_name = "meiyue"
-$recent_n_tweets = 100
 $recent_user_name = "meiyue"
 
 # followship
 
-$name_a = "123"
+$name_a = "test1"
 $name_b = "meiyue"
 
 
