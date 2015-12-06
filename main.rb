@@ -32,6 +32,11 @@ get '/' do
   erb :home
 end
 
+#to clear redis if any format changes in data
+get '/clearredis' do
+  $redis.flushdb
+end
+
 get '/timeline' do
   logged_username = session[:username]
   logged_id = User.find_by(username: logged_username).id
