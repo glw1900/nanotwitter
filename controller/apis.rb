@@ -70,3 +70,41 @@ get '/api/timeline/:username' do
   @parameters.to_json
 end
 
+<<<<<<< HEAD
+
+post "/signin" do
+  @user = {}
+  @user["username"] = params[:username]
+  @user["password"] = params[:password]
+  parameters = {}
+  if auth(@user)
+    parameters["status"] = "true"
+  else
+    parameters["status"] = "false"
+  end
+  parameters.to_json
+end
+
+||||||| merged common ancestors
+=======
+<<<<<<< HEAD
+
+
+post "/api/signin" do
+  response_body = Hash.new
+  @tring_logging_in = params[:user]
+  if @tring_logging_in.is_a? String
+    @tring_logging_in = JSON.parse(@tring_logging_in.gsub('=>', ':'))
+  end
+  if auth(@tring_logging_in)
+    username = @tring_logging_in["username"]
+    session["username"] = username
+    redirect '/timeline'
+    response_body["login_ok"] = "ok"
+  else
+    "Wrong Password"
+  end
+end
+=======
+>>>>>>> 70d5960469b3ee3ea5b22f765c4586620b30d5f5
+>>>>>>> 6f489698c7db600e91e7386ab4fc27710ade5667
