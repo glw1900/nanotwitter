@@ -74,10 +74,10 @@ class FantasticFour
 
   def user_follow(followee_name)
     if @status
-      HTTP.post(
+      return JSON.parse(HTTP.post(
       @url + '/api/create/follow', :params => {
      "follower_name" => @logged_username,
-     "followee_name" => followee_name}).body
+     "followee_name" => followee_name}).body)["status"]
     else
       return false
     end
@@ -86,10 +86,10 @@ class FantasticFour
 
   def user_unfollow(followee_name)
     if @status
-      HTTP.post(
+      return JSON.parse(HTTP.post(
       @url + '/api/delete/follow', :params => {
       "follower_name" => @logged_username,
-      "followee_name" => followee_name }).body
+      "followee_name" => followee_name }).body)["status"]
     else
       return false
     end
@@ -127,7 +127,3 @@ class FantasticFour
   end
 end
 
-
-
-ff = FantasticFour.new("http://0.0.0.0:4567","ctz2","abcd",email = nil,profileInfo = nil)
-puts ff.set_host_url("http://0.0.0.0:4567")
