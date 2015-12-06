@@ -61,11 +61,11 @@ post "/signin" do
   if @tring_logging_in.is_a? String
     @tring_logging_in = JSON.parse(@tring_logging_in.gsub('=>', ':'))
   end
-
   if auth(@tring_logging_in)
     username = @tring_logging_in["username"]
     session["username"] = username
     redirect '/timeline'
+    response["login_ok"] = "ok"
   else
     "Wrong Password"
   end

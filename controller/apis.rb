@@ -70,3 +70,21 @@ get '/api/timeline/:username' do
   end
   @parameters.to_json
 end
+
+
+
+post "/api/signin" do
+  response_body = Hash.new
+  @tring_logging_in = params[:user]
+  if @tring_logging_in.is_a? String
+    @tring_logging_in = JSON.parse(@tring_logging_in.gsub('=>', ':'))
+  end
+  if auth(@tring_logging_in)
+    username = @tring_logging_in["username"]
+    session["username"] = username
+    redirect '/timeline'
+    response_body["login_ok"] = "ok"
+  else
+    "Wrong Password"
+  end
+end
