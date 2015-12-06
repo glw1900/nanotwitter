@@ -1,7 +1,7 @@
 #api
 get '/api/v1/tweets/:tweet_id' do
   t = Tweet.find_by(id: params[:tweet_id]).as_json
-  t
+  t.to_json
 end
 
 get '/api/v1/users/:username' do
@@ -15,7 +15,7 @@ end
 
 get '/api/v1/users/:username/tweets' do
   id = params[:username]
-  logged_id = User.first().id
+  logged_id = User.first.id
   @parameters = user_a_look_at_user_b_homepage_with_redis(logged_id, id)["homepage_tweet_list"]
   @parameters.to_json
 end
