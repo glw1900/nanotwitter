@@ -5,7 +5,7 @@ get '/api/v1/tweets/:tweet_id' do
 end
 
 get '/api/v1/users/:username' do
-  u = User.find_by(username: params[:username]).as_json
+  u = User.find_by(username: params[:username]).to_json
   u
 end
 

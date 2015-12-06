@@ -6,6 +6,7 @@ end
 
 def get_user_info(user_name)
   response = JSON.parse(HTTP.get($url + "/api/v1/users/" + user_name).body)
+  puts response
   return response
 end
 
