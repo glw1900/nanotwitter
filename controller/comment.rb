@@ -2,11 +2,15 @@ post '/create/comment' do
 	comment = Comment.new()
 	comment.tweet_id = params["tweet_id"]
 	comment.content = params["content"]
-	comment.commenter_id = User.find_by(username: session["username"]).id
-	if comment.save
-		redirect 'tweet/' + params["tweet_id"]
+	if session["username"] != nil
+		comment.commenter_id = User.find_by(username: session["username"]).id
+		if comment.save
+			redirect 'tweet/' + params["tweet_id"]
+		else
+			"error when creating a comment"
+		end
 	else
-		"error when creating a comment"
+		redirect '/signin'
 	end
 end
 
