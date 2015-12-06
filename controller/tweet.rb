@@ -22,6 +22,7 @@ def create_tweet(params)
   end
 end
 
+
 post "/create/tweet" do
   create_tweet(params)
   redirect '/timeline'
@@ -39,6 +40,10 @@ post "/delete/tweet" do
   end
 end
 
+get '/tweets/:tweet_id' do
+  @parameters = view_a_twitter(params[:tweet_id])
+  @parameters.to_json
+end
 
 
 
