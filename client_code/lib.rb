@@ -1,8 +1,6 @@
 require 'http'
 require 'json'
 
-
-
 class FantasticFour
   attr_accessor :url, :logged_username, :status
 
@@ -25,13 +23,13 @@ class FantasticFour
 
   def user_login(username, password)
     @logged_username = username
-    HTTP.post(@url + "/signin",
+    return JSON.parse(HTTP.post(@url + "/api/signin",
     :params => {
         :user => {
           "username" => username,
           "password" => password
       }
-    })
+    }).body)["status"]
   end
 
   def create_user(username, password, email, profileInfo)

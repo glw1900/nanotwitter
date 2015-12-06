@@ -70,3 +70,17 @@ get '/api/timeline/:username' do
   @parameters.to_json
 end
 
+
+post "/signin" do
+  @user = {}
+  @user["username"] = params[:username]
+  @user["password"] = params[:password]
+  parameters = {}
+  if auth(@user)
+    parameters["status"] = "true"
+  else
+    parameters["status"] = "false"
+  end
+  parameters.to_json
+end
+
