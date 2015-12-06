@@ -52,22 +52,9 @@ def tweet_array_to_hash(records_array, logged)
 end
 
 
-def tweet_array_to_hash(records_array, logged)
-  rt = Array.new
-  records_array.each do |tw|
-    t = sql_to_hash(tw, logged)
-    rt << t
-  end
-  rt.sort { |x, y| x["time"] <=> y["time"] }
-  rt = rt.reverse
-  return rt
-end
-
-
 def sql_to_hash(tw, logged)
   t = Hash.new()
   t["text"] = tw["content"]
-  t["id"] = tw["id"]
   t["time"] = tw["created_at"]
   t["by_user"] = tw["username"]
   # below is made up
@@ -110,8 +97,9 @@ def first_50_tweets_lst
   #/
   newest_50_queue = "newest50queue"
   # if first_50_queue is empty
+  #/
   if(!$redis.exists(newest_50_queue))
-    sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id ORDER BY T.created_at DESC LIMIT 50"
+    sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id ORDER BY T.created_at DESC LIMIT 50"
     records_array =  ActiveRecord::Base.connection.execute(sql)
     rt = tweet_array_to_hash(records_array, false)
     rt.each do |tweet|
@@ -124,16 +112,40 @@ def first_50_tweets_lst
   array_of_jsons.each do |js|
       rt_array << JSON.parse(js)
   end
+
   return rt_array
 end
 
 
+def first_50_tweets_lst_no_redis
+  /#
+  # return an array of hash
+  #/
+  newest_50_queue = "newest50queue"
+  # if first_50_queue is empty
+  #/
+    sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id ORDER BY T.created_at DESC LIMIT 50"
+    records_array =  ActiveRecord::Base.connection.execute(sql)
+    rt = tweet_array_to_hash(records_array, false)
+    rt.each do |tweet|
+      $redis.rpush(newest_50_queue, tweet.to_json)
+    end
+  # end
+
+  array_of_jsons = $redis.lrange( "newest50queue",0,49)
+  rt_array = Array.new
+  array_of_jsons.each do |js|
+      rt_array << JSON.parse(js)
+  end
+
+  return rt_array
+end
 
 def get_time_line_tweets(user_id)
   /#
   return an array of hash
   #/
-  sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND ( (T.user_id = #{user_id}) OR (T.user_id IN
+  sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND ( (T.user_id = #{user_id}) OR (T.user_id IN
   (SELECT DISTINCT followee_id FROM follows AS F WHERE F.follower_id = #{user_id})) ) ORDER BY T.created_at ASC"
   records_array = ActiveRecord::Base.connection.execute(sql)
   rt = tweet_array_to_hash(records_array, true)
@@ -165,7 +177,7 @@ def user_a_look_at_user_b_homepage_with_redis(user_a_id, user_b_id)
   timelineOfB = "timelineOf" + user_b_id.to_s
 
   if(!$redis.exists(timelineOfB))
-    sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND T.user_id = #{user_b_id} "
+    sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND T.user_id = #{user_b_id} "
     records_array =  ActiveRecord::Base.connection.execute(sql)
     rt = tweet_array_to_hash(records_array, false)
     rt.each do |tweet|
@@ -177,6 +189,7 @@ def user_a_look_at_user_b_homepage_with_redis(user_a_id, user_b_id)
     array_of_jsons.each do |js|
         tw_array << JSON.parse(js)
     end
+
     image_url = "https://upload.wikimedia.org/wikipedia/commons/f/f6/Barack_Obama_and_Bill_Clinton_profile.jpg"
     rt = {}
     rt["logged_user_profile"] = get_user_profile(user_a_id)
@@ -202,7 +215,7 @@ end
 def user_a_look_at_user_b_homepage(user_a_id, user_b_id)
   # TODO: MISS FAVOURITES, FOLLOW NUMBER, FOLLOWER NUMBER
 
-  sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND T.user_id = #{user_b_id} "
+  sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND T.user_id = #{user_b_id} "
   records_array = ActiveRecord::Base.connection.execute(sql)
   tw_array = tweet_array_to_hash(records_array, true)
 
@@ -245,22 +258,7 @@ def get_followers(user_id)
   return create_user_ls_from_sql_result(records_array)
 end
 
-def get_comment_using_tweet_id(tweet_id)
-  comments_array = Comment.where(tweet_id: tweet_id)
-  return comments_array_to_hash(comments_array)
-end
 
-def comments_array_to_hash(comments_array)
-  c = Array.new()
-  comments_array.each do |comment|
-    c_hash = Hash.new()
-    c_hash["commenter_name"] = User.find_by(id: comment.commenter_id).username
-    c_hash["content"] = comment.content
-    c_hash["created_at"] = comment.created_at
-    c << c_hash
-  end
-  return c
-end
 
 def create_user_ls_from_sql_result(arr)
   ls = []
@@ -302,5 +300,3 @@ def make_fake_tweets(user_name, num)
     Tweet.bulk_insert(values, columns)
 #    binding.pry
 end
-
-
