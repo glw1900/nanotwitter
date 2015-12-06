@@ -16,7 +16,7 @@ def create_tweet(params)
     response["posted_tweet_id"] = "#{@new_tweet.id}"
     response["successfully_posted"] = "true"
     timelineOfB = "timelineOf" + tweet["user_id"].to_s
-    if(!$redis.exists(timelineOfB))
+    if($redis.exists(timelineOfB))
       $redis.rpush(timelineOfB, h.to_json)
     end
   end
@@ -38,3 +38,11 @@ post "/delete/tweet" do
     puts "Warning! tweet_id #{tweet_id} does not exist, no need to delete it."
   end
 end
+
+
+
+
+
+
+
+

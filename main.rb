@@ -26,10 +26,19 @@ get '/loaderio-f3cc423b8dcef53b6cafc74290cff52f/' do
   'loaderio-f3cc423b8dcef53b6cafc74290cff52f'
 end
 
+get '/loaderio-ed1bbf67a573c43a29c3a8ceeb1fb606/' do
+  'loaderio-ed1bbf67a573c43a29c3a8ceeb1fb606'
+end
+
 get '/' do
   @parameters = {}
   @parameters["unlogged_twitter_list"] = first_50_tweets_lst
   erb :home
+end
+
+#to clear redis if any format changes in data
+get '/clearredis' do
+  $redis.flushdb
 end
 
 get '/timeline' do
@@ -52,15 +61,20 @@ end
 
 get '/logout' do
   session["username"] = nil
+  response["status"] = "true"
   redirect "/"
 end
 
 post "/signin" do
   @tring_logging_in = params[:user]
+  if @tring_logging_in.is_a? String
+    @tring_logging_in = JSON.parse(@tring_logging_in.gsub('=>', ':'))
+  end
   if auth(@tring_logging_in)
     username = @tring_logging_in["username"]
     session["username"] = username
     redirect '/timeline'
+    response["login_ok"] = "ok"
   else
     "Wrong Password"
   end

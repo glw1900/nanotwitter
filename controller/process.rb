@@ -5,7 +5,6 @@ def auth(user)
   username = user["username"]
   password = user["password"]
   u = User.find_by(username: username)
-  # binding.pry
   if u.nil?
     return false
   end
@@ -98,6 +97,7 @@ def first_50_tweets_lst
   #/
   newest_50_queue = "newest50queue"
   # if first_50_queue is empty
+  #/
   if(!$redis.exists(newest_50_queue))
     sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id ORDER BY T.created_at DESC LIMIT 50"
     records_array =  ActiveRecord::Base.connection.execute(sql)
@@ -112,6 +112,32 @@ def first_50_tweets_lst
   array_of_jsons.each do |js|
       rt_array << JSON.parse(js)
   end
+
+  return rt_array
+end
+
+
+def first_50_tweets_lst_no_redis
+  /#
+  # return an array of hash
+  #/
+  newest_50_queue = "newest50queue"
+  # if first_50_queue is empty
+  #/
+    sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id ORDER BY T.created_at DESC LIMIT 50"
+    records_array =  ActiveRecord::Base.connection.execute(sql)
+    rt = tweet_array_to_hash(records_array, false)
+    rt.each do |tweet|
+      $redis.rpush(newest_50_queue, tweet.to_json)
+    end
+  # end
+
+  array_of_jsons = $redis.lrange( "newest50queue",0,49)
+  rt_array = Array.new
+  array_of_jsons.each do |js|
+      rt_array << JSON.parse(js)
+  end
+
   return rt_array
 end
 
@@ -163,6 +189,7 @@ def user_a_look_at_user_b_homepage_with_redis(user_a_id, user_b_id)
     array_of_jsons.each do |js|
         tw_array << JSON.parse(js)
     end
+
     image_url = "https://upload.wikimedia.org/wikipedia/commons/f/f6/Barack_Obama_and_Bill_Clinton_profile.jpg"
     rt = {}
     rt["logged_user_profile"] = get_user_profile(user_a_id)
@@ -256,7 +283,6 @@ def make_follower(followee_id, num)
     Follow.create(follower_id: sample_ids[i], followee_id: followee_id)
     i = i + 1
   end
-
 end
 
 def make_fake_tweets(user_name, num)

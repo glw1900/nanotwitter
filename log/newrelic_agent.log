@@ -1,0 +1,34 @@
+[2015-12-05 22:47:20 -0500 Meiyues-MacBook-Pro.local (15772)] INFO : Starting the New Relic agent in "development" environment.
+[2015-12-05 22:47:20 -0500 Meiyues-MacBook-Pro.local (15772)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[2015-12-05 22:47:20 -0500 Meiyues-MacBook-Pro.local (15772)] INFO : Reading configuration from config/newrelic.yml (/Users/sleep/Dropbox/cosi105b_meiyue/nanotwitter/nt/nanotwitter)
+[2015-12-05 22:47:20 -0500 Meiyues-MacBook-Pro.local (15772)] INFO : Environment: development
+[2015-12-05 22:47:20 -0500 Meiyues-MacBook-Pro.local (15772)] INFO : No known dispatcher detected.
+[2015-12-05 22:47:20 -0500 Meiyues-MacBook-Pro.local (15772)] INFO : Application: nanotwitter_relic (Development)
+[2015-12-05 22:47:21 -0500 Meiyues-MacBook-Pro.local (15772)] INFO : Installing ActiveRecord 4 instrumentation
+[2015-12-05 22:47:21 -0500 Meiyues-MacBook-Pro.local (15772)] INFO : Installing Net instrumentation
+[2015-12-05 22:47:21 -0500 Meiyues-MacBook-Pro.local (15772)] INFO : Installing Sinatra instrumentation
+[2015-12-05 22:47:21 -0500 Meiyues-MacBook-Pro.local (15772)] INFO : Installing deferred Rack instrumentation
+[2015-12-05 22:47:21 -0500 Meiyues-MacBook-Pro.local (15772)] INFO : Installing Rack::Builder middleware instrumentation
+[2015-12-05 22:47:21 -0500 Meiyues-MacBook-Pro.local (15772)] INFO : Installing Redis Instrumentation
+[2015-12-05 22:47:21 -0500 Meiyues-MacBook-Pro.local (15772)] INFO : Finished instrumentation
+[2015-12-05 22:47:22 -0500 Meiyues-MacBook-Pro.local (15772)] INFO : Reporting to: https://rpm.newrelic.com/accounts/1150571/applications/10172141
+[2015-12-05 22:47:24 -0500 Meiyues-MacBook-Pro.local (15772)] INFO : Doing deferred dependency-detection before Rack startup
+[2015-12-05 22:47:29 -0500 Meiyues-MacBook-Pro.local (15772)] WARN : Skipping RUM instrumentation. Unable to find <body> tag in first 50000 bytes of document.
+[2015-12-05 22:51:09 -0500 Meiyues-MacBook-Pro.local (15772)] WARN : Skipping RUM instrumentation. Unable to find <body> tag in first 50000 bytes of document.
+[2015-12-05 22:51:29 -0500 Meiyues-MacBook-Pro.local (15772)] WARN : Skipping RUM instrumentation. Unable to find <body> tag in first 50000 bytes of document.
+[2015-12-05 22:57:45 -0500 Meiyues-MacBook-Pro.local (15801)] INFO : Starting the New Relic agent in "development" environment.
+[2015-12-05 22:57:45 -0500 Meiyues-MacBook-Pro.local (15801)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[2015-12-05 22:57:45 -0500 Meiyues-MacBook-Pro.local (15801)] INFO : Reading configuration from config/newrelic.yml (/Users/sleep/Dropbox/cosi105b_meiyue/nanotwitter/nt/nanotwitter)
+[2015-12-05 22:57:45 -0500 Meiyues-MacBook-Pro.local (15801)] INFO : Environment: development
+[2015-12-05 22:57:45 -0500 Meiyues-MacBook-Pro.local (15801)] INFO : No known dispatcher detected.
+[2015-12-05 22:57:45 -0500 Meiyues-MacBook-Pro.local (15801)] INFO : Application: nanotwitter_relic (Development)
+[2015-12-05 22:57:45 -0500 Meiyues-MacBook-Pro.local (15801)] INFO : Installing ActiveRecord 4 instrumentation
+[2015-12-05 22:57:45 -0500 Meiyues-MacBook-Pro.local (15801)] INFO : Installing Net instrumentation
+[2015-12-05 22:57:45 -0500 Meiyues-MacBook-Pro.local (15801)] INFO : Installing Sinatra instrumentation
+[2015-12-05 22:57:45 -0500 Meiyues-MacBook-Pro.local (15801)] INFO : Installing deferred Rack instrumentation
+[2015-12-05 22:57:45 -0500 Meiyues-MacBook-Pro.local (15801)] INFO : Installing Rack::Builder middleware instrumentation
+[2015-12-05 22:57:45 -0500 Meiyues-MacBook-Pro.local (15801)] INFO : Installing Redis Instrumentation
+[2015-12-05 22:57:45 -0500 Meiyues-MacBook-Pro.local (15801)] INFO : Finished instrumentation
+[2015-12-05 22:57:47 -0500 Meiyues-MacBook-Pro.local (15801)] INFO : Reporting to: https://rpm.newrelic.com/accounts/1150571/applications/10172141
+[2015-12-05 22:57:48 -0500 Meiyues-MacBook-Pro.local (15801)] INFO : Doing deferred dependency-detection before Rack startup
+[2015-12-05 22:57:54 -0500 Meiyues-MacBook-Pro.local (15801)] WARN : Skipping RUM instrumentation. Unable to find <body> tag in first 50000 bytes of document.
