@@ -15,7 +15,7 @@ get '/api/v1/tweets/recent' do
 end
 
 get '/api/v1/users/:username/tweets' do
-  id = params[:username]
+  id = User.find_by(username: params[:username]).id
   logged_id = User.first.id
   @parameters = user_a_look_at_user_b_homepage_with_redis(logged_id, id)["homepage_tweet_list"]
   @parameters.to_json
