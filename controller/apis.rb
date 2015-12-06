@@ -1,21 +1,24 @@
 #api
+
 get '/api/v1/tweets/:tweet_id' do
   t = Tweet.find_by(id: params[:tweet_id]).as_json
-  t
+  t.to_json
 end
 
 get '/api/v1/users/:username' do
   u = User.find_by(username: params[:username]).as_json
-  u
+  u.to_json
 end
 
-get '/api/v1/tweets/recent' do
-  first_50_tweets_lst.to_json
+get '/api/v1/tweet/recent' do
+  u = Hash.new
+  u["first50"] = first_50_tweets_lst
+  u.to_json
 end
 
-get '/api/v1/users/:id/tweets' do
-  id = params[:id]
-  logged_id = User.first().id
+get '/api/v1/users/:username/tweets' do
+  id = User.find_by(username: params[:username]).id
+  logged_id = User.first.id
   @parameters = user_a_look_at_user_b_homepage_with_redis(logged_id, id)["homepage_tweet_list"]
   @parameters.to_json
 end
