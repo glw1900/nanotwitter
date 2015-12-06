@@ -4,8 +4,8 @@ def get_tweet_by_id(tweet_id)
   return response
 end
 
-def get_user_info(user_id)
-  response = JSON.parse(HTTP.get($url + "/api/v1/users/" + user_id.to_s).body)
+def get_user_info(user_name)
+  response = JSON.parse(HTTP.get($url + "/api/v1/users/" + user_name).body)
   return response
 end
 
@@ -14,8 +14,8 @@ def recent_50_tweets()
   return response
 end
 
-def recent_n_user_tweets(user_id)
-  response = JSON.parse(HTTP.get($url + "/api/v1/users/" + user_id.to_s + "/tweets").body)
+def recent_n_user_tweets(user_name)
+  response = JSON.parse(HTTP.get($url + "/api/v1/users/" + user_name + "/tweets").body)
   return response
 end
 
