@@ -40,18 +40,7 @@ post "/delete/tweet" do
 end
 
 
-#~~~~~waiting for erb
-get '/tweet/:tweet_id' do
-  @parameters = {}
-  t = Tweet.find_by(id: params[:tweet_id])
-  @parameters["content"] = t.content
-  @parameters["id"] = t.id
-  @parameters["user_id"] = t.user_id
-  @parameters["created_at"] = t.created_at
-  @parameters["retweet_id"] = t.retweet_id
-  @parameters["comment"] = get_comment_using_tweet_id(params[:tweet_id])
-  @parameters.to_json
-end
+
 
 
 

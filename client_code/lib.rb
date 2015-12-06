@@ -1,15 +1,5 @@
 require 'http'
-<<<<<<< HEAD
 require 'json'
-
-||||||| merged common ancestors
-require 'json'
-
-
-
-=======
-
->>>>>>> 6f489698c7db600e91e7386ab4fc27710ade5667
 class FantasticFour
   attr_accessor :url, :logged_username, :status
 
@@ -38,13 +28,8 @@ class FantasticFour
           "username" => username,
           "password" => password
       }
-<<<<<<< HEAD
     }).body)["status"]
-||||||| merged common ancestors
-    })
-=======
-    }).body.to_s
->>>>>>> 6f489698c7db600e91e7386ab4fc27710ade5667
+
   end
 
   def create_user(username, password, email, profileInfo)
@@ -96,7 +81,6 @@ class FantasticFour
     end
   end
 
-
   def user_unfollow(followee_name)
     if @status
       return JSON.parse(HTTP.post(
@@ -108,6 +92,9 @@ class FantasticFour
     end
   end
 
+  def get_newest_fifty_tweet()
+    return JSON.parse(HTTP.get(@url+'/api').body)
+  end
 
   def user_logout()
     if @status
@@ -117,7 +104,6 @@ class FantasticFour
     end
   end
 
-
   def user_delete_everything(username)
     if @status
       HTTP.post(@url+'/delete/user/'+username)
@@ -126,7 +112,6 @@ class FantasticFour
     end
   end
 
-
   def user_get_timeline()
     if @status
       HTTP.get(@url)
@@ -134,5 +119,4 @@ class FantasticFour
       return false
     end
   end
-
 end
