@@ -77,7 +77,7 @@ class FantasticFour
       HTTP.post(
       @url + '/api/create/follow', :params => {
      "follower_name" => @logged_username,
-     "followee_name" => followee_name})
+     "followee_name" => followee_name}).body
     else
       return false
     end
@@ -89,7 +89,7 @@ class FantasticFour
       HTTP.post(
       @url + '/api/delete/follow', :params => {
       "follower_name" => @logged_username,
-      "followee_name" => followee_name })
+      "followee_name" => followee_name }).body
     else
       return false
     end
