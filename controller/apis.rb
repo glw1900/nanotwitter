@@ -13,8 +13,8 @@ get '/api/v1/tweets/recent' do
   first_50_tweets_lst.to_json
 end
 
-get '/api/v1/users/:id/tweets' do
-  id = params[:id]
+get '/api/v1/users/:username/tweets' do
+  id = params[:username]
   logged_id = User.first().id
   @parameters = user_a_look_at_user_b_homepage_with_redis(logged_id, id)["homepage_tweet_list"]
   @parameters.to_json
