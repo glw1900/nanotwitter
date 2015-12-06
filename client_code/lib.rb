@@ -82,7 +82,6 @@ class FantasticFour
     end
   end
 
-
   def user_unfollow(followee_name)
     if @status
       return JSON.parse(HTTP.post(
@@ -94,6 +93,9 @@ class FantasticFour
     end
   end
 
+  def get_newest_fifty_tweet()
+    return JSON.parse(HTTP.get(@url+'/api').body)
+  end
 
   def user_logout()
     if @status
@@ -103,7 +105,6 @@ class FantasticFour
     end
   end
 
-
   def user_delete_everything(username)
     if @status
       HTTP.post(@url+'/delete/user/'+username)
@@ -112,7 +113,6 @@ class FantasticFour
     end
   end
 
-
   def user_get_timeline()
     if @status
       HTTP.get(@url)
@@ -120,5 +120,4 @@ class FantasticFour
       return false
     end
   end
-
 end
