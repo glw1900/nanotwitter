@@ -32,15 +32,9 @@ get '/' do
   erb :home
 end
 
-
-get '/mytest' do
-  logged_username = session[:username]
-  logged_id = User.find_by(username: logged_username).id
-  @parameters = {}
-  if !session["username"].nil?
-    @parameters = get_time_line(logged_id)
-  end
-  @parameters["timeline_twitter_list"][0]["id"]
+#to clear redis if any format changes in data
+get '/clearredis' do
+  $redis.flushdb
 end
 
 get '/timeline' do

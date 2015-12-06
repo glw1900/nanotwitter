@@ -129,11 +129,12 @@ def first_50_tweets_lst
 end
 
 
+
 def get_time_line_tweets(user_id)
   /#
   return an array of hash
   #/
-  sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND ( (T.user_id = #{user_id}) OR (T.user_id IN
+  sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND ( (T.user_id = #{user_id}) OR (T.user_id IN
   (SELECT DISTINCT followee_id FROM follows AS F WHERE F.follower_id = #{user_id})) ) ORDER BY T.created_at ASC"
   records_array = ActiveRecord::Base.connection.execute(sql)
   rt = tweet_array_to_hash(records_array, true)
@@ -165,7 +166,7 @@ def user_a_look_at_user_b_homepage_with_redis(user_a_id, user_b_id)
   timelineOfB = "timelineOf" + user_b_id.to_s
 
   if(!$redis.exists(timelineOfB))
-    sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND T.user_id = #{user_b_id} "
+    sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND T.user_id = #{user_b_id} "
     records_array =  ActiveRecord::Base.connection.execute(sql)
     rt = tweet_array_to_hash(records_array, false)
     rt.each do |tweet|
@@ -202,7 +203,7 @@ end
 def user_a_look_at_user_b_homepage(user_a_id, user_b_id)
   # TODO: MISS FAVOURITES, FOLLOW NUMBER, FOLLOWER NUMBER
 
-  sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND T.user_id = #{user_b_id} "
+  sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND T.user_id = #{user_b_id} "
   records_array = ActiveRecord::Base.connection.execute(sql)
   tw_array = tweet_array_to_hash(records_array, true)
 
@@ -245,7 +246,22 @@ def get_followers(user_id)
   return create_user_ls_from_sql_result(records_array)
 end
 
+def get_comment_using_tweet_id(tweet_id)
+  comments_array = Comment.where(tweet_id: tweet_id)
+  return comments_array_to_hash(comments_array)
+end
 
+def comments_array_to_hash(comments_array)
+  c = Array.new()
+  comments_array.each do |comment|
+    c_hash = Hash.new()
+    c_hash["commenter_name"] = User.find_by(id: comment.commenter_id).username
+    c_hash["content"] = comment.content
+    c_hash["created_at"] = comment.created_at
+    c << c_hash
+  end
+  return c
+end
 
 def create_user_ls_from_sql_result(arr)
   ls = []
@@ -288,3 +304,5 @@ def make_fake_tweets(user_name, num)
     Tweet.bulk_insert(values, columns)
 #    binding.pry
 end
+
+
