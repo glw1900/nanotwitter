@@ -5,7 +5,7 @@ post '/create/comment' do
 	if session["username"] != nil
 		comment.commenter_id = User.find_by(username: session["username"]).id
 		if comment.save
-			redirect 'tweet/' + params["tweet_id"]
+			redirect 'tweets/' + params["tweet_id"]
 		else
 			"error when creating a comment"
 		end
