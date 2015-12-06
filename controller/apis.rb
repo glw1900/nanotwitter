@@ -1,10 +1,12 @@
 #api
-get '/api/v1/tweet/:tweet_id' do
+get '/api/v1/tweets/:tweet_id' do
   t = Tweet.find_by(id: params[:tweet_id]).as_json
+  t
 end
 
-get '/api/v1/users/:id' do
-  u = User.find_by(id:params[:id]).as_json
+get '/api/v1/users/:username' do
+  u = User.find_by(username: params[:username]).as_json
+  u
 end
 
 get '/api/v1/tweets/recent' do
