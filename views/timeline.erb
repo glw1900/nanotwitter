@@ -40,23 +40,19 @@
         <button type="button" class="btn btn-default btn-lg"><a href="/logout">Log Out</a></button>
        </li></ul>
 
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+     </div>
+    </div>
   </nav>
 
 <nav class="navbar navbar-default">
   <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
 
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a href="#">
           <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Tweets    <br> 12 </button>
           </a>
         </li>
-
         <li><a href="#">
           <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Following <br> 23 </button>
           </a>
@@ -72,11 +68,33 @@
       </li>
      </ul>
     </ul>
-   </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-  </nav>
+   </div>
+  </div>
+</nav>
+  <button type="button" class="btn btn-info btn-lg" >Open Modal</button>
+  <button type="button" class="btn btn-info" >Open Modal</button>
 
-<div class="container-fluid">
+  <div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <textarea class="form-control" placeholder="Try to input multiple lines here..."></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+
+<!-- <div class="container-fluid">
+
   <div class="row">
     <div class="col-sm-3">
       <div class="img-responsive">
@@ -86,6 +104,8 @@
       <a href = '/users/<%=@parameters["logged_user_profile"]["username"] %>'><h1>  <%=@parameters["logged_user_profile"]["username"]%> </h1></a>
     </div>
     <div class="col-sm-9">
+
+    </div>
       <div class="modal-body">
         <form class="form col-md-12 center-block" action="/create/tweet" method="POST">
           <textarea  cols="100" id="textarea" name= "content" rows="6" placeholder="New Tweet"></textarea>
@@ -107,6 +127,8 @@
               <button type="button" class="btn btn-info">Reply</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <button type="button" class="btn btn-info">Retweet</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <button type="button" class="btn btn-info">Favorite</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
 
           <% end %>
         <%else%>
