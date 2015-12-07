@@ -36,6 +36,16 @@ get '/' do
   erb :home
 end
 
+
+get '/mytest/:username' do
+  logged_username = session[:username]
+  logged_id = User.find_by(username: logged_username).id
+  look_at_username = params[:username]
+  look_at_user_id = User.find_by(username: look_at_username).id
+  @parameters = user_a_look_at_user_b_homepage_with_redis(logged_id, look_at_user_id)
+  @parameters.to_json
+end
+
 #to clear redis if any format changes in data
 get '/clearredis' do
   $redis.flushdb
@@ -73,6 +83,7 @@ post "/signin" do
   if auth(@tring_logging_in)
     username = @tring_logging_in["username"]
     session["username"] = username
+    binding.pry
     redirect '/timeline'
     response["login_ok"] = "ok"
   else
