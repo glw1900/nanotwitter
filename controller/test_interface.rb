@@ -48,10 +48,9 @@ end
 
 
 get '/test/seed/:num' do
-    # testuser_id = User.find_by(username: test_user_name)
+  # testuser_id = User.find_by(username: test_user_name)
 	params[:num].to_i.times do |i|
-    	User.create(username: "test_username#{i}", email: "fake@email.com",
-    	password: "1234", profile: nil)
+    	# User.create(username: "test_username#{i}", email: "fake@email.com", password: "1234", profile: nil)
 	end
 	params[:num] +' users created'
 end
