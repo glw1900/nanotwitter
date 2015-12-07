@@ -37,22 +37,23 @@ get '/test/reset/all' do
   User.delete_all()
   Tweet.delete_all()
   Follow.delete_all()
-  Comment.delete_all()    
-  User.create(username: "testuser", email: Faker::Internet.email, password: "1234", profile: nil)
+  Comment.delete_all()
+  if User.find_by(username: "testuser").nil
+    User.create(username: "testuser", email: Faker::Internet.email, password: "1234", profile: nil)
+  end    
   id =  User.find_by(username:"testuser").id
   # temp = "#{id}"
   "reset finished, testuser created #{id}"
 end
 
 #
-
-
 get '/test/seed/:num' do
-	
   i = 0
   num = params[:num].to_i
   while i < num
-    User.create(username: "test_username#{i}", email: "fake@email.com", password: "1234", profile: nil)
+    if User.find_by(username:"test_username#{i}").nil?
+      User.create(username: "test_username#{i}", email: "fake@email.com", password: "1234", profile: nil)
+    end
     i += 1
 	end
 	params[:num] +' users created'
