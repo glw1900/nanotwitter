@@ -55,6 +55,7 @@ end
 def sql_to_hash(tw, logged)
   t = Hash.new()
   t["text"] = tw["content"]
+  t["id"] = tw["id"]
   t["time"] = tw["created_at"]
   t["by_user"] = tw["username"]
   # below is made up
@@ -99,7 +100,7 @@ def first_50_tweets_lst
   # if first_50_queue is empty
   #/
   if(!$redis.exists(newest_50_queue))
-    sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id ORDER BY T.created_at DESC LIMIT 50"
+    sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id ORDER BY T.created_at DESC LIMIT 50"
     records_array =  ActiveRecord::Base.connection.execute(sql)
     rt = tweet_array_to_hash(records_array, false)
     rt.each do |tweet|
@@ -124,7 +125,7 @@ def first_50_tweets_lst_no_redis
   newest_50_queue = "newest50queue"
   # if first_50_queue is empty
   #/
-    sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id ORDER BY T.created_at DESC LIMIT 50"
+    sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id ORDER BY T.created_at DESC LIMIT 50"
     records_array =  ActiveRecord::Base.connection.execute(sql)
     rt = tweet_array_to_hash(records_array, false)
     rt.each do |tweet|
@@ -145,7 +146,7 @@ def get_time_line_tweets(user_id)
   /#
   return an array of hash
   #/
-  sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND ( (T.user_id = #{user_id}) OR (T.user_id IN
+  sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND ( (T.user_id = #{user_id}) OR (T.user_id IN
   (SELECT DISTINCT followee_id FROM follows AS F WHERE F.follower_id = #{user_id})) ) ORDER BY T.created_at ASC"
   records_array = ActiveRecord::Base.connection.execute(sql)
   rt = tweet_array_to_hash(records_array, true)
@@ -177,7 +178,7 @@ def user_a_look_at_user_b_homepage_with_redis(user_a_id, user_b_id)
   timelineOfB = "timelineOf" + user_b_id.to_s
 
   if(!$redis.exists(timelineOfB))
-    sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND T.user_id = #{user_b_id} "
+    sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND T.user_id = #{user_b_id} "
     records_array =  ActiveRecord::Base.connection.execute(sql)
     rt = tweet_array_to_hash(records_array, false)
     rt.each do |tweet|
@@ -215,7 +216,7 @@ end
 def user_a_look_at_user_b_homepage(user_a_id, user_b_id)
   # TODO: MISS FAVOURITES, FOLLOW NUMBER, FOLLOWER NUMBER
 
-  sql = "SELECT T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND T.user_id = #{user_b_id} "
+  sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND T.user_id = #{user_b_id} "
   records_array = ActiveRecord::Base.connection.execute(sql)
   tw_array = tweet_array_to_hash(records_array, true)
 
