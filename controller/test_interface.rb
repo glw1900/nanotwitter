@@ -34,9 +34,9 @@ end
 
 
 get '/test/reset/all' do
-  # User.destroy_all()
-  # Tweet.destroy_all()
-  # Follow.destroy_all()
+  User.destroy_all()
+  Tweet.destroy_all()
+  Follow.destroy_all()
   # Comment.destroy_all()    
   # User.create(username: "testuser", email: Faker::Internet.email, password: "1234", profile: nil)
   # id =  User.find_by(username:"testuser").id
