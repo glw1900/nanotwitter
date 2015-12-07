@@ -7,10 +7,11 @@ get '/test/tweets/:num' do
         i = 0
         num = params['num'].to_i
         while(i < num) do
-            Tweet.create(user_id: testuser_id, content: "a fake tweet")
-            i = i + 1
+          if Tweet.find_by(content: "a fake tweet #{i}").nil?
+            Tweet.create(user_id: testuser_id, content: "a fake tweet #{i}")
+          end
+          i = i + 1
         end
-        Tweet.find_by(user_id: testuser_id).content
     else
     'testuser not exist'
     end
