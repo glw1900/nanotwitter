@@ -11,17 +11,14 @@ get '/user/testuser' do
   erb :timeline
 end
 
-
-
 post '/user/testuser/tweet' do
   logged_username = "testuser"
   testuser = User.find_by(username: logged_username)
   if testuser != nil
     logged_id = testuser.id
-
     return_message = {}
     tweet = {}
-    tweet["content"] = "a fake tweet"
+    tweet["content"] = "tweet by testuser"
     tweet["media_url"] = "http://www.cats.org.uk/uploads/images/pages/photo_latest14.jpg"
     tweet["retweet_id"] = 0
     tweet["user_id"] = logged_id
@@ -40,6 +37,7 @@ post '/user/testuser/tweet' do
         $redis.rpush(timelineOfB, h.to_json)
       end
     end
+    "successful"
   else
     "testuser does not exist"
   end
