@@ -43,6 +43,3 @@ get '/user/testuser/tweet' do
     "testuser does not exist"
   end
 end
-
-
-/user/testuser/tweet (POST) - have testuser create one tweet
