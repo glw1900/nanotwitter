@@ -16,7 +16,7 @@ require 'newrelic_rpm'
 set :environment, :production
 enable :sessions
 set :public_folder, File.dirname(__FILE__)+'/bootstrap-3.3.5-dist'
-require 'pry-byebug'
+# require 'pry-byebug'
 
 get '/loaderio-d3a485382ba9e01e149ff5b014cd52e3/' do
   'loaderio-d3a485382ba9e01e149ff5b014cd52e3'
