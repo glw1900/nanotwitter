@@ -83,6 +83,7 @@ post "/signin" do
   if auth(@tring_logging_in)
     username = @tring_logging_in["username"]
     session["username"] = username
+    binding.pry
     redirect '/timeline'
     response["login_ok"] = "ok"
   else
