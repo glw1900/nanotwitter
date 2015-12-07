@@ -1,3 +1,5 @@
+require 'faker'
+
 get '/user/testuser' do
   logged_username = "testuser"
   testuser = User.find_by(username: logged_username)
@@ -18,7 +20,7 @@ post '/user/testuser/tweet' do
     logged_id = testuser.id
     return_message = {}
     tweet = {}
-    tweet["content"] = "tweet by testuser"
+    tweet["content"] = Faker::Bitcoin.address
     tweet["media_url"] = "http://www.cats.org.uk/uploads/images/pages/photo_latest14.jpg"
     tweet["retweet_id"] = 0
     tweet["user_id"] = logged_id
