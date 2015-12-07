@@ -11,29 +11,6 @@
 </head>
 
 <body>
-   <div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Comment</h4>
-      </div>
-      <div class="modal-body">
-        <form role="form" action="/create/comment"method="POST">
-          <textarea class="form-control" placeholder="comment here..." name="content"></textarea>
-          <input type="hidden" name="tweet_id" value=1>
-          <button class="btn btn-primary">comment</button>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>
 	<nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -119,6 +96,31 @@
         </form>
       </div>
       <br><br><br><br><br><br><br><br>
+
+      <div id="addComment" class="modal fade" role="dialog">
+     <div class="modal-dialog">
+
+       <!-- Modal content-->
+       <div class="modal-content">
+         <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal">&times;</button>
+           <h4 class="modal-title">Comment</h4>
+         </div>
+         <div class="modal-body">
+           <form role="form" action="/create/comment"method="POST">
+             <textarea class="form-control" placeholder="comment here..." name="content"></textarea>
+             <input type="text" name="tweet_id" id="tweet_id">
+             <button class="btn btn-primary">comment</button>
+           </form>
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+         </div>
+       </div>
+       </div>
+     </div>
+
+
       <ul class="list-group">
         <% if !@parameters["timeline_twitter_list"].nil? %>
           <% @parameters["timeline_twitter_list"].each do |tweet| %>
@@ -126,7 +128,9 @@
             <li class="list-group-item">
               <a href = '/users/<%=tweet["by_user"] %>'><h3><strong> <%= tweet["by_user"] %></strong> <small>@<%= tweet["time"] %></small></h3></a>
               <p><%= tweet["text"] %> </p>
-              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Reply</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <p><%= tweet["id"] %> </p>
+              <p> whatever  </p>
+              <button type="button" class="open-AddComment btn btn-info" data-toggle="modal" data-what='<%= tweet["id"]%>' data-target="#addComment">Comment</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <button type="button" class="btn btn-info">Retweet</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <button type="button" class="btn btn-info">Favorite</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -139,5 +143,16 @@
   </div>
 </div>
 </div>
+<script>
+$('#addComment').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var tweetID = button.data('what') // Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  modal.find('.modal-body input').val(tweetID)
+})
+</script>
+
 </body>
 </html>
