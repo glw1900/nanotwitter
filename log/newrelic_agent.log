@@ -337,3 +337,32 @@
 [2015-12-07 01:10:06 -0500 lijishandeMacBook-Pro.local (2195)] INFO : Doing deferred dependency-detection before Rack startup
 [2015-12-07 01:15:25 -0500 lijishandeMacBook-Pro.local (2195)] ERROR : 1 error(s) running task for event 'report_event_data' in Agent Event Loop:
 [2015-12-07 01:15:25 -0500 lijishandeMacBook-Pro.local (2195)] ERROR : NewRelic::Agent::ServerConnectionException: Recoverable error connecting to collector-180.newrelic.com:443 after 0.001236 seconds: getaddrinfo: nodename nor servname provided, or not known
+[2015-12-07 17:52:49 -0500 lijishandeMacBook-Pro.local (2605)] INFO : Starting the New Relic agent in "development" environment.
+[2015-12-07 17:52:49 -0500 lijishandeMacBook-Pro.local (2605)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[2015-12-07 17:52:49 -0500 lijishandeMacBook-Pro.local (2605)] INFO : Reading configuration from config/newrelic.yml (/Users/CassyLee/Dropbox/cosi105b_JishanLi/nanotwitter)
+[2015-12-07 17:52:49 -0500 lijishandeMacBook-Pro.local (2605)] INFO : Environment: development
+[2015-12-07 17:52:49 -0500 lijishandeMacBook-Pro.local (2605)] INFO : No known dispatcher detected.
+[2015-12-07 17:52:49 -0500 lijishandeMacBook-Pro.local (2605)] INFO : Application: nanotwitter_relic (Development)
+[2015-12-07 17:52:49 -0500 lijishandeMacBook-Pro.local (2605)] INFO : Installing ActiveRecord 4 instrumentation
+[2015-12-07 17:52:49 -0500 lijishandeMacBook-Pro.local (2605)] INFO : Installing Net instrumentation
+[2015-12-07 17:52:49 -0500 lijishandeMacBook-Pro.local (2605)] INFO : Installing Sinatra instrumentation
+[2015-12-07 17:52:49 -0500 lijishandeMacBook-Pro.local (2605)] INFO : Installing deferred Rack instrumentation
+[2015-12-07 17:52:49 -0500 lijishandeMacBook-Pro.local (2605)] INFO : Installing Rack::Builder middleware instrumentation
+[2015-12-07 17:52:49 -0500 lijishandeMacBook-Pro.local (2605)] INFO : Installing Redis Instrumentation
+[2015-12-07 17:52:49 -0500 lijishandeMacBook-Pro.local (2605)] INFO : Finished instrumentation
+[2015-12-07 17:52:51 -0500 lijishandeMacBook-Pro.local (2605)] INFO : Reporting to: https://rpm.newrelic.com/accounts/1150571/applications/10172141
+[2015-12-07 17:54:46 -0500 lijishandeMacBook-Pro.local (2605)] INFO : Doing deferred dependency-detection before Rack startup
+[2015-12-07 18:03:58 -0500 lijishandeMacBook-Pro.local (2641)] INFO : Starting the New Relic agent in "development" environment.
+[2015-12-07 18:03:58 -0500 lijishandeMacBook-Pro.local (2641)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[2015-12-07 18:03:58 -0500 lijishandeMacBook-Pro.local (2641)] INFO : Reading configuration from config/newrelic.yml (/Users/CassyLee/Dropbox/cosi105b_JishanLi/nanotwitter)
+[2015-12-07 18:03:58 -0500 lijishandeMacBook-Pro.local (2641)] INFO : Environment: development
+[2015-12-07 18:03:58 -0500 lijishandeMacBook-Pro.local (2641)] INFO : No known dispatcher detected.
+[2015-12-07 18:03:58 -0500 lijishandeMacBook-Pro.local (2641)] INFO : Application: nanotwitter_relic (Development)
+[2015-12-07 18:03:58 -0500 lijishandeMacBook-Pro.local (2641)] INFO : Installing ActiveRecord 4 instrumentation
+[2015-12-07 18:03:58 -0500 lijishandeMacBook-Pro.local (2641)] INFO : Installing Net instrumentation
+[2015-12-07 18:03:58 -0500 lijishandeMacBook-Pro.local (2641)] INFO : Installing Sinatra instrumentation
+[2015-12-07 18:03:58 -0500 lijishandeMacBook-Pro.local (2641)] INFO : Installing deferred Rack instrumentation
+[2015-12-07 18:03:58 -0500 lijishandeMacBook-Pro.local (2641)] INFO : Installing Rack::Builder middleware instrumentation
+[2015-12-07 18:03:58 -0500 lijishandeMacBook-Pro.local (2641)] INFO : Installing Redis Instrumentation
+[2015-12-07 18:03:58 -0500 lijishandeMacBook-Pro.local (2641)] INFO : Finished instrumentation
+[2015-12-07 18:03:59 -0500 lijishandeMacBook-Pro.local (2641)] INFO : Reporting to: https://rpm.newrelic.com/accounts/1150571/applications/10172141
