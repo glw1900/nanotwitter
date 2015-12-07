@@ -79,14 +79,14 @@ get '/test/status' do
   rt.to_json
 end
 
-get '/test/tweet/:userid' do
-  user_name = User.find_by(id: params[:userid].to_i).username
-  new_tweet =  {
-    "content" => "this is fake twitter",
-    "media_url" => "http://somepic.jpg",
-    "retweet_id" => "34",
-    "username" => user_name
-  }
-  create_tweet(new_tweet)
-  "one tweet is created by " + user_name
-end
+# get '/test/tweet/:userid' do
+#   user_name = User.find_by(id: params[:userid].to_i).username
+#   new_tweet =  {
+#     "content" => "this is fake twitter",
+#     "media_url" => "http://somepic.jpg",
+#     "retweet_id" => "34",
+#     "username" => user_name
+#   }
+#   create_tweet(new_tweet)
+#   "one tweet is created by " + user_name
+# end
