@@ -38,7 +38,7 @@ get '/test/reset/all' do
   Tweet.delete_all()
   Follow.delete_all()
   Comment.delete_all()
-  if User.find_by(username: "testuser").nil
+  if User.find_by(username: "testuser").nil?
     User.create(username: "testuser", email: Faker::Internet.email, password: "1234", profile: nil)
   end    
   id =  User.find_by(username:"testuser").id
