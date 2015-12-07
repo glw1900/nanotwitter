@@ -12,7 +12,8 @@ get '/user/testuser' do
 end
 
 
-get '/user/testuser/tweet' do
+
+post '/user/testuser/tweet' do
   logged_username = "testuser"
   testuser = User.find_by(username: logged_username)
   if testuser != nil
@@ -20,8 +21,8 @@ get '/user/testuser/tweet' do
 
     return_message = {}
     tweet = {}
-    tweet["content"] = params[:content]
-    tweet["media_url"] = params[:media_url]
+    tweet["content"] = "a fake tweet"
+    tweet["media_url"] = "http://www.cats.org.uk/uploads/images/pages/photo_latest14.jpg"
     tweet["retweet_id"] = 0
     tweet["user_id"] = logged_id
     tweet["pub_time"] = nil
