@@ -17,19 +17,31 @@ get '/test/tweets/:num' do
     "succeed"
 end
 
-get '/test/reset' do
-	testuser = User.find_by(username: "testuser")
-	if testuser != nil
-    	testuser_id = testuser.id
-		Tweet.destroy_all("user_id = " + testuser_id.to_s)
-		Follow.destroy_all("follower_id = " + testuser_id.to_s)
-		Follow.destroy_all("followee_id = " + testuser_id.to_s)
-	else
-		User.create(username: "testuser", email: Faker::Internet.email, password: "1234", profile: nil)
-	end
-    id =  User.find_by(username:"testuser").id
-    # temp = "#{id}"
-	"reset finished, testuser created #{id}"
+# get '/test/reset/all' do
+# 	testuser = User.find_by(username: "testuser")
+# 	if testuser != nil
+#     	testuser_id = testuser.id
+# 		Tweet.destroy_all("user_id = " + testuser_id.to_s)
+# 		Follow.destroy_all("follower_id = " + testuser_id.to_s)
+# 		Follow.destroy_all("followee_id = " + testuser_id.to_s)
+# 	else
+# 		User.create(username: "testuser", email: Faker::Internet.email, password: "1234", profile: nil)
+# 	end
+#     id =  User.find_by(username:"testuser").id
+#     # temp = "#{id}"
+# 	"reset finished, testuser created #{id}"
+# end
+
+
+get '/test/reset/all' do
+  User.destroy_all()
+  Tweet.destroy_all()
+  Follow.destroy_all()
+  Comment.destroy_all()    
+  User.create(username: "testuser", email: Faker::Internet.email, password: "1234", profile: nil)
+  id =  User.find_by(username:"testuser").id
+  # temp = "#{id}"
+  "reset finished, testuser created #{id}"
 end
 
 #
