@@ -62,6 +62,7 @@ def sql_to_hash(tw, logged)
   retweet_user_id = Tweet.find_by(id:tw["retweet_id"]).id
   t["retweet_user_name"] = User.find_by(id: retweet_user_id).username
   t["abbreviation"] = nil
+
   if tw["retweet_id"] != nil
     t["abbreviation"] = top_n_word_from_tweet(tw["retweet_id"])
   end
@@ -78,8 +79,16 @@ end
 end
 
 def top_n_word_from_tweet(tweet_id)
+
+  if Tweet.find_by(id: tweet_id).nil?
+    return ""
+  else
+    truecontent = Tweet.find_by(id: tweet_id).content
+    return top_n_word(truecontent,12)
+  end
   content = Tweet.find_by(id: tweet_id).content
-  return top_n_word(content)
+  return top_n_word(content, 12)
+
 end
 
 # def sql_to_hash_single(tw, logged)
@@ -104,7 +113,7 @@ def first_50_tweets_lst
   newest_50_queue = "newest50queue"
   # if first_50_queue is empty
   #/
-  if(!$redis.exists(newest_50_queue))
+  if(!$redis.exists(newest_50_queue) || ($redis.llen(newest_50_queue) <= 40))
     sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id ORDER BY T.created_at DESC LIMIT 50"
     records_array =  ActiveRecord::Base.connection.execute(sql)
     rt = tweet_array_to_hash(records_array, false)
@@ -136,8 +145,6 @@ def first_50_tweets_lst_no_redis
     rt.each do |tweet|
       $redis.rpush(newest_50_queue, tweet.to_json)
     end
-  # end
-
   array_of_jsons = $redis.lrange( "newest50queue",0,49)
   rt_array = Array.new
   array_of_jsons.each do |js|
@@ -160,7 +167,6 @@ end
 
 def get_user_profile(user_id)
   image_url = "https://upload.wikimedia.org/wikipedia/commons/f/f6/Barack_Obama_and_Bill_Clinton_profile.jpg"
-
   rt = {}
   rt["username"] = User.find_by(id: user_id).username
   rt["follower_id"] = user_id
@@ -174,6 +180,13 @@ def get_time_line(user_id)
   rt = {}
   rt["logged_user_profile"] = get_user_profile(user_id)
   rt["timeline_twitter_list"] = get_time_line_tweets(user_id)
+  num = 0
+  rt["timeline_twitter_list"].each do |tw|
+    if tw["by_user"] == session["username"]
+      num = num + 1
+    end
+  end
+  rt["logged_user_profile"]["tweet_num"] = num
   return rt
 end
 
@@ -346,6 +359,7 @@ def top_n_word(str,n)
   str.split(/\s+/, n+1)[0...n].join(' ')
 end
 
+
 def user_a_favor_tweet_list(user_id)
     sql = "SELECT T.id, T.content,T.retweet_id, F.created_at, T.user_id, U.username
         FROM tweets AS T, favorites as F, users AS U
@@ -356,4 +370,3 @@ def user_a_favor_tweet_list(user_id)
   records_array = ActiveRecord::Base.connection.execute(sql)
   return tweet_array_to_hash(records_array, true)
 end
-

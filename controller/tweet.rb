@@ -47,11 +47,5 @@ get '/tweets/:tweet_id' do
     @parameters["logged_user"] = session[:username]
   end
   @parameters.to_json
+  erb :tweet
 end
-
-
-
-
-
-
-

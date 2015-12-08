@@ -9,25 +9,20 @@ get '/user/testuser' do
   testuser = User.find_by(username: logged_username)
   if testuser != nil
     logged_id = testuser.id
-  else
-    "testuser does not exist"
-  end
-
-  @parameters = {}
-  # if($redis.exists("test_user_timeline_change"))
-    if($redis.get("test_user_timeline_change") == "true")
+    @parameters = {}
+    if($redis.get("test_user_timeline_change") == "true" or $redis.get("test_user_timeline_change") == nil)
       @parameters = get_time_line(logged_id)
       $redis.set("test_user_timeline", @parameters.to_json)
       $redis.set("test_user_timeline_change", "false")
     else
       @parameters = JSON.parse($redis.get("test_user_timeline").gsub('=>', ':'))
     end
-  # else
-  #     @parameters = JSON.parse($redis.get("test_user_timeline").gsub('=>', ':'))
-  # end
-
+  else
+    "testuser does not exist"
+  end
   erb :timeline
 end
+
 
 post '/user/testuser/tweet' do
   logged_username = "testuser"
@@ -38,7 +33,7 @@ post '/user/testuser/tweet' do
     tweet = {}
     tweet["content"] = Faker::Bitcoin.address
     tweet["media_url"] = "http://www.cats.org.uk/uploads/images/pages/photo_latest14.jpg"
-    tweet["retweet_id"] = 0
+    tweet["retweet_id"] = nil
     tweet["user_id"] = logged_id
     tweet["pub_time"] = nil
     newest_50_queue = "newest50queue"
@@ -46,7 +41,7 @@ post '/user/testuser/tweet' do
     if @new_tweet.save!
       $redis.set("test_user_timeline_change", "true")
       h = sql_to_hash(@new_tweet, false)
-      h["by_user"] = params["username"]
+      h["by_user"] = logged_username
       $redis.rpush(newest_50_queue, h.to_json)
       $redis.lpop(newest_50_queue)
       response["posted_tweet_id"] = "#{@new_tweet.id}"
