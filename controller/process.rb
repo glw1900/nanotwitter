@@ -76,8 +76,12 @@ end
 
 
 def top_n_word_from_tweet(tweet_id)
-  content = Tweet.find_by(id: tweet_id).content
-  return top_n_word(content)
+  if Tweet.find_by(id: tweet_id).nil?
+    return ""
+  else
+    truecontent = Tweet.find_by(id: tweet_id).content
+    return top_n_word(truecontent,12)
+  end
 end
 
 # def sql_to_hash_single(tw, logged)
@@ -343,4 +347,3 @@ end
 def top_n_word(str,n)
   str.split(/\s+/, n+1)[0...n].join(' ')
 end
-

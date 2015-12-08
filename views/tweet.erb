@@ -66,15 +66,54 @@
    </div>
  </div>
 
+ <div id="addRetweet" class="modal fade" role="dialog">
+<div class="modal-dialog">
+
+  <!-- Modal content-->
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <h4 class="modal-title">Retweet</h4>
+    </div>
+    <div class="modal-body">
+      <form role="form" action="/create/tweet"method="POST">
+        <textarea class="form-control" placeholder="something want to say..." name="content"></textarea>
+        <input type="hidden" name="tweet_id" id="tweet_id">
+        <input type="hidden" name="username" value=<%= @parameters["logged_user"]%>>
+        <button class="btn btn-primary">comment</button>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+  </div>
+</div>
+
   <ul class="list-group">
     <li class="list-group-item">
       <a href = '/users/<%=@parameters["username"] %>'><h3><strong> <%= @parameters["username"] %></strong> <small>@<%= @parameters["created_at"] %></small></h3></a>
       <p><%= @parameters["content"] %> </p>
-      <p><%= @parameters["username"] %></p>
-      <button type="button" class="open-AddComment btn btn-info" data-toggle="modal" data-what= "<%= @parameters["id"] %>" data-target="#addComment">Comment</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <button type="button" class="btn btn-info">Retweet</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <% if !@parameters["retweet_id"].nil? %>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <a href="/tweets/<%= @parameters["retweet_id"] %>"> <%= @parameters["abbreviation"] %> </a>
+        </ul>
+      <% end %>
+      <button type="button" class="btn btn-info" data-toggle="modal" data-what= "<%= @parameters["id"] %>" data-target="#addComment">Comment</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button type="button" class="btn btn-info" data-toggle="modal" data-what= "<%= @parameters["id"] %>" data-target="#addRetweet">Retweet</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <button type="button" class="btn btn-info">Favorite</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   </ul>
+  <% if !@parameters["comment"].nil? %>
+    <h2>Coments</h2>
+    <ul class="list-group">
+        <% @parameters["comment"].each do |com| %>
+          <li class="list-group-item">
+            <a href = '/users/<%=com["username"] %>'><h4><strong> <%= com["username"] %></strong> <small>@<%= com["created_at"] %></small></h4></a>
+            <p><%= com["content"] %> </p>
+        <% end %>
+    </ul>
+  <% end %>
 
   <script>
   $('#addComment').on('show.bs.modal', function (event) {
@@ -84,6 +123,14 @@
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
     modal.find('.modal-body input').val(tweetID)
+  })
+  $('#addRetweet').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var tweetID = button.data('what') // Extract info from data-* attributes
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+    modal.find('.modal-body input[name="retweet_id"]').val(tweetID)
   })
   </script>
 
