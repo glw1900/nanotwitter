@@ -17,9 +17,9 @@ get '/user/testuser' do
       $redis.set("test_user_timeline", @parameters.to_json)
       $redis.set("test_user_timeline_change") == "false"
     end
-      @parameters = JSON.parse($redis.get("test_user_timeline"))
+      @parameters = JSON.parse($redis.get("test_user_timeline").gsub('=>', ':'))
   else
-      @parameters = JSON.parse($redis.get("test_user_timeline"))
+      @parameters = JSON.parse($redis.get("test_user_timeline").gsub('=>', ':'))
   end
 
 
