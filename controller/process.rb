@@ -65,7 +65,7 @@ def sql_to_hash(tw, logged)
     t["retweet_user_name"] = User.find_by(id: retweet_user_id).username
     t["abbreviation"] = top_n_word_from_tweet(tw["retweet_id"])
   end
-  if ts["has_comment"] != nil
+  if t["has_comment"] != nil
     t["comment"] = get_comment_list(tw["id"])
   end
   # t["favored"] = 
@@ -154,7 +154,7 @@ def get_time_line_tweets(user_id)
   /#
   return an array of hash
   #/
-  sql = "SELECT T.id, T.content, T.created_at, T.retweet_id,T.has_comment, T.U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND ( (T.user_id = #{user_id}) OR (T.user_id IN
+  sql = "SELECT T.id, T.content, T.created_at, T.retweet_id,T.has_comment, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND ( (T.user_id = #{user_id}) OR (T.user_id IN
   (SELECT DISTINCT followee_id FROM follows AS F WHERE F.follower_id = #{user_id})) ) ORDER BY T.created_at "
   records_array = ActiveRecord::Base.connection.execute(sql)
   rt = tweet_array_to_hash(records_array, true)
