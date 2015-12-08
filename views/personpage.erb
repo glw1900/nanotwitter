@@ -153,10 +153,18 @@
 
             <li class="list-group-item">
               <h3><strong> <%= @parameters["username"] %></strong> <small>@<%= tweet["time"] %></small></h3>
-              <p><%= tweet["text"] %> </p>
+              <a href="/tweets/<%= tweet["id"] %>"> <%= tweet["text"] %> </a>
+              <br>
+              <% if !tweet["retweet_id"].nil? %>
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    <a href = '/users/<%=tweet["by_user"] %>'><h4><%= tweet["retweet_user_name"] %></h4></a>
+                    <a href="/tweets/<%= tweet["retweet_id"] %>"> <%= tweet["abbreviation"] %> </a>
+                </ul>
+              <% end %>
               <button type="button" class="btn btn-info" data-toggle="modal" data-what= "<%= tweet["id"] %>" data-target="#addComment">Comment</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <button type="button" class="btn btn-info" data-toggle="modal" data-what= "<%= tweet["id"] %>" data-target="#addRetweet">Retweet</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <button type="button" class="btn btn-info">Favorite</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
           <% end %>
         <%else%>
           <p>publish some tweets!</p>
