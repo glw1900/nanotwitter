@@ -31,7 +31,6 @@ get '/test/reset/all' do
   "reset finished, testuser created #{id}"
 end
 
-#
 get '/test/seed/:num' do
   i = 0
   num = params[:num].to_i
