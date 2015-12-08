@@ -58,6 +58,12 @@ def sql_to_hash(tw, logged)
   t["id"] = tw["id"]
   t["time"] = tw["created_at"]
   t["by_user"] = tw["username"]
+  t["retweet_id"] = tw["retweet_id"]
+  t["abbreviation"] = nil
+  if tw["retweet_id"] != nil
+    t["abbreviation"] = top_n_word_from_tweet(tw["retweet_id"])
+  end
+
   # below is made up
   t["favourite_number"] = 109
   t["comment"] = get_comment_list(tw["id"])
@@ -68,6 +74,11 @@ def sql_to_hash(tw, logged)
   return t
 end
 
+
+def top_n_word_from_tweet(tweet_id)
+  content = Tweet.find_by(id: tweet_id).content
+  return top_n_word(content)
+end
 
 # def sql_to_hash_single(tw, logged)
 #   t = Hash.new()
@@ -328,4 +339,7 @@ def make_fake_tweets(user_name, num)
 #    binding.pry
 end
 
+def top_n_word(str,n)
+  str.split(/\s+/, n+1)[0...n].join(' ')
+end
 
