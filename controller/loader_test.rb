@@ -5,6 +5,7 @@ $redis = Redis.new(:url => "redis://redistogo:6089d2a4552e7700e65eebca0fdbca63@p
 
 
 get '/user/testuser' do
+  binding.pry
   logged_username = "testuser"
   testuser = User.find_by(username: logged_username)
   if testuser != nil
