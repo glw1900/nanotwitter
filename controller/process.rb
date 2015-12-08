@@ -59,22 +59,24 @@ def sql_to_hash(tw, logged)
   t["time"] = tw["created_at"]
   t["by_user"] = tw["username"]
   t["retweet_id"] = tw["retweet_id"]
+  retweet_user_id = Tweet.find_by(id:tw["retweet_id"]).id
+  t["retweet_user_name"] = User.find_by(id: retweet_user_id).username
   t["abbreviation"] = nil
 
   if tw["retweet_id"] != nil
     t["abbreviation"] = top_n_word_from_tweet(tw["retweet_id"])
   end
-
-  # below is made up
-  t["favourite_number"] = 109
   t["comment"] = get_comment_list(tw["id"])
+  t["favored"] = 
   if logged
     #fake data
-     t["has_this_user_favorited_this_tweet"] = false
+    t["has_this_user_favorited_this_tweet"] = false
   end
   return t
 end
 
+  
+end
 
 def top_n_word_from_tweet(tweet_id)
 
@@ -111,7 +113,7 @@ def first_50_tweets_lst
   newest_50_queue = "newest50queue"
   # if first_50_queue is empty
   #/
-  if(!$redis.exists(newest_50_queue))
+  if(!$redis.exists(newest_50_queue) || ($redis.llen(newest_50_queue) <= 40))
     sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id ORDER BY T.created_at DESC LIMIT 50"
     records_array =  ActiveRecord::Base.connection.execute(sql)
     rt = tweet_array_to_hash(records_array, false)
