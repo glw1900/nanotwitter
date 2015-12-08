@@ -60,8 +60,9 @@ def sql_to_hash(tw, logged)
   t["by_user"] = tw["username"]
   t["retweet_id"] = tw["retweet_id"]
   t["abbreviation"] = nil
+
   if tw["retweet_id"] != nil
-    t["abbreviation"] = top_n_word_from_tweet(tw["retweet_id"],12)
+    t["abbreviation"] = top_n_word_from_tweet(tw["retweet_id"])
   end
 
   # below is made up
@@ -77,7 +78,7 @@ end
 
 def top_n_word_from_tweet(tweet_id)
   content = Tweet.find_by(id: tweet_id).content
-  return top_n_word(content)
+  return top_n_word(content, 12)
 end
 
 # def sql_to_hash_single(tw, logged)

@@ -33,7 +33,7 @@ post '/user/testuser/tweet' do
     tweet = {}
     tweet["content"] = Faker::Bitcoin.address
     tweet["media_url"] = "http://www.cats.org.uk/uploads/images/pages/photo_latest14.jpg"
-    tweet["retweet_id"] = 0
+    tweet["retweet_id"] = nil
     tweet["user_id"] = logged_id
     tweet["pub_time"] = nil
     newest_50_queue = "newest50queue"
