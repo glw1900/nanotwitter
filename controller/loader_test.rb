@@ -10,7 +10,7 @@ get '/user/testuser' do
   if testuser != nil
     logged_id = testuser.id
     @parameters = {}
-    if($redis.get("test_user_timeline_change") == "true" || $redis.get("test_user_timeline_change") == nil)
+    if($redis.get("test_user_timeline_change") == "true" or $redis.get("test_user_timeline_change") == nil)
       @parameters = get_time_line(logged_id)
       $redis.set("test_user_timeline", @parameters.to_json)
       $redis.set("test_user_timeline_change", "false")
