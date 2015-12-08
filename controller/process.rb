@@ -58,13 +58,15 @@ def sql_to_hash(tw, logged)
   t["id"] = tw["id"]
   t["time"] = tw["created_at"]
   t["by_user"] = tw["username"]
+  t["retweet_id"] = tw["retweet_id"]
+  t["abbreviation"] = nil
+  if tw["retweet_id"] != nil
+    t["abbreviation"] = top_n_word_from_tweet(tw["retweet_id"])
+  end
+
   # below is made up
-  t["favourite_number"] = 10
-  t["comment"] = Hash.new
-  t["comment"]["commenter_name"] = "fake_name_1"
-  t["comment"]["content"] = "fake_content_2"
-  t["comment"]["time"] = "2007-10-23 22:15:15 UTC"
-  t["comment"]["reply_to"] = "fake_content_3"
+  t["favourite_number"] = 109
+  t["comment"] = get_comment_list(tw["id"])
   if logged
     #fake data
      t["has_this_user_favorited_this_tweet"] = false
@@ -73,24 +75,25 @@ def sql_to_hash(tw, logged)
 end
 
 
-def sql_to_hash_single(tw, logged)
-  t = Hash.new()
-  t["text"] = tw["content"]
-  t["time"] = tw["created_at"]
-  t["by_user"] = tw["username"]
-  # below is made up
-  t["favourite_number"] = 10
-  t["comment"] = Hash.new
-  t["comment"]["commenter_name"] = "fake_name_1"
-  t["comment"]["content"] = "fake_content_2"
-  t["comment"]["time"] = "2007-10-23 22:15:15 UTC"
-  t["comment"]["reply_to"] = "fake_content_3"
-  if logged
-    #fake data
-     t["has_this_user_favorited_this_tweet"] = false
-  end
-  return t
+def top_n_word_from_tweet(tweet_id)
+  content = Tweet.find_by(id: tweet_id).content
+  return top_n_word(content)
 end
+
+# def sql_to_hash_single(tw, logged)
+#   t = Hash.new()
+#   t["text"] = tw["content"]
+#   t["time"] = tw["created_at"]
+#   t["by_user"] = tw["username"]
+#   # below is made up
+#   t["favourite_number"] = 10
+#   t["comment"] = get_comment_list()
+#   if logged
+#     #fake data
+#      t["has_this_user_favorited_this_tweet"] = false
+#   end
+#   return t
+# end
 
 def first_50_tweets_lst
   /#
@@ -312,10 +315,11 @@ end
 
 def make_follower(followee_id, num)
   sample_ids = User.pluck(:id).sample(num)
-
   i = 0
   while(i < num) do
-    Follow.create(follower_id: sample_ids[i], followee_id: followee_id)
+    if Follow.find_by(follower_id: sample_ids[i], followee_id: followee_id).nil? and sample_ids[i] != followee_id
+      Follow.create(follower_id: sample_ids[i], followee_id: followee_id)
+    end
     i = i + 1
   end
 end
@@ -335,3 +339,8 @@ def make_fake_tweets(user_name, num)
     Tweet.bulk_insert(values, columns)
 #    binding.pry
 end
+
+def top_n_word(str,n)
+  str.split(/\s+/, n+1)[0...n].join(' ')
+end
+
