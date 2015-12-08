@@ -75,8 +75,7 @@ def sql_to_hash(tw, logged)
   return t
 end
 
-  
-end
+
 
 def top_n_word_from_tweet(tweet_id)
 
