@@ -103,28 +103,26 @@
     <div class="col-sm-3">
       <div class="img-responsive">
         <img class="embed-responsive-item" src="https://lh3.googleusercontent.com/-3Zqv6Of_vlk/AAAAAAAAAAI/AAAAAAAAAAA/JiFX6Ovb6nc/photo.jpg" style="height:230px; width: 270px; display:block;"></iframe>
-       
       </div>
+
       <h1>  <%=@parameters["username"]%> </h1>
+
     </div>
     <div class="col-sm-9">
-      
       <ul class="list-group">
         <% if !@parameters["users_list"].nil? %>
           <% @parameters["users_list"].each do |users| %>
             <li class="list-group-item">
               <h3><strong> <%= users["username"] %></strong> <small>@<%= users["followed_at_time"] %></small></h3>
               <button type="button" class="btn btn-info">Follow</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <% end %>
+          <%end%>
         <%else%>
           <p>publish some tweets!</p>
         <% end %>
       </ul>
-
     </div>
   </div>
 </div>
 </div>
-
 </body>
 </html>
