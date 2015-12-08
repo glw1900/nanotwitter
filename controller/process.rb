@@ -286,9 +286,10 @@ def view_a_twitter(tweet_id)
     res["abbreviation"] = top_n_word_from_tweet(t["retweet_id"])
   end
   res["user_id"] = t.user_id
-  res["has_comment"] = t.has_comment
   res["by_user"] = User.find_by(id: t.user_id).username
-  res["comment"] = get_comment_list(tweet_id)
+  if t.has_comment != nil
+    res["comment"] = get_comment_list(tweet_id)
+  end
   return res
 end
 
