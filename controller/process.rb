@@ -103,7 +103,7 @@ def first_50_tweets_lst
   newest_50_queue = "newest50queue"
   # if first_50_queue is empty
   #/
-  if(!$redis.exists(newest_50_queue))
+  if(!$redis.exists(newest_50_queue) || ($redis.llen(newest_50_queue) <= 40))
     sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id ORDER BY T.created_at DESC LIMIT 50"
     records_array =  ActiveRecord::Base.connection.execute(sql)
     rt = tweet_array_to_hash(records_array, false)
@@ -164,10 +164,6 @@ def get_user_profile(user_id)
   rt["follow_number"] = how_many_do_i_follow(user_id)
   rt["follower_number"] = how_many_follow_me(user_id)
   return rt
-end
-
-def my_tweet_num(user_id, )
-
 end
 
 def get_time_line(user_id)
