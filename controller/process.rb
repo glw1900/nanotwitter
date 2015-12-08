@@ -59,21 +59,23 @@ def sql_to_hash(tw, logged)
   t["time"] = tw["created_at"]
   t["by_user"] = tw["username"]
   t["retweet_id"] = tw["retweet_id"]
+  retweet_user_id = Tweet.find_by(id:tw["retweet_id"]).id
+  t["retweet_user_name"] = User.find_by(id: retweet_user_id).username
   t["abbreviation"] = nil
   if tw["retweet_id"] != nil
     t["abbreviation"] = top_n_word_from_tweet(tw["retweet_id"])
   end
-
-  # below is made up
-  t["favourite_number"] = 109
   t["comment"] = get_comment_list(tw["id"])
+  t["favored"] = 
   if logged
     #fake data
-     t["has_this_user_favorited_this_tweet"] = false
+    t["has_this_user_favorited_this_tweet"] = false
   end
   return t
 end
 
+  
+end
 
 def top_n_word_from_tweet(tweet_id)
   content = Tweet.find_by(id: tweet_id).content
