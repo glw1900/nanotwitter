@@ -280,10 +280,14 @@ def view_a_twitter(tweet_id)
   res["text"] = t.content
   res["time"] = t.created_at
   res["retweet_id"] = t.retweet_id
+  if t.retweet_id != nil
+    retweet_user_id = Tweet.find_by(id: t.retweet_id).user_id
+    res["retweet_user_name"] = User.find_by(id: retweet_user_id).username
+    res["abbreviation"] = top_n_word_from_tweet(t["retweet_id"])
+  end
   res["user_id"] = t.user_id
   res["has_comment"] = t.has_comment
   res["by_user"] = User.find_by(id: t.user_id).username
-  res["abbreviation"] = top_n_word_from_tweet(t["retweet_id"])
   res["comment"] = get_comment_list(tweet_id)
   return res
 end
