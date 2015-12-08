@@ -33,7 +33,6 @@ get '/test/reset/all' do
   "reset finished, testuser created #{id}"
 end
 
-#
 get '/test/seed/:num' do
   i = 0
   num = params[:num].to_i
@@ -45,7 +44,6 @@ get '/test/seed/:num' do
 	end
 	params[:num] +' users created'
 end
-
 
 get '/test/follow/:num' do
   testuser_id = User.find_by(username: "testuser").id
