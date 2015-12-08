@@ -61,7 +61,7 @@ def sql_to_hash(tw, logged)
   t["retweet_id"] = tw["retweet_id"]
   t["abbreviation"] = nil
   if tw["retweet_id"] != nil
-    t["abbreviation"] = top_n_word_from_tweet(tw["retweet_id"])
+    t["abbreviation"] = top_n_word_from_tweet(tw["retweet_id"],12)
   end
 
   # below is made up
