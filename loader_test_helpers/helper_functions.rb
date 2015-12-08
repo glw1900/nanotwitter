@@ -5,7 +5,7 @@ $url = "http://hugetwitter.herokuapp.com"
 
 $u = 500
 $t = 500
-$f = 100
+$f = 30
 
 
 HTTP.get($url + "/test/reset/all")
