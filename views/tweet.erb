@@ -10,9 +10,82 @@
     <script src="/js/bootstrap.min.js"></script>
 </head>
 <body>
+  <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/timeline">Home</a>
+      <a class="navbar-brand" href="#">Notifications</a>
+      <a class="navbar-brand" href="#">Moments</a>
+      <a class="navbar-brand" href="#">Messages</a>
+    </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+        </li>
+      </ul>
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+       <ul class="nav  navbar-right"><li>
+        <button type="button" class="btn btn-default btn-lg"><a href="/logout">Log Out</a></button>
+       </li></ul>
 
+     </div>
+    </div>
+  </nav>
 
+  <div id="addComment" class="modal fade" role="dialog">
+ <div class="modal-dialog">
 
+   <!-- Modal content-->
+   <div class="modal-content">
+     <div class="modal-header">
+       <button type="button" class="close" data-dismiss="modal">&times;</button>
+       <h4 class="modal-title">Comment</h4>
+     </div>
+     <div class="modal-body">
+       <form role="form" action="/create/comment"method="POST">
+         <textarea class="form-control" placeholder="comment here..." name="content"></textarea>
+         <input type="hidden" name="tweet_id" id="tweet_id">
+         <button class="btn btn-primary">comment</button>
+       </form>
+     </div>
+     <div class="modal-footer">
+       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+     </div>
+   </div>
+   </div>
+ </div>
+
+  <ul class="list-group">
+    <li class="list-group-item">
+      <a href = '/users/<%=@parameters["username"] %>'><h3><strong> <%= @parameters["username"] %></strong> <small>@<%= @parameters["created_at"] %></small></h3></a>
+      <p><%= @parameters["content"] %> </p>
+      <p><%= @parameters["username"] %></p>
+      <button type="button" class="open-AddComment btn btn-info" data-toggle="modal" data-what= "<%= @parameters["id"] %>" data-target="#addComment">Comment</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button type="button" class="btn btn-info">Retweet</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button type="button" class="btn btn-info">Favorite</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </ul>
+
+  <script>
+  $('#addComment').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var tweetID = button.data('what') // Extract info from data-* attributes
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+    modal.find('.modal-body input').val(tweetID)
+  })
+  </script>
 
 </body>
 </html>

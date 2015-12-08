@@ -128,12 +128,9 @@
             <li class="list-group-item">
               <a href = '/users/<%=tweet["by_user"] %>'><h3><strong> <%= tweet["by_user"] %></strong> <small>@<%= tweet["time"] %></small></h3></a>
               <p><%= tweet["text"] %> </p>
-              <p><%= tweet["id"] %> </p>
-              <p> whatever  </p>
               <button type="button" class="open-AddComment btn btn-info" data-toggle="modal" data-what= "<%= tweet["id"] %>" data-target="#addComment">Comment</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <button type="button" class="btn btn-info">Retweet</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <button type="button" class="btn btn-info">Favorite</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
           <% end %>
         <%else%>
           <p>publish some tweets!</p>
