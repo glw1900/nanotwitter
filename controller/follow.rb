@@ -29,7 +29,6 @@ post '/create/user' do
   "Password not match"
 end
 
-
 post '/create/follow' do
   follow = Follow.new()
   if(params[:follower_id] != nil)

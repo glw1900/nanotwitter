@@ -150,7 +150,7 @@ def get_time_line_tweets(user_id)
   return an array of hash
   #/
   sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND ( (T.user_id = #{user_id}) OR (T.user_id IN
-  (SELECT DISTINCT followee_id FROM follows AS F WHERE F.follower_id = #{user_id})) ) ORDER BY T.created_at ASC"
+  (SELECT DISTINCT followee_id FROM follows AS F WHERE F.follower_id = #{user_id})) ) ORDER BY T.created_at "
   records_array = ActiveRecord::Base.connection.execute(sql)
   rt = tweet_array_to_hash(records_array, true)
   return rt
@@ -289,7 +289,7 @@ def comment_arr_to_hash(comments_array)
   arr = Array.new()
   comments_array.each do |comment|
     h = Hash.new()
-    h["username"] = comment["username"]
+    h["commenter_name"] = comment["username"]
     h["content"] = comment["content"]
     h["created_at"] = comment["created_at"]
     arr << h
@@ -342,5 +342,16 @@ end
 
 def top_n_word(str,n)
   str.split(/\s+/, n+1)[0...n].join(' ')
+end
+
+def user_a_favor_tweet_list(user_id)
+    sql = "SELECT T.id, T.content,T.retweet_id, F.created_at, T.user_id, U.username
+        FROM tweets AS T, favorites as F, users AS U
+        WHERE T.id = F.tweet_id
+        AND T.user_id = U.id
+        AND F.user_id = #{user_id}
+        ORDER BY F.created_at DESC"
+  records_array = ActiveRecord::Base.connection.execute(sql)
+  return tweet_array_to_hash(records_array, true)
 end
 
