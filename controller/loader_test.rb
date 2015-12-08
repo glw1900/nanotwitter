@@ -1,5 +1,7 @@
 require 'faker'
-
+require 'redis'
+require 'json'
+$redis = Redis.new(:url => "redis://redistogo:6089d2a4552e7700e65eebca0fdbca63@panga.redistogo.com:9792")
 get '/user/testuser' do
   logged_username = "testuser"
   testuser = User.find_by(username: logged_username)
@@ -9,7 +11,18 @@ get '/user/testuser' do
     "testuser does not exist"
   end
   @parameters = {}
-  @parameters = get_time_line(logged_id)
+  if($redis.exist("test_user_timeline_change"))
+    if($redis.get("test_user_timeline_change") == "true")
+      @parameters = get_time_line(logged_id)
+      $redis.set("test_user_timeline", @parameters.to_json)
+      $redis.set("test_user_timeline_change") == "false"
+    end
+      @parameters = JSON.parse($redis.get("test_user_timeline"))
+  else
+      @parameters = JSON.parse($redis.get("test_user_timeline"))
+  end
+
+
   erb :timeline
 end
 
@@ -28,6 +41,7 @@ post '/user/testuser/tweet' do
     newest_50_queue = "newest50queue"
     @new_tweet = Tweet.new(tweet)
     if @new_tweet.save!
+      $redis.set("test_user_timeline_change", "true")
       h = sql_to_hash(@new_tweet, false)
       h["by_user"] = params["username"]
       $redis.rpush(newest_50_queue, h.to_json)
