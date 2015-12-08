@@ -314,7 +314,7 @@ def make_follower(followee_id, num)
   sample_ids = User.pluck(:id).sample(num)
   i = 0
   while(i < num) do
-    if Follow.find_by(follower_id: sample_ids[i], followee_id: followee_id).nil and sample_ids[i] != followee_id?
+    if Follow.find_by(follower_id: sample_ids[i], followee_id: followee_id).nil and sample_ids[i] != followee_id
       Follow.create(follower_id: sample_ids[i], followee_id: followee_id)
     end
     i = i + 1
