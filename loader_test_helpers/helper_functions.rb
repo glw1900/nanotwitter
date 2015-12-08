@@ -1,9 +1,7 @@
 require 'http'
 
 $url = "http://hugetwitter.herokuapp.com"
-
-
-$u = 100
+$u = 500
 $t = 500
 $f = 30
 
