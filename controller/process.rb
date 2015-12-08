@@ -77,17 +77,16 @@ end
 
 
 def top_n_word_from_tweet(tweet_id)
-<<<<<<< HEAD
+
   if Tweet.find_by(id: tweet_id).nil?
     return ""
   else
     truecontent = Tweet.find_by(id: tweet_id).content
     return top_n_word(truecontent,12)
   end
-=======
   content = Tweet.find_by(id: tweet_id).content
   return top_n_word(content, 12)
->>>>>>> a08751285e7dad34cc470b195eecccf8bef0e108
+
 end
 
 # def sql_to_hash_single(tw, logged)
@@ -173,10 +172,6 @@ def get_user_profile(user_id)
   rt["follow_number"] = how_many_do_i_follow(user_id)
   rt["follower_number"] = how_many_follow_me(user_id)
   return rt
-end
-
-def my_tweet_num(user_id, )
-
 end
 
 def get_time_line(user_id)
