@@ -30,7 +30,7 @@ get '/loaderio-ed1bbf67a573c43a29c3a8ceeb1fb606/' do
   'loaderio-ed1bbf67a573c43a29c3a8ceeb1fb606'
 end
 
-get 'loaderio-b025f3b735c868b05d4c58827006dd6e/' do
+get '/loaderio-b025f3b735c868b05d4c58827006dd6e/' do
   'loaderio-b025f3b735c868b05d4c58827006dd6e'
 end
 
