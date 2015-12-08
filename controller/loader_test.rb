@@ -5,16 +5,11 @@ $redis = Redis.new(:url => "redis://redistogo:6089d2a4552e7700e65eebca0fdbca63@p
 
 
 get '/user/testuser' do
-  binding.pry
   logged_username = "testuser"
   testuser = User.find_by(username: logged_username)
   if testuser != nil
     logged_id = testuser.id
-  else
-    "testuser does not exist"
-  end
-
-  @parameters = {}
+    @parameters = {}
   # if($redis.exists("test_user_timeline_change"))
     if($redis.get("test_user_timeline_change") == "true")
       @parameters = get_time_line(logged_id)
@@ -23,6 +18,11 @@ get '/user/testuser' do
     else
       @parameters = JSON.parse($redis.get("test_user_timeline").gsub('=>', ':'))
     end
+  else
+    "testuser does not exist"
+  end
+
+  
   # else
   #     @parameters = JSON.parse($redis.get("test_user_timeline").gsub('=>', ':'))
   # end
