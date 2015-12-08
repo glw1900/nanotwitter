@@ -1,47 +1,33 @@
 require 'faker'
 require 'bulk-insert-active-record'
 get '/test/tweets/:num' do
-    testuser = User.find_by(username: "testuser")
-    if(testuser != nil)
-        testuser_id = testuser.id
-        i = 0
-        num = params['num'].to_i
-        while(i < num) do
-          if Tweet.find_by(content: "a fake tweet #{i}").nil?
-            Tweet.create(user_id: testuser_id, content: "a fake tweet #{i}")
-          end
-          i = i + 1
+  $redis.set("test_user_timeline_change", "true")
+  testuser = User.find_by(username: "testuser")
+  if(testuser != nil)
+      testuser_id = testuser.id
+      i = 0
+      num = params['num'].to_i
+      while(i < num) do
+        if Tweet.find_by(content: "a fake tweet #{i}").nil?
+          Tweet.create(user_id: testuser_id, content: "a fake tweet #{i}")
         end
-    else
-    'testuser not exist'
-    end
-    "succeed"
+        i = i + 1
+      end
+  else
+  'testuser not exist'
+  end
+  "succeed"
 end
-
-# get '/test/reset/all' do
-# 	testuser = User.find_by(username: "testuser")
-# 	if testuser != nil
-#     	testuser_id = testuser.id
-# 		Tweet.destroy_all("user_id = " + testuser_id.to_s)
-# 		Follow.destroy_all("follower_id = " + testuser_id.to_s)
-# 		Follow.destroy_all("followee_id = " + testuser_id.to_s)
-# 	else
-# 		User.create(username: "testuser", email: Faker::Internet.email, password: "1234", profile: nil)
-# 	end
-#     id =  User.find_by(username:"testuser").id
-#     # temp = "#{id}"
-# 	"reset finished, testuser created #{id}"
-# end
-
 
 get '/test/reset/all' do
   User.delete_all()
   Tweet.delete_all()
   Follow.delete_all()
   Comment.delete_all()
+  $redis.set("test_user_timeline_change", "true")
   if User.find_by(username: "testuser").nil?
     User.create(username: "testuser", email: Faker::Internet.email, password: "1234", profile: nil)
-  end    
+  end
   id =  User.find_by(username:"testuser").id
   # temp = "#{id}"
   "reset finished, testuser created #{id}"
@@ -82,15 +68,3 @@ get '/test/status' do
   end
   rt.to_json
 end
-
-# get '/test/tweet/:userid' do
-#   user_name = User.find_by(id: params[:userid].to_i).username
-#   new_tweet =  {
-#     "content" => "this is fake twitter",
-#     "media_url" => "http://somepic.jpg",
-#     "retweet_id" => "34",
-#     "username" => user_name
-#   }
-#   create_tweet(new_tweet)
-#   "one tweet is created by " + user_name
-# end
