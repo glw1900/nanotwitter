@@ -1442,3 +1442,18 @@
 [2015-12-08 00:46:46 -0500 lijishandeMacBook-Pro.local (4593)] INFO : Finished instrumentation
 [2015-12-08 00:46:48 -0500 lijishandeMacBook-Pro.local (4593)] INFO : Reporting to: https://rpm.newrelic.com/accounts/1150571/applications/10172141
 [2015-12-08 00:46:52 -0500 lijishandeMacBook-Pro.local (4593)] INFO : Doing deferred dependency-detection before Rack startup
+[2015-12-08 00:49:16 -0500 lijishandeMacBook-Pro.local (4625)] INFO : Starting the New Relic agent in "development" environment.
+[2015-12-08 00:49:16 -0500 lijishandeMacBook-Pro.local (4625)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[2015-12-08 00:49:16 -0500 lijishandeMacBook-Pro.local (4625)] INFO : Reading configuration from config/newrelic.yml (/Users/CassyLee/Dropbox/cosi105b_JishanLi/nanotwitter)
+[2015-12-08 00:49:16 -0500 lijishandeMacBook-Pro.local (4625)] INFO : Environment: development
+[2015-12-08 00:49:16 -0500 lijishandeMacBook-Pro.local (4625)] INFO : No known dispatcher detected.
+[2015-12-08 00:49:16 -0500 lijishandeMacBook-Pro.local (4625)] INFO : Application: nanotwitter_relic (Development)
+[2015-12-08 00:49:16 -0500 lijishandeMacBook-Pro.local (4625)] INFO : Installing ActiveRecord 4 instrumentation
+[2015-12-08 00:49:16 -0500 lijishandeMacBook-Pro.local (4625)] INFO : Installing Net instrumentation
+[2015-12-08 00:49:16 -0500 lijishandeMacBook-Pro.local (4625)] INFO : Installing Sinatra instrumentation
+[2015-12-08 00:49:16 -0500 lijishandeMacBook-Pro.local (4625)] INFO : Installing deferred Rack instrumentation
+[2015-12-08 00:49:16 -0500 lijishandeMacBook-Pro.local (4625)] INFO : Installing Rack::Builder middleware instrumentation
+[2015-12-08 00:49:16 -0500 lijishandeMacBook-Pro.local (4625)] INFO : Installing Redis Instrumentation
+[2015-12-08 00:49:16 -0500 lijishandeMacBook-Pro.local (4625)] INFO : Finished instrumentation
+[2015-12-08 00:49:16 -0500 lijishandeMacBook-Pro.local (4625)] INFO : Reporting to: https://rpm.newrelic.com/accounts/1150571/applications/10172141
+[2015-12-08 00:49:22 -0500 lijishandeMacBook-Pro.local (4625)] INFO : Doing deferred dependency-detection before Rack startup
