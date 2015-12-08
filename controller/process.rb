@@ -75,8 +75,7 @@ def sql_to_hash(tw, logged)
   return t
 end
 
-  
-end
+
 
 def top_n_word_from_tweet(tweet_id)
 
@@ -281,11 +280,11 @@ def view_a_twitter(tweet_id)
   res = {}
   t = Tweet.find_by(id: tweet_id)
   res["id"] = tweet_id
-  res["content"] = t.content
-  res["created_at"] = t.created_at
+  res["text"] = t.content
+  res["time"] = t.created_at
   res["retweet_id"] = t.retweet_id
   res["user_id"] = t.user_id
-  res["username"] = User.find_by(id: t.user_id).username
+  res["by_user"] = User.find_by(id: t.user_id).username
   res["comment"] = get_comment_list(tweet_id)
   return res
 end
