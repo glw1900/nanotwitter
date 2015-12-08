@@ -78,7 +78,7 @@
     <div class="modal-body">
       <form role="form" action="/create/tweet"method="POST">
         <textarea class="form-control" placeholder="something want to say..." name="content"></textarea>
-        <input type="hidden" name="tweet_id" id="tweet_id">
+        <input type="hidden" name="retweet_id" id="retweet_id">
         <input type="hidden" name="username" value=<%= @parameters["logged_user"]%>>
         <button class="btn btn-primary">comment</button>
       </form>

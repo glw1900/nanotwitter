@@ -1563,3 +1563,48 @@
 [2015-12-08 01:23:41 -0500 Meiyues-MacBook-Pro.local (3115)] INFO : Reporting to: https://rpm.newrelic.com/accounts/1150571/applications/10172141
 [2015-12-08 01:23:43 -0500 Meiyues-MacBook-Pro.local (3115)] INFO : Doing deferred dependency-detection before Rack startup
 >>>>>>> a462eab7ee05964c47bdca2fa6353d5d0c669acd
+[2015-12-08 01:25:04 -0500 lijishandeMacBook-Pro.local (4950)] INFO : Starting the New Relic agent in "development" environment.
+[2015-12-08 01:25:04 -0500 lijishandeMacBook-Pro.local (4950)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[2015-12-08 01:25:04 -0500 lijishandeMacBook-Pro.local (4950)] INFO : Reading configuration from config/newrelic.yml (/Users/CassyLee/Dropbox/cosi105b_JishanLi/nanotwitter)
+[2015-12-08 01:25:04 -0500 lijishandeMacBook-Pro.local (4950)] INFO : Environment: development
+[2015-12-08 01:25:04 -0500 lijishandeMacBook-Pro.local (4950)] INFO : No known dispatcher detected.
+[2015-12-08 01:25:04 -0500 lijishandeMacBook-Pro.local (4950)] INFO : Application: nanotwitter_relic (Development)
+[2015-12-08 01:25:04 -0500 lijishandeMacBook-Pro.local (4950)] INFO : Installing ActiveRecord 4 instrumentation
+[2015-12-08 01:25:04 -0500 lijishandeMacBook-Pro.local (4950)] INFO : Installing Net instrumentation
+[2015-12-08 01:25:04 -0500 lijishandeMacBook-Pro.local (4950)] INFO : Installing Sinatra instrumentation
+[2015-12-08 01:25:04 -0500 lijishandeMacBook-Pro.local (4950)] INFO : Installing deferred Rack instrumentation
+[2015-12-08 01:25:04 -0500 lijishandeMacBook-Pro.local (4950)] INFO : Installing Rack::Builder middleware instrumentation
+[2015-12-08 01:25:04 -0500 lijishandeMacBook-Pro.local (4950)] INFO : Installing Redis Instrumentation
+[2015-12-08 01:25:04 -0500 lijishandeMacBook-Pro.local (4950)] INFO : Finished instrumentation
+[2015-12-08 01:25:05 -0500 lijishandeMacBook-Pro.local (4950)] INFO : Reporting to: https://rpm.newrelic.com/accounts/1150571/applications/10172141
+[2015-12-08 01:25:08 -0500 lijishandeMacBook-Pro.local (4950)] INFO : Doing deferred dependency-detection before Rack startup
+[2015-12-08 01:28:18 -0500 lijishandeMacBook-Pro.local (4971)] INFO : Starting the New Relic agent in "development" environment.
+[2015-12-08 01:28:18 -0500 lijishandeMacBook-Pro.local (4971)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[2015-12-08 01:28:18 -0500 lijishandeMacBook-Pro.local (4971)] INFO : Reading configuration from config/newrelic.yml (/Users/CassyLee/Dropbox/cosi105b_JishanLi/nanotwitter)
+[2015-12-08 01:28:18 -0500 lijishandeMacBook-Pro.local (4971)] INFO : Environment: development
+[2015-12-08 01:28:18 -0500 lijishandeMacBook-Pro.local (4971)] INFO : No known dispatcher detected.
+[2015-12-08 01:28:18 -0500 lijishandeMacBook-Pro.local (4971)] INFO : Application: nanotwitter_relic (Development)
+[2015-12-08 01:28:18 -0500 lijishandeMacBook-Pro.local (4971)] INFO : Installing ActiveRecord 4 instrumentation
+[2015-12-08 01:28:18 -0500 lijishandeMacBook-Pro.local (4971)] INFO : Installing Net instrumentation
+[2015-12-08 01:28:18 -0500 lijishandeMacBook-Pro.local (4971)] INFO : Installing Sinatra instrumentation
+[2015-12-08 01:28:19 -0500 lijishandeMacBook-Pro.local (4971)] INFO : Installing deferred Rack instrumentation
+[2015-12-08 01:28:19 -0500 lijishandeMacBook-Pro.local (4971)] INFO : Installing Rack::Builder middleware instrumentation
+[2015-12-08 01:28:19 -0500 lijishandeMacBook-Pro.local (4971)] INFO : Installing Redis Instrumentation
+[2015-12-08 01:28:19 -0500 lijishandeMacBook-Pro.local (4971)] INFO : Finished instrumentation
+[2015-12-08 01:28:20 -0500 lijishandeMacBook-Pro.local (4971)] INFO : Reporting to: https://rpm.newrelic.com/accounts/1150571/applications/10172141
+[2015-12-08 01:28:22 -0500 lijishandeMacBook-Pro.local (4971)] INFO : Doing deferred dependency-detection before Rack startup
+[2015-12-08 01:32:13 -0500 lijishandeMacBook-Pro.local (4997)] INFO : Starting the New Relic agent in "development" environment.
+[2015-12-08 01:32:13 -0500 lijishandeMacBook-Pro.local (4997)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[2015-12-08 01:32:13 -0500 lijishandeMacBook-Pro.local (4997)] INFO : Reading configuration from config/newrelic.yml (/Users/CassyLee/Dropbox/cosi105b_JishanLi/nanotwitter)
+[2015-12-08 01:32:13 -0500 lijishandeMacBook-Pro.local (4997)] INFO : Environment: development
+[2015-12-08 01:32:13 -0500 lijishandeMacBook-Pro.local (4997)] INFO : No known dispatcher detected.
+[2015-12-08 01:32:13 -0500 lijishandeMacBook-Pro.local (4997)] INFO : Application: nanotwitter_relic (Development)
+[2015-12-08 01:32:13 -0500 lijishandeMacBook-Pro.local (4997)] INFO : Installing ActiveRecord 4 instrumentation
+[2015-12-08 01:32:13 -0500 lijishandeMacBook-Pro.local (4997)] INFO : Installing Net instrumentation
+[2015-12-08 01:32:13 -0500 lijishandeMacBook-Pro.local (4997)] INFO : Installing Sinatra instrumentation
+[2015-12-08 01:32:13 -0500 lijishandeMacBook-Pro.local (4997)] INFO : Installing deferred Rack instrumentation
+[2015-12-08 01:32:13 -0500 lijishandeMacBook-Pro.local (4997)] INFO : Installing Rack::Builder middleware instrumentation
+[2015-12-08 01:32:13 -0500 lijishandeMacBook-Pro.local (4997)] INFO : Installing Redis Instrumentation
+[2015-12-08 01:32:13 -0500 lijishandeMacBook-Pro.local (4997)] INFO : Finished instrumentation
+[2015-12-08 01:32:13 -0500 lijishandeMacBook-Pro.local (4997)] INFO : Reporting to: https://rpm.newrelic.com/accounts/1150571/applications/10172141
+[2015-12-08 01:32:19 -0500 lijishandeMacBook-Pro.local (4997)] INFO : Doing deferred dependency-detection before Rack startup
