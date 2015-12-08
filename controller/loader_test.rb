@@ -14,16 +14,17 @@ get '/user/testuser' do
   end
 
   @parameters = {}
-  if($redis.exists("test_user_timeline_change"))
+  # if($redis.exists("test_user_timeline_change"))
     if($redis.get("test_user_timeline_change") == "true")
       @parameters = get_time_line(logged_id)
       $redis.set("test_user_timeline", @parameters.to_json)
       $redis.set("test_user_timeline_change", "false")
+    else
+      @parameters = JSON.parse($redis.get("test_user_timeline").gsub('=>', ':'))
     end
-      @parameters = JSON.parse($redis.get("test_user_timeline").gsub('=>', ':'))
-  else
-      @parameters = JSON.parse($redis.get("test_user_timeline").gsub('=>', ':'))
-  end
+  # else
+  #     @parameters = JSON.parse($redis.get("test_user_timeline").gsub('=>', ':'))
+  # end
 
   erb :timeline
 end
