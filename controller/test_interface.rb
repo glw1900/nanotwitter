@@ -45,7 +45,6 @@ get '/test/seed/:num' do
 	params[:num] +' users created'
 end
 
-
 get '/test/follow/:num' do
   testuser_id = User.find_by(username: "testuser").id
   make_follower(testuser_id, params[:num].to_i)
