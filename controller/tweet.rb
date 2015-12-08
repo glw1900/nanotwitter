@@ -3,7 +3,7 @@ def create_tweet(params)
   tweet = {}
   tweet["content"] = params[:content]
   tweet["media_url"] = params[:media_url]
-  tweet["retweet_id"] = 0
+  tweet["retweet_id"] = params[:retweet_id]
   tweet["user_id"] = User.find_by(username: params["username"]).id
   tweet["pub_time"] = nil
   newest_50_queue = "newest50queue"
