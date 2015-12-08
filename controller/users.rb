@@ -3,17 +3,16 @@ $redis = Redis.new(:url => "redis://redistogo:6089d2a4552e7700e65eebca0fdbca63@p
 
 get '/users/:username' do
   #add follower_id and followee_id to @parameters
+  binding.pry
   if params[:username] == "testuser"
-    "fuck"
-    # redirect '/users/testuser'
+    redirect '/users/testuser'
   else
     logged_username = session[:username]
     logged_id = User.find_by(username: logged_username).id
     look_at_username = params[:username]
     look_at_user_id = User.find_by(username: look_at_username).id
     @parameters = user_a_look_at_user_b_homepage_with_redis(logged_id, look_at_user_id)
-    "dame"
-    # erb :personpage
+    erb :personpage
   end
 end
 
