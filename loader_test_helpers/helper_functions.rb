@@ -7,6 +7,7 @@ $u = 100
 $t = 500
 $f = 30
 
+
 HTTP.get($url + "/test/reset/all")
 HTTP.get($url + "/test/seed/" + $u.to_s)
 HTTP.get($url + "/test/tweets/" + $t.to_s)
