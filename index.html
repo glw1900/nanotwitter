@@ -37,6 +37,23 @@
 <p>This is our Huge Twitter github page, we have supported a lot of functionalities of the original twitter and we are still moving on, including posting twitter, timeline, following, unfollowing, commenting, retweet.</p>
 
 <p>Please visit our website at http:/hugetwitter.herokuapp.com, and register, have fun!</p>
+
+<h3>
+<a id="technology-description" class="anchor" href="#technology-description" aria-hidden="true"><span class="octicon octicon-link"></span></a>Technology Description</h3>
+
+<p>We adopt redis to cache data that requires comparatively high cost in querying in database and yet are requested frequently, such as 50 most recent twitters and timeline of recent login users. </p>
+
+<p>Read into comments table for every twitter is quite a cost. We noticed that most twitters might not have comments, therefore there is no need to query in the comments table every time. Then we labeled every tweet as 1 or 0, when tweets are created, the label is set to 0, then if a comment is made, we change the label to 1. Thus every time we first check the label of a twitter, if it’s labeled 0 then we check in the comment table.</p>
+
+<h3>
+<a id="screen-shot" class="anchor" href="#screen-shot" aria-hidden="true"><span class="octicon octicon-link"></span></a>Screen Shot</h3>
+
+<p><img src="http://postimg.org/image/lqxj6uyy3/" alt="">
+<img src="http://postimg.org/image/3jo69ifr5/" alt="">
+<img src="http://postimg.org/image/7op0ox0mb/" alt=""></p>
+
+<h3>
+<a id="interesting-engineering" class="anchor" href="#interesting-engineering" aria-hidden="true"><span class="octicon octicon-link"></span></a>Interesting Engineering!</h3>
       </section>
     </div>
 
