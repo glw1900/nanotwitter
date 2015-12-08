@@ -3,7 +3,6 @@ require 'redis'
 require 'json'
 $redis = Redis.new(:url => "redis://redistogo:6089d2a4552e7700e65eebca0fdbca63@panga.redistogo.com:9792")
 
-
 get '/user/testuser' do
   logged_username = "testuser"
   testuser = User.find_by(username: logged_username)
@@ -22,7 +21,6 @@ get '/user/testuser' do
   end
   erb :timeline
 end
-
 
 post '/user/testuser/tweet' do
   logged_username = "testuser"
