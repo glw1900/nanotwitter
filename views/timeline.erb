@@ -53,23 +53,24 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a href="#">
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Tweets <br> 12 </button>
+          <button type="button" class="btn btn-danger"> Tweets <br> <%=@parameters["logged_user_profile"]["tweet_num"]%> </button>
+          </a>
+        </li>
+
+        <li><a href='/users/<%=@parameters["username"]%>/following'>
+          <button type="button" class="btn btn-danger"> Following <br> <%=@parameters["logged_user_profile"]["follow_number"]%> </button>
+          </a>
+        </li>
+
+        <li><a href="/users/<%=@parameters["username"] %>/followers">
+          <button type="button" class="btn btn-danger"> Followers <br> <%=@parameters["logged_user_profile"]["follower_number"]%> </button>
           </a>
         </li>
 
         <li><a href="#">
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Following <br> 23 </button>
+          <button type="button" class="btn btn-danger" > Favorites <br> 4 </button>
           </a>
         </li>
-        <li><a href="#">
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Followers <br> 34 </button>
-          </a>
-        </li>
-
-        <li><a href="#">
-          <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Favorites <br> 4 </button>
-          </a>
-      </li>
      </ul>
     </ul>
    </div><!-- /.navbar-collapse -->
@@ -120,6 +121,29 @@
        </div>
      </div>
 
+     <div id="addRetweet" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Retweet</h4>
+        </div>
+        <div class="modal-body">
+          <form role="form" action="/create/tweet"method="POST">
+            <textarea class="form-control" placeholder="something want to say..." name="content"></textarea>
+            <input type="hidden" name="retweet_id" id="retweet_id">
+            <input type="hidden" name="username" value=<%= @parameters["logged_user_profile"]["username"]%>>
+            <button class="btn btn-primary">retweet</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div>
+    </div>
 
       <ul class="list-group">
         <% if !@parameters["timeline_twitter_list"].nil? %>
@@ -127,18 +151,23 @@
 
             <li class="list-group-item">
               <a href = '/users/<%=tweet["by_user"] %>'><h3><strong> <%= tweet["by_user"] %></strong> <small>@<%= tweet["time"] %></small></h3></a>
-              <p><%= tweet["text"] %> </p>
-              <p><%= tweet["id"] %> </p>
-              <p> whatever  </p>
-              <button type="button" class="open-AddComment btn btn-info" data-toggle="modal" data-what= "<%= tweet["id"] %>" data-target="#addComment">Comment</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <button type="button" class="btn btn-info">Retweet</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="/tweets/<%= tweet["id"] %>"> <%= tweet["text"] %> </a>
+              <br>
+              <% if !tweet["retweet_id"].nil? %>
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    <a href="/tweets/<%= tweet["retweet_id"] %>"> <%= tweet["abbreviation"] %> </a>
+                </ul>
+              <% end %>
+              <button type="button" class="btn btn-info" data-toggle="modal" data-what= "<%= tweet["id"] %>" data-target="#addComment">Comment</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <button type="button" class="btn btn-info" data-toggle="modal" data-what= "<%= tweet["id"] %>" data-target="#addRetweet">Retweet</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <button type="button" class="btn btn-info">Favorite</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
           <% end %>
         <%else%>
           <p>publish some tweets!</p>
         <% end %>
       </ul>
+
     </div>
   </div>
 </div>
@@ -151,6 +180,14 @@ $('#addComment').on('show.bs.modal', function (event) {
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
   modal.find('.modal-body input').val(tweetID)
+})
+$('#addRetweet').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var tweetID = button.data('what') // Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  modal.find('.modal-body input[name="retweet_id"]').val(tweetID)
 })
 </script>
 

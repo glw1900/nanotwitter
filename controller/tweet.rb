@@ -43,11 +43,5 @@ end
 get '/tweets/:tweet_id' do
   @parameters = view_a_twitter(params[:tweet_id])
   @parameters.to_json
+  erb :tweet
 end
-
-
-
-
-
-
-

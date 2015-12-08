@@ -77,8 +77,16 @@ end
 
 
 def top_n_word_from_tweet(tweet_id)
+
+  if Tweet.find_by(id: tweet_id).nil?
+    return ""
+  else
+    truecontent = Tweet.find_by(id: tweet_id).content
+    return top_n_word(truecontent,12)
+  end
   content = Tweet.find_by(id: tweet_id).content
   return top_n_word(content, 12)
+
 end
 
 # def sql_to_hash_single(tw, logged)
@@ -348,8 +356,7 @@ end
 def top_n_word(str,n)
   str.split(/\s+/, n+1)[0...n].join(' ')
 end
-<<<<<<< HEAD
-=======
+
 
 def user_a_favor_tweet_list(user_id)
     sql = "SELECT T.id, T.content,T.retweet_id, F.created_at, T.user_id, U.username
@@ -361,5 +368,3 @@ def user_a_favor_tweet_list(user_id)
   records_array = ActiveRecord::Base.connection.execute(sql)
   return tweet_array_to_hash(records_array, true)
 end
-
->>>>>>> 1d11ba2d81fe299f00475016adcb9d7627a4f4e0
