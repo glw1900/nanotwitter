@@ -1532,3 +1532,18 @@
 [2015-12-08 01:23:40 -0500 Meiyues-MacBook-Pro.local (3115)] INFO : Finished instrumentation
 [2015-12-08 01:23:41 -0500 Meiyues-MacBook-Pro.local (3115)] INFO : Reporting to: https://rpm.newrelic.com/accounts/1150571/applications/10172141
 [2015-12-08 01:23:43 -0500 Meiyues-MacBook-Pro.local (3115)] INFO : Doing deferred dependency-detection before Rack startup
+[2015-12-08 01:24:37 -0500 Meiyues-MacBook-Pro.local (3178)] INFO : Starting the New Relic agent in "development" environment.
+[2015-12-08 01:24:37 -0500 Meiyues-MacBook-Pro.local (3178)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[2015-12-08 01:24:37 -0500 Meiyues-MacBook-Pro.local (3178)] INFO : Reading configuration from config/newrelic.yml (/Users/sleep/Dropbox/cosi105b_meiyue/nanotwitter/nt/nanotwitter)
+[2015-12-08 01:24:37 -0500 Meiyues-MacBook-Pro.local (3178)] INFO : Environment: development
+[2015-12-08 01:24:37 -0500 Meiyues-MacBook-Pro.local (3178)] INFO : No known dispatcher detected.
+[2015-12-08 01:24:37 -0500 Meiyues-MacBook-Pro.local (3178)] INFO : Application: nanotwitter_relic (Development)
+[2015-12-08 01:24:37 -0500 Meiyues-MacBook-Pro.local (3178)] INFO : Installing ActiveRecord 4 instrumentation
+[2015-12-08 01:24:37 -0500 Meiyues-MacBook-Pro.local (3178)] INFO : Installing Net instrumentation
+[2015-12-08 01:24:37 -0500 Meiyues-MacBook-Pro.local (3178)] INFO : Installing Sinatra instrumentation
+[2015-12-08 01:24:37 -0500 Meiyues-MacBook-Pro.local (3178)] INFO : Installing deferred Rack instrumentation
+[2015-12-08 01:24:37 -0500 Meiyues-MacBook-Pro.local (3178)] INFO : Installing Rack::Builder middleware instrumentation
+[2015-12-08 01:24:37 -0500 Meiyues-MacBook-Pro.local (3178)] INFO : Installing Redis Instrumentation
+[2015-12-08 01:24:37 -0500 Meiyues-MacBook-Pro.local (3178)] INFO : Finished instrumentation
+[2015-12-08 01:24:39 -0500 Meiyues-MacBook-Pro.local (3178)] INFO : Reporting to: https://rpm.newrelic.com/accounts/1150571/applications/10172141
+[2015-12-08 01:24:40 -0500 Meiyues-MacBook-Pro.local (3178)] INFO : Doing deferred dependency-detection before Rack startup
