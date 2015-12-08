@@ -11,7 +11,7 @@ get '/user/testuser' do
     "testuser does not exist"
   end
   @parameters = {}
-  if($redis.exist("test_user_timeline_change"))
+  if($redis.exists("test_user_timeline_change"))
     if($redis.get("test_user_timeline_change") == "true")
       @parameters = get_time_line(logged_id)
       $redis.set("test_user_timeline", @parameters.to_json)
