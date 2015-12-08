@@ -16,7 +16,7 @@ require 'newrelic_rpm'
 set :environment, :production
 enable :sessions
 set :public_folder, File.dirname(__FILE__)+'/bootstrap-3.3.5-dist'
-require 'pry-byebug'
+# require 'pry-byebug'
 
 get '/loaderio-d3a485382ba9e01e149ff5b014cd52e3/' do
   'loaderio-d3a485382ba9e01e149ff5b014cd52e3'
@@ -28,6 +28,10 @@ end
 
 get '/loaderio-ed1bbf67a573c43a29c3a8ceeb1fb606/' do
   'loaderio-ed1bbf67a573c43a29c3a8ceeb1fb606'
+end
+
+get '/loaderio-b025f3b735c868b05d4c58827006dd6e/' do
+  'loaderio-b025f3b735c868b05d4c58827006dd6e'
 end
 
 get '/' do
@@ -83,7 +87,6 @@ post "/signin" do
   if auth(@tring_logging_in)
     username = @tring_logging_in["username"]
     session["username"] = username
-    binding.pry
     redirect '/timeline'
     response["login_ok"] = "ok"
   else
