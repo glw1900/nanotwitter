@@ -14,6 +14,7 @@ class CreateUser < ActiveRecord::Migration
   		t.integer :retweet_id
   		t.date :pub_time
       t.string :media_url
+      t.string :has_comment
       t.timestamps null: false
     end
     create_table :follows do |t|

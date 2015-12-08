@@ -65,7 +65,9 @@ def sql_to_hash(tw, logged)
     t["retweet_user_name"] = User.find_by(id: retweet_user_id).username
     t["abbreviation"] = top_n_word_from_tweet(tw["retweet_id"])
   end
-  t["comment"] = get_comment_list(tw["id"])
+  if t["has_comment"] != nil
+    t["comment"] = get_comment_list(tw["id"])
+  end
   # t["favored"] = 
   if logged
     #fake data
@@ -105,14 +107,10 @@ end
 # end
 
 def first_50_tweets_lst
-  /#
   # return an array of hash
-  #/
   newest_50_queue = "newest50queue"
-  # if first_50_queue is empty
-  #/
   if(!$redis.exists(newest_50_queue) || ($redis.llen(newest_50_queue) <= 40))
-    sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id ORDER BY T.created_at DESC LIMIT 50"
+    sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, T.has_comment, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id ORDER BY T.created_at DESC LIMIT 50"
     records_array =  ActiveRecord::Base.connection.execute(sql)
     rt = tweet_array_to_hash(records_array, false)
     rt.each do |tweet|
@@ -137,7 +135,7 @@ def first_50_tweets_lst_no_redis
   newest_50_queue = "newest50queue"
   # if first_50_queue is empty
   #/
-    sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id ORDER BY T.created_at DESC LIMIT 50"
+    sql = "SELECT T.id, T.content, T.created_at, T.retweet_id,T.has_comment, has_comment U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id ORDER BY T.created_at DESC LIMIT 50"
     records_array =  ActiveRecord::Base.connection.execute(sql)
     rt = tweet_array_to_hash(records_array, false)
     rt.each do |tweet|
@@ -156,7 +154,7 @@ def get_time_line_tweets(user_id)
   /#
   return an array of hash
   #/
-  sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND ( (T.user_id = #{user_id}) OR (T.user_id IN
+  sql = "SELECT T.id, T.content, T.created_at, T.retweet_id,T.has_comment, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND ( (T.user_id = #{user_id}) OR (T.user_id IN
   (SELECT DISTINCT followee_id FROM follows AS F WHERE F.follower_id = #{user_id})) ) ORDER BY T.created_at "
   records_array = ActiveRecord::Base.connection.execute(sql)
   rt = tweet_array_to_hash(records_array, true)
@@ -194,7 +192,7 @@ def user_a_look_at_user_b_homepage_with_redis(user_a_id, user_b_id)
   timelineOfB = "timelineOf" + user_b_id.to_s
 
   if(!$redis.exists(timelineOfB))
-    sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND T.user_id = #{user_b_id} "
+    sql = "SELECT T.id, T.content, T.created_at, T.retweet_id,T.has_comment, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND T.user_id = #{user_b_id} "
     records_array =  ActiveRecord::Base.connection.execute(sql)
     rt = tweet_array_to_hash(records_array, false)
     rt.each do |tweet|
@@ -232,7 +230,7 @@ end
 def user_a_look_at_user_b_homepage(user_a_id, user_b_id)
   # TODO: MISS FAVOURITES, FOLLOW NUMBER, FOLLOWER NUMBER
 
-  sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND T.user_id = #{user_b_id} "
+  sql = "SELECT T.id, T.content, T.created_at, T.retweet_id,T.has_comment, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND T.user_id = #{user_b_id} "
   records_array = ActiveRecord::Base.connection.execute(sql)
   tw_array = tweet_array_to_hash(records_array, true)
 
@@ -283,6 +281,7 @@ def view_a_twitter(tweet_id)
   res["time"] = t.created_at
   res["retweet_id"] = t.retweet_id
   res["user_id"] = t.user_id
+  res["has_comment"] = t.has_comment
   res["by_user"] = User.find_by(id: t.user_id).username
   res["abbreviation"] = top_n_word_from_tweet(t["retweet_id"])
   res["comment"] = get_comment_list(tweet_id)
