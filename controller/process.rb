@@ -134,8 +134,6 @@ def first_50_tweets_lst_no_redis
     rt.each do |tweet|
       $redis.rpush(newest_50_queue, tweet.to_json)
     end
-  # end
-
   array_of_jsons = $redis.lrange( "newest50queue",0,49)
   rt_array = Array.new
   array_of_jsons.each do |js|
@@ -158,7 +156,6 @@ end
 
 def get_user_profile(user_id)
   image_url = "https://upload.wikimedia.org/wikipedia/commons/f/f6/Barack_Obama_and_Bill_Clinton_profile.jpg"
-
   rt = {}
   rt["username"] = User.find_by(id: user_id).username
   rt["follower_id"] = user_id
@@ -168,10 +165,21 @@ def get_user_profile(user_id)
   return rt
 end
 
+def my_tweet_num(user_id, )
+
+end
+
 def get_time_line(user_id)
   rt = {}
   rt["logged_user_profile"] = get_user_profile(user_id)
   rt["timeline_twitter_list"] = get_time_line_tweets(user_id)
+  num = 0
+  rt["timeline_twitter_list"].each do |tw|
+    if tw["by_user"] == session["username"]
+      num = num + 1
+    end
+  end
+  rt["logged_user_profile"]["tweet_num"] = num
   return rt
 end
 
@@ -343,4 +351,3 @@ end
 def top_n_word(str,n)
   str.split(/\s+/, n+1)[0...n].join(' ')
 end
-
