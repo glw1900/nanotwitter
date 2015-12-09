@@ -256,22 +256,41 @@ def user_a_look_at_user_b_homepage(user_a_id, user_b_id)
 end
 
 def get_following(user_id)
-  sql = "SELECT U.username, F.created_at
+  sql = "SELECT U.username, F.created_at, U.id
         FROM users AS U, follows as F
         WHERE U.id = F.followee_id
         AND F.follower_id = #{user_id}"
   records_array = ActiveRecord::Base.connection.execute(sql)
-  return create_user_ls_from_sql_result(records_array)
+  return create_user_ls_from_sql_result(records_array,user_id)
 end
 
 def get_followers(user_id)
-  sql = "SELECT U.username, F.created_at
+  sql = "SELECT U.username, F.created_at,U.id
         FROM users AS U, follows as F
         WHERE U.id = F.follower_id
         AND F.followee_id = #{user_id}"
   records_array = ActiveRecord::Base.connection.execute(sql)
-  return create_user_ls_from_sql_result(records_array)
+  return create_user_ls_from_sql_result(records_array,user_id)
 end
+
+def create_user_ls_from_sql_result(arr,user_id)
+  ls = []
+  image_url = "http://vignette1.wikia.nocookie.net/webarebears/images/d/d6/Bear_stack.jpg/revision/latest?cb=20150706002256"
+  arr.each do |user|
+    user_hash = {}
+    user_hash["username"] = user[0]
+    user_hash["followed_at_time"] = user[1]
+    user_hash["is_following"] = nil
+    f = Follow.find_by(follower_id: user_id, follower_id: user[:id])
+    if f != nil 
+      user_hash["is_following"] = 0
+    end
+    user_hash["profile_photo_url"] = image_url
+    ls.push(user_hash)
+  end
+  return ls
+end
+
 
 def view_a_twitter(tweet_id)
   res = {}
@@ -315,19 +334,6 @@ def comment_arr_to_hash(comments_array)
   return arr
 end
 
-
-def create_user_ls_from_sql_result(arr)
-  ls = []
-  image_url = "http://vignette1.wikia.nocookie.net/webarebears/images/d/d6/Bear_stack.jpg/revision/latest?cb=20150706002256"
-  arr.each do |user|
-    user_hash = {}
-    user_hash["username"] = user[0]
-    user_hash["followed_at_time"] = user[1]
-    user_hash["profile_photo_url"] = image_url
-    ls.push(user_hash)
-  end
-  return ls
-end
 
 #======================for test interface
 
