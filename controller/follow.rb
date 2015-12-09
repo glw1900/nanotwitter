@@ -6,6 +6,7 @@ get '/users/:username/following' do
   @parameters["username"] = params[:username]
   @parameters["logged_user_profile"] = get_user_profile(user_id)
   @parameters["users_list"] = get_following(user_id)
+  @parameters["follow_page"] = 0
   erb :follow
 end
 
@@ -15,6 +16,7 @@ get '/users/:username/followers' do
   @parameters["username"] = params[:username]
   @parameters["logged_user_profile"] = get_user_profile(user_id)
   @parameters["users_list"] = get_followers(user_id)
+  @parameters["follow_page"] = 1
   erb :follow
 end
 
