@@ -60,20 +60,22 @@ def sql_to_hash(tw, logged)
   t["by_user"] = tw["username"]
   t["retweet_id"] = tw["retweet_id"]
   t["abbreviation"] = nil
-
   if tw["retweet_id"] != nil
+    retweet_user_id = Tweet.find_by(id: tw["retweet_id"]).user_id
+    t["retweet_user_name"] = User.find_by(id: retweet_user_id).username
     t["abbreviation"] = top_n_word_from_tweet(tw["retweet_id"])
   end
-
-  # below is made up
-  t["favourite_number"] = 109
-  t["comment"] = get_comment_list(tw["id"])
+  if tw["has_comment"] != nil
+    t["comment"] = get_comment_list(tw["id"])
+  end
+  # t["favored"] =
   if logged
     #fake data
-     t["has_this_user_favorited_this_tweet"] = false
+    t["has_this_user_favorited_this_tweet"] = false
   end
   return t
 end
+
 
 
 def top_n_word_from_tweet(tweet_id)
@@ -105,12 +107,10 @@ end
 # end
 
 def first_50_tweets_lst
-  /#
   # return an array of hash
-  #/
   newest_50_queue = "newest50queue"
   if(!$redis.exists(newest_50_queue) || ($redis.llen(newest_50_queue) <= 40))
-    sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id ORDER BY T.created_at DESC LIMIT 50"
+    sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, T.has_comment, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id ORDER BY T.created_at DESC LIMIT 50"
     records_array =  ActiveRecord::Base.connection.execute(sql)
     rt = tweet_array_to_hash(records_array, false)
     rt.each do |tweet|
@@ -135,7 +135,7 @@ def first_50_tweets_lst_no_redis
   newest_50_queue = "newest50queue"
   # if first_50_queue is empty
   #/
-    sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id ORDER BY T.created_at DESC LIMIT 50"
+    sql = "SELECT T.id, T.content, T.created_at, T.retweet_id,T.has_comment, has_comment U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id ORDER BY T.created_at DESC LIMIT 50"
     records_array =  ActiveRecord::Base.connection.execute(sql)
     rt = tweet_array_to_hash(records_array, false)
     rt.each do |tweet|
@@ -154,7 +154,7 @@ def get_time_line_tweets(user_id)
   /#
   return an array of hash
   #/
-  sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND ( (T.user_id = #{user_id}) OR (T.user_id IN
+  sql = "SELECT T.id, T.content, T.created_at, T.retweet_id,T.has_comment, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND ( (T.user_id = #{user_id}) OR (T.user_id IN
   (SELECT DISTINCT followee_id FROM follows AS F WHERE F.follower_id = #{user_id})) ) ORDER BY T.created_at "
   records_array = ActiveRecord::Base.connection.execute(sql)
   rt = tweet_array_to_hash(records_array, true)
@@ -192,7 +192,7 @@ def user_a_look_at_user_b_homepage_with_redis(user_a_id, user_b_id)
   timelineOfB = "timelineOf" + user_b_id.to_s
 
   if(!$redis.exists(timelineOfB))
-    sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND T.user_id = #{user_b_id} "
+    sql = "SELECT T.id, T.content, T.created_at, T.retweet_id,T.has_comment, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND T.user_id = #{user_b_id} "
     records_array =  ActiveRecord::Base.connection.execute(sql)
     rt = tweet_array_to_hash(records_array, false)
     rt.each do |tweet|
@@ -230,7 +230,7 @@ end
 def user_a_look_at_user_b_homepage(user_a_id, user_b_id)
   # TODO: MISS FAVOURITES, FOLLOW NUMBER, FOLLOWER NUMBER
 
-  sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND T.user_id = #{user_b_id} "
+  sql = "SELECT T.id, T.content, T.created_at, T.retweet_id,T.has_comment, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id AND T.user_id = #{user_b_id} "
   records_array = ActiveRecord::Base.connection.execute(sql)
   tw_array = tweet_array_to_hash(records_array, true)
 
@@ -256,33 +256,63 @@ def user_a_look_at_user_b_homepage(user_a_id, user_b_id)
 end
 
 def get_following(user_id)
-  sql = "SELECT U.username, F.created_at
+  sql = "SELECT U.username, F.created_at, U.id
         FROM users AS U, follows as F
         WHERE U.id = F.followee_id
         AND F.follower_id = #{user_id}"
   records_array = ActiveRecord::Base.connection.execute(sql)
-  return create_user_ls_from_sql_result(records_array)
+  return create_user_ls_from_sql_result(records_array,user_id)
 end
 
 def get_followers(user_id)
-  sql = "SELECT U.username, F.created_at
+  sql = "SELECT U.username, F.created_at,U.id
         FROM users AS U, follows as F
         WHERE U.id = F.follower_id
         AND F.followee_id = #{user_id}"
   records_array = ActiveRecord::Base.connection.execute(sql)
-  return create_user_ls_from_sql_result(records_array)
+  return create_user_ls_from_sql_result(records_array,user_id)
 end
+
+def create_user_ls_from_sql_result(arr,user_id)
+  ls = []
+  image_url = "http://vignette1.wikia.nocookie.net/webarebears/images/d/d6/Bear_stack.jpg/revision/latest?cb=20150706002256"
+  arr.each do |user|
+    user_hash = {}
+    user_hash["username"] = user[0]
+    user_hash["followed_at_time"] = user[1]
+    user_hash["is_following"] = nil
+    f = Follow.find_by(follower_id: user_id, follower_id: user[:id])
+    if f != nil
+      user_hash["is_following"] = 0
+    end
+    user_hash["profile_photo_url"] = image_url
+    ls.push(user_hash)
+  end
+  return ls
+end
+
 
 def view_a_twitter(tweet_id)
   res = {}
   t = Tweet.find_by(id: tweet_id)
   res["id"] = tweet_id
-  res["content"] = t.content
-  res["created_at"] = t.created_at
+  res["text"] = t.content
+  res["time"] = t.created_at
   res["retweet_id"] = t.retweet_id
+  if t.retweet_id != nil
+    retweet_user_id = Tweet.find_by(id: t.retweet_id).user_id
+    res["retweet_user_name"] = User.find_by(id: retweet_user_id).username
+    res["abbreviation"] = top_n_word_from_tweet(t["retweet_id"])
+  end
   res["user_id"] = t.user_id
-  res["username"] = User.find_by(id: t.user_id).username
-  res["comment"] = get_comment_list(tweet_id)
+
+  # res["has_comment"] = t.has_comment
+  res["by_user"] = User.find_by(id: t.user_id).username
+  res["abbreviation"] = top_n_word_from_tweet(t["retweet_id"])
+
+  if t.has_comment != nil
+    res["comment"] = get_comment_list(tweet_id)
+  end
   return res
 end
 
@@ -308,19 +338,6 @@ def comment_arr_to_hash(comments_array)
   return arr
 end
 
-
-def create_user_ls_from_sql_result(arr)
-  ls = []
-  image_url = "http://vignette1.wikia.nocookie.net/webarebears/images/d/d6/Bear_stack.jpg/revision/latest?cb=20150706002256"
-  arr.each do |user|
-    user_hash = {}
-    user_hash["username"] = user[0]
-    user_hash["followed_at_time"] = user[1]
-    user_hash["profile_photo_url"] = image_url
-    ls.push(user_hash)
-  end
-  return ls
-end
 
 #======================for test interface
 

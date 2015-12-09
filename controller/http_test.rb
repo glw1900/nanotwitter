@@ -1,2 +1,2 @@
 require 'http'
-puts HTTP.post("http://hugetwitter.herokuapp.com/user/testuser/tweet").body
+puts HTTP.post("http://http://0.0.0.0:4567/user/testuser/tweet").body

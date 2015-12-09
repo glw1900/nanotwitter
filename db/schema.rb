@@ -89,8 +89,9 @@ ActiveRecord::Schema.define(version: 20151117001744) do
     t.integer  "retweet_id"
     t.date     "pub_time"
     t.string   "media_url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "has_comment"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "tweets", ["user_id"], name: "index_tweets_on_user_id"

@@ -41,7 +41,11 @@ post "/delete/tweet" do
 end
 
 get '/tweets/:tweet_id' do
+  @parameters = {}
   @parameters = view_a_twitter(params[:tweet_id])
+  if session[:username] != nil 
+    @parameters["logged_user"] = session[:username]
+  end
   @parameters.to_json
   erb :tweet
 end

@@ -1,1 +1,0 @@
-we have our api in controller/apis, and we put the test file and the library in the client_code folder.

@@ -10,40 +10,6 @@
     <script src="/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/timeline">Home</a>
-      <a class="navbar-brand" href="#">Notifications</a>
-      <a class="navbar-brand" href="#">Moments</a>
-      <a class="navbar-brand" href="#">Messages</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="dropdown">
-        </li>
-      </ul>
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-       <ul class="nav  navbar-right"><li>
-        <button type="button" class="btn btn-default btn-lg"><a href="/timeline">Tweet!</a></button>
-       </li></ul>
-      </div>   <!-- /.navbar-collapse -->
-    </div>  <!-- /.container-fluid -->
-  </nav>
 
  <div class="media">
   <div class="media-left media-middle">
@@ -58,43 +24,9 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="/users/<%=@username%>">
-          <button type="button" class="btn btn-danger" > Tweets <br> 100 </button>
-          </a>
-        </li>
-
-        <li><a href='/users/<%=@username %>/following'>
-          <button type="button" class="btn btn-danger"> Following <br> 5 </button>
-          </a>
-        </li>
-        
-        <li><a href="/users/<%=@username %>/followers">
-          <button type="button" class="btn btn-danger"> Followers <br> 4 </button>
-          </a>
-        </li>
-
-        <li><a href="#">
-          <button type="button" class="btn btn-danger" > Favorites <br> 4 </button>
-          </a>
-        </li>
-
+        <li><a class="navbar-brand" href="/timeline">Home</a></li>
       </ul>
 
-      <ul class="nav navbar-nav navbar-right">
-        <%if @parameters["mode"] == "user_viewing_followed"%>
-          <form action="/delete/follow" method="POST">
-            <input type = "hidden" value = "<%= @parameters["logged_user_profile"]["follower_id"]%>" name = "follower_id">
-            <input type = "hidden" value = "<%= @parameters["followee_id"]%>" name = "followee_id">
-            <input type = "submit" class="btn btn-success" value = "Unfollow">
-          </form>
-        <%elsif @parameters["mode"] == "user_viewing_unfollowed"%>
-          <form action="/create/follow" method="POST">
-            <input type = "hidden" value = "<%= @parameters["logged_user_profile"]["follower_id"]%>" name = "follower_id">
-            <input type = "hidden" value = "<%= @parameters["followee_id"]%>" name = "followee_id">
-            <input type = "submit" class="btn btn-danger" value = "Follow">
-          </form>
-        <%end%>
-      </ul>
       </div>
     </div>
   </nav>
@@ -104,28 +36,45 @@
     <div class="col-sm-3">
       <div class="img-responsive">
         <img class="embed-responsive-item" src="https://lh3.googleusercontent.com/-3Zqv6Of_vlk/AAAAAAAAAAI/AAAAAAAAAAA/JiFX6Ovb6nc/photo.jpg" style="height:230px; width: 270px; display:block;"></iframe>
-       
       </div>
+
       <h1>  <%=@parameters["username"]%> </h1>
+
     </div>
     <div class="col-sm-9">
-      
       <ul class="list-group">
+        <%if @parameters["follow_page"] == 0%>
+          <h3>Followings of <%= @parameters["username"] %></h3>
+        <% else %>
+          <h3>Followers of <%= @parameters["username"] %></h3>
+        <% end %>
+
         <% if !@parameters["users_list"].nil? %>
           <% @parameters["users_list"].each do |users| %>
             <li class="list-group-item">
               <h3><strong> <%= users["username"] %></strong> <small>@<%= users["followed_at_time"] %></small></h3>
-              <button type="button" class="btn btn-info">Follow</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <% end %>
+
+              <%if users["is_following"] == nil%>
+                <form action="/delete/follow" method="POST">
+                  <input type = "hidden" value = "<%= @parameters["logged_user_profile"]["follower_id"]%>" name = "follower_id">
+                  <input type = "hidden" value = "<%= @parameters["followee_id"]%>" name = "followee_id">
+                  <input type = "submit" class="btn btn-success" value = "Unfollow">
+                </form>
+              <%else%>
+                <form action="/create/follow" method="POST">
+                  <input type = "hidden" value = "<%= @parameters["logged_user_profile"]["follower_id"]%>" name = "follower_id">
+                  <input type = "hidden" value = "<%= @parameters["followee_id"]%>" name = "followee_id">
+                  <input type = "submit" class="btn btn-danger" value = "Follow">
+                </form>
+              <%end%>
+          <%end%>
         <%else%>
           <p>publish some tweets!</p>
         <% end %>
       </ul>
-
     </div>
   </div>
 </div>
 </div>
-
 </body>
 </html>

@@ -3,7 +3,6 @@ require 'redis'
 require 'json'
 $redis = Redis.new(:url => "redis://redistogo:6089d2a4552e7700e65eebca0fdbca63@panga.redistogo.com:9792")
 
-
 get '/user/testuser' do
   logged_username = "testuser"
   testuser = User.find_by(username: logged_username)
@@ -23,7 +22,6 @@ get '/user/testuser' do
   erb :timeline
 end
 
-
 post '/user/testuser/tweet' do
   logged_username = "testuser"
   testuser = User.find_by(username: logged_username)
@@ -33,9 +31,8 @@ post '/user/testuser/tweet' do
     tweet = {}
     tweet["content"] = Faker::Bitcoin.address
     tweet["media_url"] = "http://www.cats.org.uk/uploads/images/pages/photo_latest14.jpg"
-    tweet["retweet_id"] = nil
     tweet["user_id"] = logged_id
-    tweet["pub_time"] = nil
+    tweet["has_comment"] = nil
     newest_50_queue = "newest50queue"
     @new_tweet = Tweet.new(tweet)
     if @new_tweet.save!
