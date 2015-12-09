@@ -109,8 +109,6 @@ def first_50_tweets_lst
   # return an array of hash
   #/
   newest_50_queue = "newest50queue"
-  # if first_50_queue is empty
-  #/
   if(!$redis.exists(newest_50_queue) || ($redis.llen(newest_50_queue) <= 40))
     sql = "SELECT T.id, T.content, T.created_at, T.retweet_id, U.username FROM tweets AS T, users AS U WHERE T.user_id = U.id ORDER BY T.created_at DESC LIMIT 50"
     records_array =  ActiveRecord::Base.connection.execute(sql)
