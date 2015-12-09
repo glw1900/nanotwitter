@@ -1,18 +1,18 @@
 require 'pry-byebug'
 
 get '/users/:username/following' do
-  @username = params[:username]
-  user_id = User.find_by(username: @username).id
+  user_id = User.find_by(username: params[:username]).id
   @parameters = {}
+  @parameters["username"] = params[:username]
   @parameters["logged_user_profile"] = get_user_profile(user_id)
   @parameters["users_list"] = get_following(user_id)
   erb :follow
 end
 
 get '/users/:username/followers' do
-  @username = params[:username]
-  user_id = User.find_by(username: @username).id
+  user_id = User.find_by(username: params[:username]).id
   @parameters = {}
+  @parameters["username"] = params[:username]
   @parameters["logged_user_profile"] = get_user_profile(user_id)
   @parameters["users_list"] = get_followers(user_id)
   erb :follow
