@@ -90,6 +90,7 @@
       <% if !@parameters["retweet_id"].nil? %>
         <ul class="list-group">
           <li class="list-group-item">
+            <a href = '/users/<%=tweet["by_user"] %>'><h4><%= @parameters["retweet_user_name"] %></h4></a>
             <a href="/tweets/<%= @parameters["retweet_id"] %>"> <%= @parameters["abbreviation"] %> </a>
         </ul>
       <% end %>

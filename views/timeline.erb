@@ -50,12 +50,12 @@
           </a>
         </li>
 
-        <li><a href='/users/<%=@parameters["username"]%>/following'>
+        <li><a href='/users/<%=@parameters["logged_user_profile"]["username"]%>/following'>
           <button type="button" class="btn btn-danger"> Following <br> <%=@parameters["logged_user_profile"]["follow_number"]%> </button>
           </a>
         </li>
 
-        <li><a href="/users/<%=@parameters["username"] %>/followers">
+        <li><a href="/users/<%=@parameters["logged_user_profile"]["username"] %>/followers">
           <button type="button" class="btn btn-danger"> Followers <br> <%=@parameters["logged_user_profile"]["follower_number"]%> </button>
           </a>
         </li>

@@ -68,7 +68,7 @@ def sql_to_hash(tw, logged)
   if tw["has_comment"] != nil
     t["comment"] = get_comment_list(tw["id"])
   end
-  # t["favored"] = 
+  # t["favored"] =
   if logged
     #fake data
     t["has_this_user_favorited_this_tweet"] = false
@@ -286,13 +286,13 @@ def view_a_twitter(tweet_id)
     res["abbreviation"] = top_n_word_from_tweet(t["retweet_id"])
   end
   res["user_id"] = t.user_id
-<<<<<<< HEAD
+
   res["by_user"] = User.find_by(id: t.user_id).username
-=======
+
   # res["has_comment"] = t.has_comment
   res["by_user"] = User.find_by(id: t.user_id).username
   res["abbreviation"] = top_n_word_from_tweet(t["retweet_id"])
->>>>>>> 246cef6a3461d6dc3c53eb84c72c5cae01acad58
+
   if t.has_comment != nil
     res["comment"] = get_comment_list(tweet_id)
   end
